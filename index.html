@@ -61,9 +61,9 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-数据结构1" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-数据结构1.1 基本概念——什么是数据结构" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2015/11/09/数据结构1/" class="article-date">
+    <a href="/2015/11/09/数据结构1.1 基本概念——什么是数据结构/" class="article-date">
   <time datetime="2015-11-09T02:48:32.000Z" itemprop="datePublished">2015-11-09</time>
 </a>
     
@@ -75,7 +75,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/11/09/数据结构1/">数据结构1</a>
+      <a class="article-title" href="/2015/11/09/数据结构1.1 基本概念——什么是数据结构/">数据结构1.1 基本概念——什么是数据结构？</a>
     </h1>
   
 
@@ -113,8 +113,25 @@
 }
 </code></pre><p>当 N = 10w 时，递归不能正常打印。</p>
 <p><strong> 解决问题方法的效率，跟空间的利用效率有关 </strong></p>
-<h3 id="3-例3-计算给定多项式在给定点x处的值">3.例3.计算给定多项式在给定点x处的值</h3><p><img src="https://github.com/FloraJieQiong/pages-pics/blob/master/20151109/%E4%BE%8B3-20151109.PNG?raw=true" alt="image"></p>
-<ul>
+<h3 id="3-例3-计算给定多项式在给定点x处的值">3.例3.计算给定多项式在给定点x处的值</h3><p><img src="https://github.com/FloraJieQiong/pages-pics/blob/master/20151109/%E4%BE%8B3-20151109.PNG?raw=true" alt="多项式"></p>
+<p>计算两种方式耗时：<br>clock() : 捕捉从程序开始运行到clock()被调用时所耗费的时间，单位是clock tick，“时钟打点”<br>CLK_TCK : 机器时钟每秒所走的时钟打点数</p>
+<pre><code><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span>
+<span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;time.h&gt;</span></span>
+<span class="keyword">clock_t</span> start, stop;
+<span class="keyword">double</span> duration;
+
+<span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span>
+</span>{
+    start = clock();
+    MyFunction(); <span class="comment">/*测试函数*/</span>
+    stop = clock();
+    duration = ((<span class="keyword">double</span>) (stop - start)) / CLK_TCK;
+
+    <span class="keyword">return</span> <span class="number">0</span>;
+}
+</code></pre><p>运行一次，duration可能为0.<br>解决方式：重复运行多次，再取平均值。</p>
+<p><strong> 解决问题方法的效率，跟算法的巧妙程度有关 </strong></p>
+<h3 id="总结"><strong> 总结 </strong></h3><ul>
 <li>数据对象在计算机中的组织方式： <ul>
 <li>逻辑结构</li>
 <li>物理存储结构 </li>
@@ -123,11 +140,41 @@
 <li>数据对象必定与一系列加在其上的操作相关联</li>
 <li>完成这些操作所用的方法就是算法</li>
 </ul>
+<h3 id="4-_抽象数据类型">4. 抽象数据类型</h3><ul>
+<li>数据类型<ul>
+<li>数据对象集</li>
+<li>数据集合相关联的操作集</li>
+</ul>
+</li>
+<li>抽象： 描述数据类型的方法不依赖于具体实现<ul>
+<li>与存放数据的机器无关</li>
+<li>与数据存储的物理结构无关</li>
+<li>与实现操作的算法和编程语言均无关<br>即 只描述数据对象集和相关操作集“是什么”，不涉及“如何做到”的问题</li>
+</ul>
+</li>
+</ul>
+<h3 id="例4：“矩阵”的抽象数据类型定义">例4：“矩阵”的抽象数据类型定义</h3><ul>
+<li>类型名称：矩阵</li>
+<li>数据对象集：一个MxN的矩阵</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/54aeba3ef0e841b0d113516ccb3382a9274071a1/20151109/4-%E7%9F%A9%E9%98%B5-20151109.PNG" alt="矩阵"></p>
+<p>由MxN个三元组<a,i,j>构成，其中a是矩阵元素的值，i是元素所在的行号，j是元素所在的列号。（a是抽象的，不管a具体是什么，二维数组？一维数据？十字链表？）</a,i,j></p>
+<ul>
+<li>操作集：对于任意矩阵 A、B、C 属于 Matrix，以及整数 i、j、M、N<ul>
+<li>Matrix Create(int M, int N) 返回一个M x N的空矩阵</li>
+<li>int GetMaxRow(Matrix A) 返回矩阵A的总行数</li>
+<li>int GetMaxCol(Matrix A) 返回矩阵A的总列数</li>
+<li>ElementType GetEntry(Matrix A, int i, int j) 返回矩阵A的第i行、第j列的元素</li>
+<li>Matrix Add(Matrix A, Matrix B) 如果A和B的行、列数一致，则返回矩阵C = A + B，否则返回错误标志。（C = A + B是抽象的，先按行加？先按列加？什么语言？）</li>
+<li>Matrix Multiply(Matrix A, Matrix B) 如果A的列数等于B的行数，则返回矩阵C = A B，否则返回错误标志。</li>
+</ul>
+</li>
+</ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/11/09/数据结构1/" data-id="cigrjemeu0001yoo0jpdow8zv" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/11/09/数据结构1.1 基本概念——什么是数据结构/" data-id="cigsowea60000p4o05caubs9i" class="article-share-link">Share</a>
       
       
     </footer>
@@ -172,7 +219,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/11/06/hello-world/" data-id="cigrjemew0002yoo0xmb4w6fo" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/11/06/hello-world/" data-id="cigrw5m370002mco03kc8alrj" class="article-share-link">Share</a>
       
       
     </footer>
@@ -208,7 +255,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/11/03/Hello-World-0/" data-id="cigrjemek0000yoo0sn14rlxh" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/11/03/Hello-World-0/" data-id="cigrw5m2i0000mco0xhqyi62h" class="article-share-link">Share</a>
       
       
     </footer>
@@ -245,7 +292,7 @@
       <ul>
         
           <li>
-            <a href="/2015/11/09/数据结构1/">数据结构1</a>
+            <a href="/2015/11/09/数据结构1.1 基本概念——什么是数据结构/">数据结构1.1 基本概念——什么是数据结构？</a>
           </li>
         
           <li>
