@@ -3,21 +3,42 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Hello World | Hexo</title>
+  <title>数据结构1-1-基本概念——最大子列和问题 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick">
+  <meta name="description" content="1.最大子列和问题
+ 算法1 
+int MaxSubseqSum1(int A[], int N){
+    int ThisSum, MaxSum = 0;
+    int i, j, k;
+    for(i = 0; i &amp;lt; N; i++){
+        for(j = i; j &amp;lt; N; j++){
+            ThisSum = 0;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://yoursite.com/2015/11/06/hello-world/index.html">
+<meta property="og:title" content="数据结构1-1-基本概念——最大子列和问题">
+<meta property="og:url" content="http://yoursite.com/2015/11/16/数据结构1 基本概念——1-3最大子列和问题/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick">
-<meta property="og:updated_time" content="2015-11-03T11:49:41.661Z">
+<meta property="og:description" content="1.最大子列和问题
+ 算法1 
+int MaxSubseqSum1(int A[], int N){
+    int ThisSum, MaxSum = 0;
+    int i, j, k;
+    for(i = 0; i &amp;lt; N; i++){
+        for(j = i; j &amp;lt; N; j++){
+            ThisSum = 0;">
+<meta property="og:image" content="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/54256bbe25da63466c83cf5045f48b6461a3d9ba/2015111/%E6%9C%80%E5%A4%A7%E5%AD%90%E5%88%97%E5%92%8C.PNG">
+<meta property="og:image" content="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/5ea20416e949700f79ef7a9c55234674a18b8f34/2015111/%E5%88%86%E8%80%8C%E6%B2%BB%E4%B9%8B.PNG">
+<meta property="og:image" content="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/36a3a0330c1b382d780067f85154bd09e1168ca2/2015111/%E5%88%86%E8%80%8C%E6%B2%BB%E4%B9%8B2.PNG">
+<meta property="og:updated_time" content="2015-11-16T11:44:07.020Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick">
+<meta name="twitter:title" content="数据结构1-1-基本概念——最大子列和问题">
+<meta name="twitter:description" content="1.最大子列和问题
+ 算法1 
+int MaxSubseqSum1(int A[], int N){
+    int ThisSum, MaxSum = 0;
+    int i, j, k;
+    for(i = 0; i &amp;lt; N; i++){
+        for(j = i; j &amp;lt; N; j++){
+            ThisSum = 0;">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -194,11 +215,11 @@ Quick">
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap"><article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-数据结构1 基本概念——1-3最大子列和问题" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/11/06/hello-world/" class="article-date">
-  	<time datetime="2015-11-06T05:45:58.856Z" itemprop="datePublished">2015-11-06</time>
+      <a href="/2015/11/16/数据结构1 基本概念——1-3最大子列和问题/" class="article-date">
+  	<time datetime="2015-11-16T01:06:35.000Z" itemprop="datePublished">2015-11-16</time>
 </a>
     </div>
   
@@ -211,7 +232,7 @@ Quick">
         
   
     <h1 class="article-title" itemprop="name">
-      Hello World
+      数据结构1-1-基本概念——最大子列和问题
     </h1>
   
 
@@ -227,15 +248,60 @@ Quick">
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick_Start">Quick Start</h2><h3 id="Create_a_new_post">Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run_server">Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate_static_files">Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy_to_remote_sites">Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+        <h3 id="1-最大子列和问题">1.最大子列和问题</h3><p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/54256bbe25da63466c83cf5045f48b6461a3d9ba/2015111/%E6%9C%80%E5%A4%A7%E5%AD%90%E5%88%97%E5%92%8C.PNG" alt="最大子列和"></p>
+<p><strong> 算法1 </strong></p>
+<pre><code><span class="function"><span class="keyword">int</span> <span class="title">MaxSubseqSum1</span><span class="params">(<span class="keyword">int</span> A[], <span class="keyword">int</span> N)</span></span>{
+    <span class="keyword">int</span> ThisSum, MaxSum = <span class="number">0</span>;
+    <span class="keyword">int</span> i, j, k;
+    <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; N; i++){
+        <span class="keyword">for</span>(j = i; j &lt; N; j++){
+            ThisSum = <span class="number">0</span>;
+            <span class="keyword">for</span>(k = i; k &lt;=j; k++){
+                ThisSum += A[k];
+                <span class="keyword">if</span>(ThisSum &gt; MaxSum)
+                    MaxSum = ThisSum;
+            }
+        }<span class="comment">//j循环结束</span>
+    }<span class="comment">//i循环结束</span>
+    <span class="keyword">return</span> MaxSum;
+}
+</code></pre><p>复杂度 T(N) = O(N^3)</p>
+<p><strong> 算法2 </strong></p>
+<pre><code><span class="function"><span class="keyword">int</span> <span class="title">MaxSubseqSum2</span><span class="params">(<span class="keyword">int</span> A[], <span class="keyword">int</span> N)</span></span>{
+    <span class="keyword">int</span> ThisSum, MaxSum = <span class="number">0</span>;
+    <span class="keyword">int</span> i, j;
+    <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; N; i++){
+        ThisSum = <span class="number">0</span>;
+        <span class="keyword">for</span>(j = i; j &lt; N; j++){
+            ThisSum += A[j];<span class="comment">//对于相同的i，不同的j，只要在j-1次循环的基础上累加1即可</span>
+            <span class="keyword">if</span>(ThisSum &gt; MaxSum){
+                MaxSum = ThisSum;
+            }
+        }
+    }
+    <span class="keyword">return</span> MaxSum;
+}
+</code></pre><p>复杂度 T(N) = O(N^2)</p>
+<p><strong> 算法3：分而治之 </strong></p>
+<p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/5ea20416e949700f79ef7a9c55234674a18b8f34/2015111/%E5%88%86%E8%80%8C%E6%B2%BB%E4%B9%8B.PNG" alt="分而治之"></p>
+<p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/36a3a0330c1b382d780067f85154bd09e1168ca2/2015111/%E5%88%86%E8%80%8C%E6%B2%BB%E4%B9%8B2.PNG" alt="分而治之举例"></p>
+<p><strong> 算法4:在线处理 </strong></p>
+<pre><code><span class="function"><span class="keyword">int</span> <span class="title">MaxSubseqSum4</span><span class="params">(<span class="keyword">int</span> A[], <span class="keyword">int</span> N)</span></span>{
+    <span class="keyword">int</span> ThisSum, MaxSum;
+    <span class="keyword">int</span> i;
+    ThisSum = MaxSum = <span class="number">0</span>;
+    <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; N; i++){
+        ThisSum += A[i];<span class="comment">//向右累加</span>
+        <span class="keyword">if</span>(ThisSum &gt; MaxSum){
+            MaxSum = ThisSum;<span class="comment">//发现更大的，更新当前结果</span>
+        }<span class="keyword">else</span> <span class="keyword">if</span>(ThisSum &lt; <span class="number">0</span>){
+            ThisSum = <span class="number">0</span>;<span class="comment">//不能使后边的部分和增大，抛弃</span>
+            }
+    }
+    <span class="keyword">return</span> MaxSum;
+}
+</code></pre><p>T(N) = O(N)<br>举例[-1,3，-2,4，-6,1,6，-1]<br>MaxSum = 7</p>
+<p>“在线”的意思是指 每输入一个数据 就进行 及时处理，在任何一个地方中止输入，算法都能正确给出当前的解。</p>
 
       
     </div>
@@ -245,18 +311,18 @@ Quick">
     
 <nav id="article-nav">
   
-    <a href="/2015/11/09/数据结构1 基本概念——1-1什么是数据结构/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2015/11/16/数据结构2-线性结构——2-1-线性表及其实现/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption"><</strong>
       <div class="article-nav-title">
         
-          数据结构1.1 基本概念——什么是数据结构？
+          数据结构2 线性结构——2.1 线性表及其实现 
         
       </div>
     </a>
   
   
-    <a href="/2015/11/03/Hello-World-0/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Hello-World</div>
+    <a href="/2015/11/10/数据结构1 基本概念——1-2什么是算法/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">数据结构1.1 基本概念——什么是算法</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -285,7 +351,7 @@ Quick">
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="hello-world" data-title="Hello World" data-url="http://yoursite.com/2015/11/06/hello-world/"></div>
+	<div class="ds-thread" data-thread-key="数据结构1 基本概念——1-3最大子列和问题" data-title="数据结构1-1-基本概念——最大子列和问题" data-url="http://yoursite.com/2015/11/16/数据结构1 基本概念——1-3最大子列和问题/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
