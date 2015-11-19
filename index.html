@@ -326,7 +326,108 @@ List L, *PtrL;
         <span class="keyword">return</span> <span class="keyword">NULL</span>;
     }
 }
-</code></pre>
+</code></pre><p>(2)按值查找：Find</p>
+<pre><code><span class="built_in">List</span> *Find(ElementType X, <span class="built_in">List</span> *PtrL){
+    <span class="built_in">List</span> *p = PtrL;
+    <span class="keyword">while</span>(p != <span class="built_in">NULL</span> <span class="subst">&amp;&amp;</span> p <span class="subst">-&gt; </span><span class="built_in">Data</span> != X){
+        p = p <span class="subst">-&gt; </span>Next;
+    }
+    <span class="keyword">return</span> p;
+}
+</code></pre><p>平均时间性能为O(n)</p>
+<p>** 3.插入（在低 i-1( 1&lt;=i&lt;=n+1)个结点后插入一个值为X的新结点）</p>
+<ul>
+<li>1.先构造一个新结点，用s指向；</li>
+<li>2.再找到链表的第i-1个结点，用p指向；</li>
+<li>3.然后修改指针，插入结点（p之后插入新结点是s）</li>
+<li><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/31a5daa88866f66dc765befe747b7c30616630dc/2015111/%E9%93%BE%E8%A1%A8%E6%8F%92%E5%85%A5.PNG" alt="链表插入"> </li>
+</ul>
+<pre><code><span class="built_in">List</span> *Insert(ElementType X, int i, <span class="built_in">List</span> *PtrL){
+    <span class="built_in">List</span> *p, *s;
+    <span class="keyword">if</span>(i == <span class="number">1</span>){
+        <span class="comment">//新结点插入在表头</span>
+        s = (<span class="built_in">List</span> *)malloc(sizeof(<span class="built_in">List</span>));<span class="comment">//申请空间，填装结点</span>
+        s <span class="subst">-&gt; </span><span class="built_in">Data</span> = X;
+        s <span class="subst">-&gt; </span>Next = PtrL;
+        <span class="keyword">return</span> s;<span class="comment">//返回新表头指针</span>
+    }
+
+    p = FindKth(i -<span class="number">1</span>, PtrL);<span class="comment">//查找第i-1个结点</span>
+    <span class="keyword">if</span>(p == <span class="built_in">NULL</span>){
+        printf(<span class="string">"第i-1个不存在，不能插入"</span>);
+        <span class="keyword">return</span> <span class="built_in">NULL</span>;
+    }<span class="keyword">else</span>{
+        s = (<span class="built_in">List</span> *)malloc(sizeof(<span class="built_in">List</span>));<span class="comment">//申请空间，填装结点</span>
+        s <span class="subst">-&gt; </span><span class="built_in">Data</span> = X;
+        s <span class="subst">-&gt; </span>Next = p <span class="subst">-&gt; </span>Next;<span class="comment">//新结点插入在第i-1个结点后边</span>
+        p <span class="subst">-&gt; </span>Next = s;
+        <span class="keyword">return</span> PtrL;
+    }
+}
+</code></pre><p>** 4.删除（删除链表的第i( 1&lt;=i&lt;=n)个位置上的结点）</p>
+<ul>
+<li>1.先找到链表的第i-1个结点，用p指向；</li>
+<li>2.再用指针s指向要被删除的结点（p的下一个结点）</li>
+<li>3.然后修改指针，删除s所指向的结点 </li>
+<li>4.最后释放s所指结点的空间<br><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/0b7f552537b3d0d6bd4a7c7c4618a495c907b63c/2015111/%E9%93%BE%E8%A1%A8%E5%88%A0%E9%99%A4.PNG" alt="链表删除"></li>
+</ul>
+<pre><code><span class="function">List *<span class="title">Delete</span><span class="params">(<span class="keyword">int</span> i, List *PtrL)</span></span>{
+    List *p, *s;
+    <span class="keyword">if</span>(i == <span class="number">1</span>){
+        <span class="comment">//删除表的第一个结点</span>
+        s = PtrL;<span class="comment">//s指向第1个结点</span>
+        <span class="keyword">if</span>(PtrL != <span class="literal">NULL</span>){
+            PtrL = PtrL -&gt; Next;
+        }<span class="keyword">else</span>{
+            <span class="keyword">return</span> <span class="literal">NULL</span>;
+        }
+        <span class="built_in">free</span>(s);
+        <span class="keyword">return</span> PtrL;
+    }
+
+    p = FindKth(i - <span class="number">1</span>, PtrL);<span class="comment">//查找第i-1个结点</span>
+    <span class="keyword">if</span>(p == <span class="literal">NULL</span>){
+        <span class="built_in">printf</span>(<span class="string">"第%d个结点不存在"</span>, i - <span class="number">1</span>);
+        <span class="keyword">return</span> <span class="literal">NULL</span>;
+    }<span class="keyword">else</span> <span class="keyword">if</span>(p -&gt; Next == <span class="literal">NULL</span>){
+        <span class="built_in">printf</span>(<span class="string">"第%d个结点不存在"</span>, i);
+        <span class="keyword">return</span> <span class="literal">NULL</span>;
+    }<span class="keyword">else</span>{
+        s = p -&gt; Next;<span class="comment">//s指向第i个结点</span>
+        p -&gt; Next = s -&gt; Next;<span class="comment">//从链表删除</span>
+        <span class="built_in">free</span>(s);<span class="comment">//释放被删除的结点</span>
+        <span class="keyword">return</span> <span class="literal">NULL</span>;
+    }
+}
+</code></pre><p>平均查找次数是n/2<br>平均时间性能是O(n)</p>
+<h4 id="广义表">广义表</h4><p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/d9fa830fe28e07674fbefc8471ce35632e049d6b/2015111/%E5%B9%BF%E4%B9%89%E8%A1%A8.PNG" alt="广义表"></p>
+<p><strong> 广义表： </strong></p>
+<ul>
+<li>是线性表的推广</li>
+<li>对于线性表，n个元素都是基本的单元素</li>
+<li>广义表中，这些元素不仅可以是单元素也可以是另一个广义表</li>
+</ul>
+<pre><code>typedef <span class="class"><span class="keyword">struct</span> <span class="title">GNode</span>{</span>
+    int <span class="constant">Tag</span>;<span class="regexp">//</span>标志域：<span class="number">0</span>表示结点是单元素，<span class="number">1</span>表示结点是广义表
+    <span class="class"><span class="keyword">union</span>{</span>
+        /<span class="regexp">/子表指针域Sublist与单元素数据域Data复用，即共用存储空间
+        ElementType Data;
+        struct GNode *SubList;
+    }URegion;
+    struct GNode *Next;/</span><span class="regexp">/指向后继结点
+}GList;</span>
+</code></pre><p>通过Tag来确认数据是Data还是SubList</p>
+<p><strong> 多重链表 </strong><br>多重链表：链表中的节点可能同时隶属于多个链</p>
+<ul>
+<li>多重链表中结点的指针域会有多个，如前面例子包含了Next和SubList两个指针域</li>
+<li>但包含两个指针域的链表并不一定是多重链表，比如在双向链表不是多重链表</li>
+</ul>
+<p><strong> 多重链表的用途 </strong><br>树、图 这样相对复杂的数据结构都可以采用多重链表的方式存储</p>
+<p><strong> 多重链表表示稀疏矩阵 </strong><br><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/9f84e90dfb17d2d28890f98e260c3943cb0c51ed/2015111/%E7%9F%A9%E9%98%B5.PNG" alt="矩阵"></p>
+<p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/9f84e90dfb17d2d28890f98e260c3943cb0c51ed/2015111/%E5%8D%81%E5%AD%97%E9%93%BE%E8%A1%A8.PNG" alt="十字链表"></p>
+<p>Head是行或列的头结点<br><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/9f84e90dfb17d2d28890f98e260c3943cb0c51ed/2015111/%E5%85%A5%E5%8F%A3%E7%BB%93%E7%82%B9.PNG" alt="入口结点"><br>Term是稀疏矩阵的非零项<br>左上角的Term结点，是入口结点，表示有4行5列，7个非零项</p>
+<p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/9f84e90dfb17d2d28890f98e260c3943cb0c51ed/2015111/union%E6%95%B4%E5%90%88term_head.PNG" alt="Union整合Term和Head"></p>
+
       
     </div>
     
