@@ -192,6 +192,272 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-数据结构2-线性结构——2-3-队列" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/12/01/数据结构2-线性结构——2-3-队列/" class="article-date">
+  	<time datetime="2015-12-01T02:41:16.000Z" itemprop="datePublished">2015-12-01</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/12/01/数据结构2-线性结构——2-3-队列/">数据结构2-线性结构——2-3-队列</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+    <article id="post-数据结构2-线性结构——2-2-堆栈" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/11/19/数据结构2-线性结构——2-2-堆栈/" class="article-date">
+  	<time datetime="2015-11-19T11:37:25.000Z" itemprop="datePublished">2015-11-19</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/11/19/数据结构2-线性结构——2-2-堆栈/">数据结构2-线性结构——2-2-堆栈</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="2-2-1">2.2.1</h1><h2 id="什么是堆栈？">什么是堆栈？</h2><h3 id="算术表达式">算术表达式</h3><ul>
+<li>组成<ul>
+<li>运算数：1,2,3</li>
+<li>运算符号：+，-，*，/</li>
+</ul>
+</li>
+</ul>
+<h3 id="后缀表达式">后缀表达式</h3><ul>
+<li>中缀表达式：运算符号位于两个运算数之前。a+b*c-d/e</li>
+<li>后缀表达式：运算符号位于两个运算数之后。abc*+de/-</li>
+</ul>
+<p>计算：62/3-42*+=?<br>后缀表达式求值策略：从左往右扫描，逐个处理运算数和运算符号。<br>1.遇到运算数先记住<br>2.遇到运算符，将与运算符挨着的2个运算数计算<br>答案是8，T(n)=O(n)</p>
+<p>用什么数据结构存储后缀表达式？<br>需要一种存储方法，能顺序存储运算数，并在需要时倒序输出。<br>堆栈</p>
+<h3 id="堆栈的抽象数据类型描述">堆栈的抽象数据类型描述</h3><p>堆栈：具有一定操作约束的线性表<br>   只在一端（栈顶，Top）做插入删除</p>
+<ul>
+<li>入栈：插入数据</li>
+<li>出栈：删除数据</li>
+<li>顺序：后入先出（Last In First Out ，LIFO）</li>
+</ul>
+<h3 id="堆栈的抽象数据类型描述-1">堆栈的抽象数据类型描述</h3><p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/c6b2f97e2f2c4ac5b3d78d2e79304552f3801121/2015111/%E5%A0%86%E6%A0%88%E7%9A%84%E6%8A%BD%E8%B1%A1%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E6%8F%8F%E8%BF%B0.PNG" alt="堆栈的抽象数据类型描述"></p>
+<h1 id="2-2-2_栈的顺序存储实现">2.2.2 栈的顺序存储实现</h1><p>通常由一个一维数组和一个记录栈顶元素位置的变量组成</p>
+<pre><code><span class="preprocessor">#<span class="keyword">define</span> MaxSize&lt;储存数据元素的最大个数&gt;</span>
+<span class="keyword">typedef</span> <span class="keyword">struct</span>{
+    ElementType Data[MaxSize];
+    <span class="keyword">int</span> Top;
+}Stack;
+</code></pre><h2 id="(1)入栈">(1)入栈</h2><pre><code><span class="literal">void</span> Push(<span class="built_in">Stack</span> *PtrS, ElementType item){
+    <span class="keyword">if</span>(Ptrs <span class="subst">-&gt; </span>Top == MaxSize - <span class="number">1</span>){
+        printf(<span class="string">"堆栈满"</span>);
+        <span class="keyword">return</span>;
+    } <span class="keyword">else</span> {
+        PtrS <span class="subst">-&gt; </span><span class="built_in">Data</span><span class="preprocessor">[</span>++(PtrS <span class="subst">-&gt; </span>Top)<span class="preprocessor">]</span><span class="markup"> = item;
+        return;
+    }
+}</span>
+</code></pre><h2 id="(2)出栈">(2)出栈</h2><pre><code>ElementType Pop(<span class="built_in">Stack</span> *PtrS){
+    <span class="keyword">if</span>(PtrS <span class="subst">-&gt; </span>Top == -<span class="number">1</span>){
+        printf(<span class="string">"堆栈空"</span>);
+        <span class="keyword">return</span> ERR<span class="subst">OR</span>;<span class="comment">//ERROR是ElementType的特殊值，标志错误</span>
+    } <span class="keyword">else</span> {
+        <span class="keyword">return</span> (PtrS <span class="subst">-&gt; </span><span class="built_in">Data</span><span class="preprocessor">[</span>(PtrS <span class="subst">-&gt; </span>Top)--<span class="preprocessor">]</span><span class="markup">);
+    }
+}</span>
+</code></pre><h2 id="[例]请用一个数组实现两个堆栈，要求最大地利用数组空间，使数组只要有空间入栈操作就可以成功。">[例]请用一个数组实现两个堆栈，要求最大地利用数组空间，使数组只要有空间入栈操作就可以成功。</h2><p>[分析]两个栈 分别从 数组的两头开始 向中间生长，当两个栈的 栈顶指针相遇时，两个栈都满了。</p>
+<pre><code><span class="preprocessor">#<span class="keyword">define</span> MaxSize&lt;存储数据元素的最大个数&gt;</span>
+<span class="keyword">struct</span> DStack{
+    ElementType Data[MaxSize];
+    <span class="keyword">int</span> Top1;<span class="comment">//堆栈1的栈顶指针</span>
+    <span class="keyword">int</span> Top2;<span class="comment">//堆栈2的栈顶指针    </span>
+}S;
+<span class="comment">//堆栈空</span>
+S.Top1 = -<span class="number">1</span>;
+S.Top2 = MaxSize;
+</code></pre><h3 id="(1)入栈-1">(1)入栈</h3><pre><code><span class="literal">void</span> Push(struce DStack *PtrS, ElementType item, int <span class="built_in">Tag</span>){
+    <span class="comment">//Tag作为区分两个堆栈的标志，取值为1,和2</span>
+    <span class="keyword">if</span>(PtrS <span class="subst">-&gt; </span>Top2 - PtrS <span class="subst">-&gt; </span>Top1 == <span class="number">1</span>){
+        printf(<span class="string">"堆栈满"</span>);
+        <span class="keyword">return</span>;            
+    }
+    <span class="keyword">if</span>(<span class="built_in">Tag</span> == <span class="number">1</span>){
+        <span class="comment">//对 堆栈1操作</span>
+        PtrS <span class="subst">-&gt; </span><span class="built_in">Data</span><span class="preprocessor">[</span>++(PtrS <span class="subst">-&gt; </span>Top1)<span class="preprocessor">]</span><span class="markup"> = item;
+    } else {
+        //对 堆栈2操作
+        PtrS -&gt; Data</span><span class="preprocessor">[</span>--(PtrS <span class="subst">-&gt; </span>Top2)<span class="preprocessor">]</span><span class="markup"> = item;
+    }
+}</span>
+</code></pre><h3 id="(2)出栈-1">(2)出栈</h3><pre><code><span class="function">ElementType <span class="title">Pop</span><span class="params">(<span class="keyword">struct</span> DStack *PtrS, <span class="keyword">int</span> Tag)</span></span>{
+    <span class="comment">//Tag作为区分两个堆栈的标志，取值为1,和2</span>
+    <span class="keyword">if</span>(Tag == <span class="number">1</span>){
+        <span class="comment">//对 堆栈1操作</span>
+        <span class="keyword">if</span>(PtrS -&gt; Top1 == -<span class="number">1</span>){
+            <span class="built_in">printf</span>(<span class="string">"堆栈1空"</span>);
+            <span class="keyword">return</span> <span class="literal">NULL</span>;
+        } <span class="keyword">else</span> {
+            <span class="keyword">return</span> PtrS -&gt; Data[(PtrS -&gt; Top1)--];
+        }
+    } <span class="keyword">else</span> {
+        <span class="comment">//对 堆栈2操作</span>
+        <span class="keyword">if</span>(PtrS -&gt; Top2 == MaxSize){
+            <span class="built_in">printf</span>(<span class="string">"堆栈2空"</span>);
+            <span class="keyword">return</span> <span class="literal">NULL</span>;
+        } <span class="keyword">else</span> {
+            <span class="keyword">return</span> PtrS -&gt; Data[(PtrS -&gt; Top2)++];
+        }
+    }
+}
+</code></pre><h1 id="2-2-3_堆栈的链式存储实现">2.2.3 堆栈的链式存储实现</h1><p>栈的链式存储结构 是 一个单向链表，叫做 链栈。<br>插入和删除操作 只能在 链栈 的栈顶进行。</p>
+<pre><code>typedef struct <span class="keyword">Node</span><span class="identifier"></span><span class="title">{
+    ElementType</span> Data;
+    struct <span class="keyword">Node</span><span class="identifier"> </span><span class="title">*Next</span>;
+}LinkStack;
+LinkStack *Top;
+</code></pre><h2 id="(1)堆栈初始化（建立空栈）">(1)堆栈初始化（建立空栈）</h2><pre><code><span class="function">LinkStack *<span class="title">createStack</span><span class="params">()</span></span>{
+    <span class="comment">//构建 一个堆栈 的头结点，返回指针</span>
+    LinkStack *S;
+    S = (LinkStack *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="keyword">struct</span> Node));
+    S -&gt; Next = <span class="literal">NULL</span>;
+    <span class="keyword">return</span> S;
+}
+</code></pre><h2 id="(2)判断_堆栈S_是否为空">(2)判断 堆栈S 是否为空</h2><pre><code><span class="function"><span class="keyword">int</span> <span class="title">IsEmpty</span><span class="params">(LinkStack *S)</span></span>{
+    <span class="comment">//空 返回1，非空 返回0</span>
+    <span class="keyword">return</span> (S -&gt; Next == <span class="literal">NULL</span>);
+}
+</code></pre><h2 id="(3)入栈">(3)入栈</h2><pre><code>void Push(ElementType item, LinkStack *S){
+    //将item 压入 堆栈S
+    struct <span class="keyword">Node</span><span class="identifier"> </span><span class="title">*TmpCell</span>;
+    TmpCell = maoolc(sizeof(struct <span class="keyword">Node</span><span class="identifier"></span><span class="title">));
+    TmpCell</span> -&gt; Element = item;
+    TmpCell -&gt; Next = S -&gt; Next;
+    S -&gt; Next = TmpCell;
+}
+</code></pre><h2 id="(4)出栈">(4)出栈</h2><pre><code><span class="function">ElementType <span class="title">Pop</span><span class="params">(LinkStack *S)</span></span>{
+    <span class="comment">//删除栈顶元素 并返回S的栈顶元素</span>
+    <span class="keyword">struct</span> Node *FirstCell;
+    ElementType TopElem;
+    <span class="keyword">if</span>(IsEmpty(S)){
+        <span class="built_in">printf</span>(<span class="string">"堆栈空"</span>);
+        <span class="keyword">return</span> <span class="literal">NULL</span>;
+    } <span class="keyword">else</span> {
+        FirstCell = S -&gt; Next;
+        S -&gt; Next = FirstCell -&gt; Next;
+        TopElem = FirstCell -&gt; Element;
+        <span class="built_in">free</span>(FirstCell);
+        <span class="keyword">return</span> TopElem;
+    }
+}
+</code></pre><p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/50c806146d26ab39f4746441a4d003e959b53f75/201512/%E9%93%BE%E6%A0%88%E5%87%BA%E6%A0%88.PNG" alt="链栈出栈"></p>
+<h1 id="2-2-4_堆栈应用：表达式求值">2.2.4 堆栈应用：表达式求值</h1><ul>
+<li>回忆 堆栈 实现 后缀表达式 求值：<br>  从左到右 读入 后缀表达式 的各项（运算数 或 运算符）<ul>
+<li>1.运算数：入栈</li>
+<li>2.运算符：从 堆栈中 弹出 适当数量 的运算数，计算并结果入栈</li>
+<li>3.最后，栈顶元素 就是表达式的结果值</li>
+</ul>
+</li>
+</ul>
+<h2 id="中缀表达式求值">中缀表达式求值</h2><p><strong> 基本策略 </strong>：将中缀表达式 转换为 后缀表达式，求值<br>[例子]: 2+9/3-5  后缀表达式为：293/+5-</p>
+<ul>
+<li>1.运算数相对顺序不变</li>
+<li>2.运算符号顺序改变<ul>
+<li>需要存储“等待中”的运算符号</li>
+<li>将当前运算符号 与 “等待中” 的 后一个运算符号 比较</li>
+</ul>
+</li>
+</ul>
+<p>[例]a<em>(b+c)/d  后缀表达式： abc+</em>d/</p>
+<p><strong> 中缀表达式 如何 转换为 后缀表达式 </strong><br>从头到尾读取 中缀表达式的每个对象，不同对象做不同处理：</p>
+<ul>
+<li>1.运算数：直接输出；</li>
+<li>2.左括号：压入堆栈</li>
+<li>3.右括号：将栈顶的运算符弹出并输出，直到遇到左括号（左括号直接出栈，不输出）</li>
+<li>4.运算符<ul>
+<li>优先级 大于 栈顶运算符，则压入栈；</li>
+<li>优先级 小于等于 栈顶运算符，将 栈顶运算符 弹出并输出；再比较 新的栈顶运算符，直到该运算符 优先级 大于 栈顶运算符 为止，然后将 该运算符压入栈；</li>
+</ul>
+</li>
+<li>5.若各对象处理完毕，把堆栈中 存留的 运算符 一并输出</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/7048bcb80f4d516667bba3a82f6251df20303ae3/201512/%E4%B8%AD%E7%BC%80%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%BD%AC%E4%B8%BA%E5%90%8E%E7%BC%80%E8%A1%A8%E8%BE%BE%E5%BC%8F%E4%BE%8B%E5%AD%90.PNG" alt="中缀表达式 转为 后缀表达式 例子"></p>
+<p><strong> 堆栈的其他应用 </strong></p>
+<ul>
+<li>函数调用 及 递归 实现</li>
+<li>深度优先搜索</li>
+<li>回溯算法</li>
+<li>……</li>
+</ul>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
     <article id="post-数据结构2-线性结构——2-1-线性表及其实现" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
