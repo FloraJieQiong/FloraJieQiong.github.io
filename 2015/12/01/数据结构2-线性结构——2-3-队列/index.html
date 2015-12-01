@@ -5,16 +5,34 @@
   
   <title>数据结构2-线性结构——2-3-队列 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description">
+  <meta name="description" content="2.3.1 什么是队列什么是队列队列：具有一定操作约束的线性表插入、删除操作：只能在一端 插入，另一端 删除。入队：数据插入出队：数据删除顺序：先来先服务、先进先出（FIFO）
+
+队列的顺序存储实现由一个数组 和 记录 头元素位置 的变量 front 以及 一个 记录 尾元素位置 都变量 rear组成。
+#define MaxSize&amp;lt;存储数据元素的最大个数&amp;gt;
+typedef stru">
 <meta property="og:type" content="article">
 <meta property="og:title" content="数据结构2-线性结构——2-3-队列">
 <meta property="og:url" content="http://yoursite.com/2015/12/01/数据结构2-线性结构——2-3-队列/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description">
-<meta property="og:updated_time" content="2015-12-01T02:41:16.825Z">
+<meta property="og:description" content="2.3.1 什么是队列什么是队列队列：具有一定操作约束的线性表插入、删除操作：只能在一端 插入，另一端 删除。入队：数据插入出队：数据删除顺序：先来先服务、先进先出（FIFO）
+
+队列的顺序存储实现由一个数组 和 记录 头元素位置 的变量 front 以及 一个 记录 尾元素位置 都变量 rear组成。
+#define MaxSize&amp;lt;存储数据元素的最大个数&amp;gt;
+typedef stru">
+<meta property="og:image" content="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/f16d738b4e8aa70c3217a15c1d623677c50d26e0/201512/%E9%98%9F%E5%88%97%E7%9A%84%E6%8A%BD%E8%B1%A1%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E6%8F%8F%E8%BF%B0.PNG">
+<meta property="og:image" content="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/88fc8cfc8dc7fddb8af1970ac1028e88df95312e/201512/%E9%A1%BA%E7%8E%AF%E9%98%9F%E5%88%971.PNG">
+<meta property="og:image" content="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/9a66b8f4d28bfbda9608dc67e14df36b9253d53f/201512/%E9%A1%BA%E7%8E%AF%E9%98%9F%E5%88%972.PNG">
+<meta property="og:image" content="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/4d566994a5d16091c1af0c8257fd3f6458b4763a/201512/%E9%98%9F%E5%88%97%E7%9A%84%E9%93%BE%E5%BC%8F%E5%AD%98%E5%82%A8%E5%AE%9E%E7%8E%B0.PNG">
+<meta property="og:image" content="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/6f06be93324af5f8c6eb80abc68689bef6137f85/201512/%E9%98%9F%E5%88%97%E7%9A%84%E9%93%BE%E5%BC%8F%E5%AD%98%E5%82%A8%E5%AE%9E%E7%8E%B02.PNG">
+<meta property="og:image" content="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/67986e44fc4c058fae88bb70334e38474a23259c/201512/%E4%B8%8D%E5%B8%A6%E5%A4%B4%E7%BB%93%E7%82%B9%E7%9A%84%E9%93%BE%E5%BC%8F%E9%98%9F%E5%88%97%E5%87%BA%E9%98%9F.PNG">
+<meta property="og:updated_time" content="2015-12-01T12:06:08.410Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据结构2-线性结构——2-3-队列">
-<meta name="twitter:description">
+<meta name="twitter:description" content="2.3.1 什么是队列什么是队列队列：具有一定操作约束的线性表插入、删除操作：只能在一端 插入，另一端 删除。入队：数据插入出队：数据删除顺序：先来先服务、先进先出（FIFO）
+
+队列的顺序存储实现由一个数组 和 记录 头元素位置 的变量 front 以及 一个 记录 尾元素位置 都变量 rear组成。
+#define MaxSize&amp;lt;存储数据元素的最大个数&amp;gt;
+typedef stru">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -224,7 +242,77 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h1 id="2-3-1_什么是队列">2.3.1 什么是队列</h1><h2 id="什么是队列">什么是队列</h2><p>队列：具有一定操作约束的线性表<br>插入、删除操作：只能在一端 插入，另一端 删除。<br>入队：数据插入<br>出队：数据删除<br>顺序：先来先服务、先进先出（FIFO）</p>
+<p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/f16d738b4e8aa70c3217a15c1d623677c50d26e0/201512/%E9%98%9F%E5%88%97%E7%9A%84%E6%8A%BD%E8%B1%A1%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E6%8F%8F%E8%BF%B0.PNG" alt="队列的抽象数据类型描述"></p>
+<h2 id="队列的顺序存储实现">队列的顺序存储实现</h2><p>由一个数组 和 记录 头元素位置 的变量 front 以及 一个 记录 尾元素位置 都变量 rear组成。</p>
+<pre><code><span class="preprocessor">#<span class="keyword">define</span> MaxSize&lt;存储数据元素的最大个数&gt;</span>
+<span class="keyword">typedef</span> <span class="keyword">struct</span>{
+    ElementType Data[MaxSize];
+    <span class="keyword">int</span> rear;
+    <span class="keyword">int</span> front;
+}Queue;
+</code></pre><p>没有元素时，front和rear都指向-1<br>第一个元素下表是0</p>
+<p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/88fc8cfc8dc7fddb8af1970ac1028e88df95312e/201512/%E9%A1%BA%E7%8E%AF%E9%98%9F%E5%88%971.PNG" alt="顺环队列1"></p>
+<p>当没有元素时，front = rear = 0</p>
+<p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/9a66b8f4d28bfbda9608dc67e14df36b9253d53f/201512/%E9%A1%BA%E7%8E%AF%E9%98%9F%E5%88%972.PNG" alt="顺环队列2"></p>
+<p>当前有5个元素，再添加一个元素，front = rear</p>
+<p>思考：<br>    （1）这种方案，堆栈空和满 的判别条件是什么？<br>    （2）为什么会出现空、满 无法区分？根本原因是什么？<br>rear、front距离是[0, n-1].当前例子中，rear front的距离是[0,5]<br>当堆栈空，满时，距离都为0<br>根本原因：<br>rear、front距离[0,n-1]，共n种；<br>当前队列状态：空，1个元素，2个元素，3,4,5,6.共n+1种状态<br>用n种距离 表示不了 n+1种状态</p>
+<p>解决方案：</p>
+<ul>
+<li>（1）使用 额外标记：Size或tag<br>Size标记元素个数，Size = 0时，队列空，Size为n时，队列满<br>tag，当rear=front，分不清是空还是满时，用tag标记最后一次操作，如果 插入，tag为1，删除tag为0.看最后一次操作的tag，判断是空还是满。</li>
+<li>（2）仅使用n-1个数组空间，不放满。当前例子中，最多只放5个元素。</li>
+</ul>
+<p>采取第二种方案：</p>
+<h2 id="(1)入队列">(1)入队列</h2><pre><code><span class="literal">void</span> AddQ(<span class="built_in">Queue</span> *PtrQ, ElementType item){
+    <span class="keyword">if</span>((PtrQ<span class="subst">-&gt;</span>rear + <span class="number">1</span>) % MaxSize == PtrQ<span class="subst">-&gt;</span>front){
+        printf(<span class="string">"队列满"</span>);
+        <span class="keyword">return</span>;
+    }
+    PtrQ <span class="subst">-&gt; </span>rear = (PtrQ<span class="subst">-&gt;</span>rear + <span class="number">1</span>) % MaxSize;
+    PtrQ <span class="subst">-&gt; </span><span class="built_in">Data</span><span class="preprocessor">[</span>PtrQ<span class="subst">-&gt;</span>rear<span class="preprocessor">]</span><span class="markup"> = item;
+}</span>
+</code></pre><h2 id="(2)出队列">(2)出队列</h2><pre><code>ElementType DeleteQ(<span class="built_in">Queue</span> *PtrQ){
+    <span class="keyword">if</span>(PtrQ <span class="subst">-&gt; </span>front == PtrQ<span class="subst">-&gt;</span>rear){
+        printf(<span class="string">"队列空"</span>);
+        <span class="keyword">return</span> ERR<span class="subst">OR</span>;
+    } <span class="keyword">else</span> {
+        PtrQ<span class="subst">-&gt;</span>front = (PtrQ<span class="subst">-&gt;</span>front+<span class="number">1</span>)%MaxSize;
+        <span class="keyword">return</span> PtrQ<span class="subst">-&gt;</span><span class="built_in">Data</span><span class="preprocessor">[</span>PtrQ<span class="subst">-&gt;</span>front<span class="preprocessor">]</span><span class="markup">;
+    }
+}</span>
+</code></pre><h1 id="2-3-2_队列的_链式_存储实现">2.3.2 队列的 链式 存储实现</h1><p>可以用 单链表 实现。<br>插入和删除 操作 分别在 链表 的两头进行。<br>队列指针 front和rear 分别 指向链表的哪一头？<br>front是用来删除的，rear是用来插入的<br>链表的头，可以做front或rear，插入 删除都可以；<br>链表的尾，如果做front，删除了，就找不到链表的头了。<br>所以 链表的头做front，头做rear</p>
+<p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/4d566994a5d16091c1af0c8257fd3f6458b4763a/201512/%E9%98%9F%E5%88%97%E7%9A%84%E9%93%BE%E5%BC%8F%E5%AD%98%E5%82%A8%E5%AE%9E%E7%8E%B0.PNG" alt="队列的链式存储实现"></p>
+<pre><code><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">Node</span></span>{
+    ElementType Data;
+    <span class="class"><span class="keyword">struct</span> <span class="title">Node</span> *Next;
+}QNode;
+typedef struct</span>{
+<span class="comment">//链队列结构</span>
+QNode *rear;<span class="comment">//指向队尾结点</span>
+QNode *front;<span class="comment">//指向队头结点</span>
+}LinkQueue;
+LinkQueue *PtrQ;
+</code></pre><p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/6f06be93324af5f8c6eb80abc68689bef6137f85/201512/%E9%98%9F%E5%88%97%E7%9A%84%E9%93%BE%E5%BC%8F%E5%AD%98%E5%82%A8%E5%AE%9E%E7%8E%B02.PNG" alt="队列的链式存储实现2"></p>
+<h3 id="不带头结点_的链式队列_出队：">不带头结点 的链式队列 出队：</h3><pre><code>ElementType DeleteQ(LinkQueue *PtrQ){
+    QNode *FrontCell;
+    ElementType FrontElem;
+    <span class="keyword">if</span>(PtrQ<span class="subst">-&gt;</span>front == <span class="built_in">NULL</span>){
+        printf(<span class="string">"队列空"</span>);
+        <span class="keyword">return</span> ERR<span class="subst">OR</span>;
+    }
+    FrontCell = PtrQ<span class="subst">-&gt;</span>front;
+    <span class="keyword">if</span>(PtrQ<span class="subst">-&gt;</span>front == PtrQ<span class="subst">-&gt;</span>rear){
+        <span class="comment">//队列只有一个元素</span>
+        PtrQ<span class="subst">-&gt;</span>front = PtrQ<span class="subst">-&gt;</span>rear = <span class="built_in">NULL</span>;<span class="comment">//删除后 队列 置空</span>
+    } <span class="keyword">else</span> {
+        PtrQ<span class="subst">-&gt;</span>front = PtrQ<span class="subst">-&gt;</span>front<span class="subst">-&gt;</span>Next;
+    }
+    FrontElem = FrontCell<span class="subst">-&gt;</span><span class="built_in">data</span>;
+    free(FrontCell);<span class="comment">//释放 被删除 结点 的空间</span>
+    <span class="keyword">return</span> FrontElem;
+}
+</code></pre><p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/67986e44fc4c058fae88bb70334e38474a23259c/201512/%E4%B8%8D%E5%B8%A6%E5%A4%B4%E7%BB%93%E7%82%B9%E7%9A%84%E9%93%BE%E5%BC%8F%E9%98%9F%E5%88%97%E5%87%BA%E9%98%9F.PNG" alt="不带头结点的链式队列出队"></p>
+
       
     </div>
     
