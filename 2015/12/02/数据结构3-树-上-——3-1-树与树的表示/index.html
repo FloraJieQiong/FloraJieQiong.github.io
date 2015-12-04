@@ -5,16 +5,82 @@
   
   <title>数据结构3-树(上)——3-1-树与树的表示 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description">
+  <meta name="description" content="3.1 树与树的表示3.1.1什么是树客观世界中 许多事物 存在的 层次关系
+
+家谱
+社会组织结构
+图书信息管理
+
+分层次组织 在管理上 具有更高的效率。
+查找查找： 根据 关键字K，从 集合R中 找出与K相同的记录
+
+静态查找：集合中 记录是固定的
+没有插入和删除操作，只有查找
+举例：查字典
+
+
+动态查找： 集合中 记录是动态变化的
+除查找，还可以 插入和删除
+
+
+
+静态查找方法1：顺序查找in">
 <meta property="og:type" content="article">
 <meta property="og:title" content="数据结构3-树(上)——3-1-树与树的表示">
 <meta property="og:url" content="http://yoursite.com/2015/12/02/数据结构3-树-上-——3-1-树与树的表示/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description">
-<meta property="og:updated_time" content="2015-12-02T02:01:52.969Z">
+<meta property="og:description" content="3.1 树与树的表示3.1.1什么是树客观世界中 许多事物 存在的 层次关系
+
+家谱
+社会组织结构
+图书信息管理
+
+分层次组织 在管理上 具有更高的效率。
+查找查找： 根据 关键字K，从 集合R中 找出与K相同的记录
+
+静态查找：集合中 记录是固定的
+没有插入和删除操作，只有查找
+举例：查字典
+
+
+动态查找： 集合中 记录是动态变化的
+除查找，还可以 插入和删除
+
+
+
+静态查找方法1：顺序查找in">
+<meta property="og:image" content="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/d5b1cc1c621830d978ae1b046cc820a0ec0bde80/201512/%E9%A1%BA%E5%BA%8F%E6%9F%A5%E6%89%BE.PNG">
+<meta property="og:image" content="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/481c80d2db16be5cf93e1eb25728031b295736b3/201512/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E4%B8%BE%E4%BE%8B.PNG">
+<meta property="og:image" content="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/b6a841cd9f31188ed06fc23784503b1b1295673c/201512/%E5%88%A4%E5%AE%9A%E6%A0%91.PNG">
+<meta property="og:image" content="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/9092a46a668c1b08c73485b36ec8387f69408e80/201512/%E6%A0%91%E7%9A%84%E5%AE%9A%E4%B9%89.PNG">
+<meta property="og:image" content="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/fb3108289afb901f102b5a04bbf23625becb91a7/201512/%E6%A0%91%E4%B8%8E%E9%9D%9E%E6%A0%91.PNG">
+<meta property="og:image" content="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/90438b87d183998de2ce8be0e50a14382013674e/201512/%E6%A0%91%E7%9A%84%E8%A1%A8%E7%A4%BA1.PNG">
+<meta property="og:image" content="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/dc9e459ca97f628e6c57a33a48604119a8ba69ee/201512/%E6%A0%91%E7%9A%84%E8%A1%A8%E7%A4%BA-%E9%93%BE%E8%A1%A8.PNG">
+<meta property="og:image" content="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/9f6e8da5b232e8001a0272f4ef5249f98c36019d/201512/%E5%84%BF%E5%AD%90%E5%85%84%E5%BC%9F%E8%A1%A8%E7%A4%BA%E6%B3%95.PNG">
+<meta property="og:image" content="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/855520711dfedd3ed8d726039f5427185fee44fa/201512/%E4%BA%8C%E5%8F%89%E6%A0%91.PNG">
+<meta property="og:updated_time" content="2015-12-03T04:47:18.099Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据结构3-树(上)——3-1-树与树的表示">
-<meta name="twitter:description">
+<meta name="twitter:description" content="3.1 树与树的表示3.1.1什么是树客观世界中 许多事物 存在的 层次关系
+
+家谱
+社会组织结构
+图书信息管理
+
+分层次组织 在管理上 具有更高的效率。
+查找查找： 根据 关键字K，从 集合R中 找出与K相同的记录
+
+静态查找：集合中 记录是固定的
+没有插入和删除操作，只有查找
+举例：查字典
+
+
+动态查找： 集合中 记录是动态变化的
+除查找，还可以 插入和删除
+
+
+
+静态查找方法1：顺序查找in">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -113,7 +179,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						
+						<a href="/tags/framework/" style="font-size: 10px;">framework</a> <a href="/tags/数据结构/" style="font-size: 20px;">数据结构</a>
 					</div>
 				</section>
 				
@@ -216,6 +282,10 @@
       
       <div class="article-info article-info-post">
         
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构/">数据结构</a></li></ul>
+	</div>
+
         
 
         <div class="clearfix"></div>
@@ -224,7 +294,87 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h1 id="3-1_树与树的表示">3.1 树与树的表示</h1><h2 id="3-1-1什么是树">3.1.1什么是树</h2><p>客观世界中 许多事物 存在的 层次关系</p>
+<ul>
+<li>家谱</li>
+<li>社会组织结构</li>
+<li>图书信息管理</li>
+</ul>
+<p>分层次组织 在管理上 具有更高的效率。</p>
+<h2 id="查找">查找</h2><p>查找： 根据 关键字K，从 集合R中 找出与K相同的记录</p>
+<ul>
+<li>静态查找：集合中 记录是固定的<ul>
+<li>没有插入和删除操作，只有查找</li>
+<li>举例：查字典</li>
+</ul>
+</li>
+<li>动态查找： 集合中 记录是动态变化的<ul>
+<li>除查找，还可以 插入和删除</li>
+</ul>
+</li>
+</ul>
+<h2 id="静态查找">静态查找</h2><h3 id="方法1：顺序查找">方法1：顺序查找</h3><pre><code><span class="keyword">int</span> SequentialSearch(StaticTable *Tbl, ElementType K){
+    <span class="comment">//在表Tbl[1]-Tbl[n]中查找关键字为K的元素</span>
+    <span class="keyword">int</span> i;
+    Tbl-&gt;Element[<span class="number">0</span>] = K;<span class="comment">//建立哨兵</span>
+    <span class="keyword">for</span>(i = Tbl-&gt;Length; Tbl-&gt;Element[i] != K; i--);
+    <span class="keyword">return</span> i;<span class="comment">//找不到返回0</span>
+}
+</code></pre><p>//数据从1开始存储，时间复杂度O(n)</p>
+<p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/d5b1cc1c621830d978ae1b046cc820a0ec0bde80/201512/%E9%A1%BA%E5%BA%8F%E6%9F%A5%E6%89%BE.PNG" alt="顺序查找"></p>
+<p><strong> 顺序查找的另一种实现：不用哨兵 </strong></p>
+<pre><code><span class="built_in">int</span> SequentailSearch(StaticTable *Tbl, ElementType K){
+    <span class="built_in">int</span> i<span class="comment">;</span>
+    <span class="keyword">for</span>(i = Tbl-&gt;Length<span class="comment">; i&gt;0 &amp;&amp; Tbl-&gt;Element[i]!=K; i--);</span>
+    <span class="keyword">return</span> i<span class="comment">;</span>
+} 
+</code></pre><h2 id="3-1-2_方法2：二分查找">3.1.2 方法2：二分查找</h2><p>假设n个数据元素时有序的：<br>    K1 &lt; K2 &lt; … &lt; Kn<br>并且 连续存放（数组），可以进行二分查找。</p>
+<p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/481c80d2db16be5cf93e1eb25728031b295736b3/201512/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E4%B8%BE%E4%BE%8B.PNG" alt="二分查找举例"></p>
+<h2 id="3-1-3_二分查找_代码实现">3.1.3 二分查找 代码实现</h2><pre><code>int <span class="type">BinarySearch</span>(<span class="type">StaticTable</span> *<span class="type">Tbl</span>, <span class="type">ElementType</span> <span class="type">K</span>){
+    <span class="comment">//在表Tbl中查找K</span>
+    int <span class="keyword">left</span>, <span class="keyword">right</span>, mid, <span class="type">NoFound</span> = -<span class="number">1</span>;
+
+    <span class="keyword">left</span> = <span class="number">1</span>;<span class="comment">//初始左边界</span>
+    <span class="keyword">right</span> = <span class="type">Tbl</span>-&gt;<span class="type">Length</span>;<span class="comment">//初始右边界</span>
+    <span class="keyword">while</span>(<span class="keyword">left</span> &lt;= <span class="keyword">right</span>){
+        mid = (<span class="keyword">left</span> + <span class="keyword">right</span>) / <span class="number">2</span>;<span class="comment">//计算中间坐标</span>
+        <span class="keyword">if</span>(<span class="type">K</span> &lt; <span class="type">Tbl</span>-&gt;<span class="type">Element</span>[mid]){
+            <span class="keyword">right</span> = mid - <span class="number">1</span>;<span class="comment">//调整右边界</span>
+        } <span class="keyword">else</span> <span class="keyword">if</span>(<span class="type">K</span> &gt; <span class="type">Tbl</span>-&gt;<span class="type">Element</span>[mid]){
+            <span class="keyword">left</span> = mid + <span class="number">1</span>;<span class="comment">//调整左边界</span>
+        } <span class="keyword">else</span> {
+            <span class="keyword">return</span> mid;
+        }
+    }
+    <span class="keyword">return</span> <span class="type">NotFound</span>;<span class="comment">//查找不成功，返回-1</span>
+}
+</code></pre><p>二分查找的 时间复杂度O(logN)</p>
+<p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/b6a841cd9f31188ed06fc23784503b1b1295673c/201512/%E5%88%A4%E5%AE%9A%E6%A0%91.PNG" alt="判定树"></p>
+<h2 id="3-1-4_树的定义">3.1.4 树的定义</h2><p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/9092a46a668c1b08c73485b36ec8387f69408e80/201512/%E6%A0%91%E7%9A%84%E5%AE%9A%E4%B9%89.PNG" alt="树的定义"></p>
+<p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/fb3108289afb901f102b5a04bbf23625becb91a7/201512/%E6%A0%91%E4%B8%8E%E9%9D%9E%E6%A0%91.PNG" alt="树与非树"></p>
+<h3 id="树的术语">树的术语</h3><ul>
+<li>1.结点的度（Degree）：结点的子树个数</li>
+<li>2.树的度：树的所有结点中 最大的度数</li>
+<li>3.叶结点（Leaf）：度为0 的点，没有子树 的点</li>
+<li>4.父结点（Parent）：有子树的结点 是其子树 的根结点 的父结点</li>
+<li>5.子结点（Child）：若A结点是B结点的父结点，则称 B结点 是A结点 的子结点；子结点 也称 孩子结点</li>
+<li>6.兄弟结点（Sibling）：具有 同一父结点 的各结点 彼此是 兄弟结点。</li>
+<li>7.路径和 路径长度：从 结点n1到nk的路径 为 一个结点序列n1，n2，…，nk， ni是ni+1的父结点。路径 所包含的个数 为 路径长度</li>
+<li>8.祖先结点（Ancestor）：沿 树根 到某一结点 路径上 的所以结点 都是 这个结点 的祖先结点</li>
+<li>9.子孙结点（Descendant）：某一结点 的子树 中的 所有结点 是这个结点的子孙</li>
+<li>10.结点的层次（Level）：规定 根结点在1层，其他 任一结点的层数 是其 父结点 的层数+1</li>
+<li>11.树的深度（Depth）：树中所有结点中 的最大层次 是这棵树的 深度。</li>
+</ul>
+<h2 id="3-1-5_树的表示">3.1.5 树的表示</h2><p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/90438b87d183998de2ce8be0e50a14382013674e/201512/%E6%A0%91%E7%9A%84%E8%A1%A8%E7%A4%BA1.PNG" alt="树的表示1"></p>
+<p><strong> 方式1：数组 </strong><br>数组 表示不了 谁是谁的父结点</p>
+<p><strong> 方式二：链表 </strong></p>
+<p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/dc9e459ca97f628e6c57a33a48604119a8ba69ee/201512/%E6%A0%91%E7%9A%84%E8%A1%A8%E7%A4%BA-%E9%93%BE%E8%A1%A8.PNG" alt="树的表示"></p>
+<p>A有3个指针，B有2个指针，C有3个指针。<br>每个元素设置几个指针？都设置3个，空的指针个数很多，浪费资源。</p>
+<p><strong> 方式三：儿子-兄弟表示法 </strong></p>
+<p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/9f6e8da5b232e8001a0272f4ef5249f98c36019d/201512/%E5%84%BF%E5%AD%90%E5%85%84%E5%BC%9F%E8%A1%A8%E7%A4%BA%E6%B3%95.PNG" alt="儿子-兄弟表示法"></p>
+<p>儿子-兄弟 表示法 旋转45°，变成 二叉树</p>
+<p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/855520711dfedd3ed8d726039f5427185fee44fa/201512/%E4%BA%8C%E5%8F%89%E6%A0%91.PNG" alt="二叉树"></p>
+
       
     </div>
     
@@ -232,6 +382,15 @@
   
     
 <nav id="article-nav">
+  
+    <a href="/2015/12/02/framework-MediaScanner/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          framework--MediaScanner
+        
+      </div>
+    </a>
   
   
     <a href="/2015/12/01/数据结构2-线性结构——2-4-应用实例：多项式加法运算/" id="article-nav-older" class="article-nav-link-wrap">

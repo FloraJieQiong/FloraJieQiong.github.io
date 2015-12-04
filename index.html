@@ -112,7 +112,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						
+						<a href="/tags/framework/" style="font-size: 10px;">framework</a> <a href="/tags/数据结构/" style="font-size: 20px;">数据结构</a>
 					</div>
 				</section>
 				
@@ -192,6 +192,789 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-数据结构3-树-上-——3-3-二叉树的遍历" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/12/04/数据结构3-树-上-——3-3-二叉树的遍历/" class="article-date">
+  	<time datetime="2015-12-04T01:53:17.000Z" itemprop="datePublished">2015-12-04</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/12/04/数据结构3-树-上-——3-3-二叉树的遍历/">数据结构3-树-上-——3-3-二叉树的遍历</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构/">数据结构</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+    <article id="post-数据结构3-树-上-——3-2-二叉树与存储结构" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/12/03/数据结构3-树-上-——3-2-二叉树与存储结构/" class="article-date">
+  	<time datetime="2015-12-03T04:44:51.000Z" itemprop="datePublished">2015-12-03</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/12/03/数据结构3-树-上-——3-2-二叉树与存储结构/">数据结构3-树-上-——3-2-二叉树与存储结构</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="3-2_二叉树及存储结构">3.2 二叉树及存储结构</h1><h2 id="3-2-1_二叉树的定义">3.2.1 二叉树的定义</h2><p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/314abd6ad2297a34d354aac072cbad88704b7b33/201512/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%AE%9A%E4%B9%89.PNG" alt="二叉树的定义"><br>(a)是空树<br>(b)只有一个结点，左子树 右子树 为空<br>(c)有左子树，右子树为空<br>(d)左子树为空，有右子树<br>(e)左子树 右子树都非空</p>
+<h3 id="特殊二叉树">特殊二叉树</h3><p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/591980a52b80dcea2159714719032bd2e478e923/201512/%E7%89%B9%E6%AE%8A%E4%BA%8C%E5%8F%89%E6%A0%911.PNG" alt="特殊二叉树1"><br>完全二叉树：有n个结点的二叉树，对 树中结点 按 从上至下、从左到右顺序 进行编号，编号为i(1 &lt;= i &lt;= n) 的结点 与 满二叉树中 编号为i的结点 在二叉树中 位置相同</p>
+<p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/38b39bdaf7c2ca4b1ec6e74b0b98a1761c4de1e3/201512/%E5%AE%8C%E5%85%A8%E4%BA%8C%E5%8F%89%E6%A0%911.PNG" alt="完全二叉树1"></p>
+<p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/bf84cbbe47481ba0874c0f5bb6c7cceb77b066f7/201512/%E5%AE%8C%E5%85%A8%E4%BA%8C%E5%8F%89%E6%A0%912.PNG" alt="完全二叉树2"></p>
+<h3 id="二叉树的几个重要性质">二叉树的几个重要性质</h3><p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/519494d1bdfc1bc1ef37647e1234a0a17882dc50/201512/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%87%A0%E4%B8%AA%E9%87%8D%E8%A6%81%E6%80%A7%E8%B4%A8.PNG" alt="二叉树的几个重要性质"><br>n0表示 没有 子树的结点，n1是有一个子树的结点，n2是有2个子树的结点。</p>
+<h3 id="二叉树的抽象数据类型定义">二叉树的抽象数据类型定义</h3><p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/3b57a5fdd00eb6678bddbfccd4ebbcabc2a91cf2/201512/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%8A%BD%E8%B1%A1%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%AE%9A%E4%B9%89.PNG" alt="二叉树的抽象数据类型定义"></p>
+<h2 id="3-2-2_二叉树的存储结构">3.2.2 二叉树的存储结构</h2><p><strong> 数组存储 </strong><br><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/856841d5e4f0ea618643d873f23eb730680815f1/201512/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E9%A1%BA%E5%BA%8F%E5%AD%98%E5%82%A8.PNG" alt="二叉树的顺序存储"></p>
+<p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/18631f2efd478f41b2c58fee471550cff90d9517/201512/%E9%A1%BA%E5%BA%8F%E5%AD%98%E5%82%A8%E4%B8%80%E8%88%AC%E4%BA%8C%E5%8F%89%E6%A0%91.PNG" alt="顺序存储 一般二叉树"></p>
+<p><strong> 链表存储 </strong></p>
+<p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/716559ce792356880ee64401109f62c5cb93c24e/201512/%E9%93%BE%E8%A1%A8%E5%AD%98%E5%82%A8%E4%BA%8C%E5%8F%89%E6%A0%91.PNG" alt="链表存储二叉树"></p>
+<pre><code><span class="label">typedef</span> <span class="keyword">struct </span>TreeNode *<span class="keyword">BinTree;
+</span><span class="label">typedef</span> <span class="keyword">BinTree </span>Position<span class="comment">;</span>
+<span class="keyword">struct </span>TreeNode{
+    ElementType <span class="preprocessor">Data</span><span class="comment">;</span>
+    <span class="keyword">BinTree </span>Left<span class="comment">;</span>
+    <span class="keyword">BinTree </span>Right<span class="comment">;</span>
+}
+</code></pre><p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/1daaeb800bd0fc2ab8079aa728b405c4fbf80f5f/201512/%E9%93%BE%E8%A1%A8%E5%AD%98%E5%82%A8%E4%BA%8C%E5%8F%89%E6%A0%91%E4%B8%BE%E4%BE%8B.PNG" alt="链表存储二叉树举例"></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构/">数据结构</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+    <article id="post-framework-MediaScanner" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/12/02/framework-MediaScanner/" class="article-date">
+  	<time datetime="2015-12-02T07:22:05.000Z" itemprop="datePublished">2015-12-02</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/12/02/framework-MediaScanner/">framework--MediaScanner</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="MediaScanner">MediaScanner</h1><h2 id="涉及组件">涉及组件</h2><ul>
+<li>MediaScannerService:负责扫描媒体文件，将扫描的信息插入到媒体数据库中</li>
+<li>MediaProvider：处理 媒体数据库的增删改查</li>
+<li>MediaScannerReceiver：接收外界发来的扫描请求，MediaScanner对外提供的接口</li>
+</ul>
+<h2 id="1-MediaScannerReceiver">1.MediaScannerReceiver</h2><pre><code>@Override
+<span class="keyword">public</span> <span class="literal">void</span> onReceive(Context context, Intent intent) {
+    final <span class="built_in">String</span> action = intent<span class="built_in">.</span>getAction();
+    final Uri uri = intent<span class="built_in">.</span>getData();
+    <span class="keyword">if</span> (Intent<span class="built_in">.</span>ACTION_BOOT_COMPLETED<span class="built_in">.</span><span class="keyword">equals</span>(action)) {
+        <span class="comment">//接收BOOT_COMPLETED广播，扫描内部 外部存储区。</span>
+        <span class="comment">//内部存储区 扫描的是/system/midia目录，存储了系统自带的铃声等媒体文件</span>
+        <span class="comment">// Scan both internal and external storage</span>
+        scan(context, MediaProvider<span class="built_in">.</span>INTERNAL_VOLUME);
+        scan(context, MediaProvider<span class="built_in">.</span>EXTERNAL_VOLUME);
+
+    } <span class="keyword">else</span> {
+        <span class="keyword">if</span> (uri<span class="built_in">.</span>getScheme()<span class="built_in">.</span><span class="keyword">equals</span>(<span class="string">"file"</span>)) {
+            <span class="comment">// handle intents related to external storage</span>
+            <span class="comment">//uri = file:///storage/emulated/0/Sound_recorder/%E5%BD%95%E9%9F%B3_2015%E5%B9%B412%E6%9C%882%E6%97%A5_11%E7%82%B918%E5%88%8653%E7%A7%92.aac, </span>
+            <span class="comment">//path = /storage/emulated/0/Sound_recorder/录音_2015年12月2日_11点18分53秒.aac</span>
+            <span class="built_in">String</span> path = uri<span class="built_in">.</span>getPath();
+            <span class="built_in">String</span> externalStoragePath = Environment<span class="built_in">.</span>getExternalStorageDirectory()<span class="built_in">.</span>getPath();<span class="comment">// /storage/emulated/0</span>
+            <span class="built_in">String</span> legacyPath = Environment<span class="built_in">.</span>getLegacyExternalStorageDirectory()<span class="built_in">.</span>getPath();<span class="comment">// /sdcard</span>
+
+            try {
+                path = <span class="literal">new</span> File(path)<span class="built_in">.</span>getCanonicalPath();
+            } catch (IOException e) {
+                <span class="keyword">Log</span><span class="built_in">.</span>e(<span class="built_in">TAG</span>, <span class="string">"couldn't canonicalize "</span> + path);
+                <span class="keyword">return</span>;
+            }
+            <span class="keyword">if</span> (path<span class="built_in">.</span>startsWith(legacyPath)) {
+                path = externalStoragePath + path<span class="built_in">.</span>substring(legacyPath<span class="built_in">.</span>length());
+            }
+
+            <span class="keyword">Log</span><span class="built_in">.</span>d(<span class="built_in">TAG</span>, <span class="string">"action: "</span> + action + <span class="string">" path: "</span> + path);
+            <span class="keyword">if</span> (Intent<span class="built_in">.</span>ACTION_MEDIA_MOUNTED<span class="built_in">.</span><span class="keyword">equals</span>(action)) {
+                <span class="comment">//接收MEDIA_MOUNTED，扫描 外部存储 /storage/emulated/0</span>
+                <span class="comment">// scan whenever any volume is mounted</span>
+                scan(context, MediaProvider<span class="built_in">.</span>EXTERNAL_VOLUME);
+            } <span class="keyword">else</span> <span class="keyword">if</span> (Intent<span class="built_in">.</span>ACTION_MEDIA_SCANNER_SCAN_FILE<span class="built_in">.</span><span class="keyword">equals</span>(action) <span class="subst">&amp;&amp;</span>
+                    path != <span class="built_in">null</span> <span class="subst">&amp;&amp;</span> path<span class="built_in">.</span>startsWith(externalStoragePath + <span class="string">"/"</span>)) {
+                <span class="comment">//外部应用 可以通过发送 ACTION_MEDIA_SCANNER_SCAN_FILE 让MediaScannerReceiver扫描 单个文件，这个文件必须位于SD卡上</span>
+                scanFile(context, path);
+            }
+        }
+    }
+}
+<span class="keyword">private</span> <span class="literal">void</span> scan(Context context, <span class="built_in">String</span> volume) {
+    Bundle args = <span class="literal">new</span> Bundle();
+    args<span class="built_in">.</span>putString(<span class="string">"volume"</span>, volume);
+    <span class="comment">//启动 MediaScannerService</span>
+    context<span class="built_in">.</span>startService(
+            <span class="literal">new</span> Intent(context, MediaScannerService<span class="built_in">.</span>class)<span class="built_in">.</span>putExtras(args));
+}    
+
+<span class="keyword">private</span> <span class="literal">void</span> scanFile(Context context, <span class="built_in">String</span> path) {
+    Bundle args = <span class="literal">new</span> Bundle();
+    args<span class="built_in">.</span>putString(<span class="string">"filepath"</span>, path);
+    <span class="comment">//启动 MediaScannerService</span>
+    context<span class="built_in">.</span>startService(
+            <span class="literal">new</span> Intent(context, MediaScannerService<span class="built_in">.</span>class)<span class="built_in">.</span>putExtras(args));
+}   
+</code></pre><p>MediaProvider.java</p>
+<pre><code><span class="literal">static</span> <span class="keyword">final</span> <span class="built_in">String</span> INTERNAL_VOLUME = <span class="string">"internal"</span>;
+<span class="literal">static</span> <span class="keyword">final</span> <span class="built_in">String</span> EXTERNAL_VOLUME = <span class="string">"external"</span>;
+</code></pre><p>MediaScannerReceiver接收三种请求：</p>
+<ul>
+<li>ACTION_BOOT_COMPLETED：扫描内部 外部存储</li>
+<li>ACTION_MEDIA_MOUNTED：扫描外部存储</li>
+<li>ACTION_MEDIA_SCANNER_SCAN_FILE：扫描Sd卡上的一个文件，文件路径必须以Environment.getExternalStorageDirectory().getPath() 开头</li>
+</ul>
+<h2 id="2-MediaScannerService">2.MediaScannerService</h2><pre><code>public <span class="class"><span class="keyword">class</span> <span class="title">MediaScannerService</span> <span class="keyword"><span class="keyword">extends</span></span> <span class="title">Service</span> <span class="title">implements</span> <span class="title">Runnable</span></span>
+</code></pre><h3 id="2-1_onCreate">2.1 onCreate</h3><pre><code>    <span class="annotation">@Override</span>
+<span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">onCreate</span><span class="params">()</span>
+</span>{
+    <span class="comment">//获得PowerManager，防止扫描过程中休眠</span>
+    PowerManager pm = (PowerManager)getSystemService(Context.POWER_SERVICE);
+    mWakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, TAG);
+    StorageManager storageManager = (StorageManager)getSystemService(Context.STORAGE_SERVICE);
+    mExternalStoragePaths = storageManager.getVolumePaths();
+
+    <span class="comment">// Start up the thread running the service.  Note that we create a</span>
+    <span class="comment">// separate thread because the service normally runs in the process's</span>
+    <span class="comment">// main thread, which we don't want to block.</span>
+    Thread thr = <span class="keyword">new</span> Thread(<span class="keyword">null</span>, <span class="keyword">this</span>, <span class="string">"MediaScannerService"</span>);
+    thr.start();<span class="comment">//创建一个工作线程，工作在MediaScannerService的run()中</span>
+}
+
+<span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">run</span><span class="params">()</span>
+</span>{
+    <span class="comment">//设置线程的优先级，调低优先级，避免MediaScannerService一直占用CPU，导致系统卡</span>
+    <span class="comment">// reduce priority below other background threads to avoid interfering</span>
+    <span class="comment">// with other services at boot time.</span>
+    Process.setThreadPriority(Process.THREAD_PRIORITY_BACKGROUND +
+            Process.THREAD_PRIORITY_LESS_FAVORABLE);
+    Looper.prepare();
+
+    mServiceLooper = Looper.myLooper();
+    mServiceHandler = <span class="keyword">new</span> ServiceHandler();<span class="comment">//创建一个Handler</span>
+
+    Looper.loop();
+}
+</code></pre><p>onCreate后，MediaScannerService创建一个 带消息处理机制 的工作线程，消息 如何传递到 这个线程呢？</p>
+<h2 id="2-2_onStartCommand">2.2 onStartCommand</h2><pre><code><span class="annotation">@Override</span>
+<span class="keyword">public</span> <span class="function"><span class="keyword">int</span> <span class="title">onStartCommand</span><span class="params">(Intent intent, <span class="keyword">int</span> flags, <span class="keyword">int</span> startId)</span>
+</span>{
+    <span class="comment">//等待mServiceHandler被创建</span>
+    <span class="keyword">while</span> (mServiceHandler == <span class="keyword">null</span>) {
+        <span class="keyword">synchronized</span> (<span class="keyword">this</span>) {
+            <span class="keyword">try</span> {
+                wait(<span class="number">100</span>);
+            } <span class="keyword">catch</span> (InterruptedException e) {
+            }
+        }
+    }
+
+    <span class="keyword">if</span> (intent == <span class="keyword">null</span>) {
+        Log.e(TAG, <span class="string">"Intent is null in onStartCommand: "</span>,
+            <span class="keyword">new</span> NullPointerException());
+        <span class="keyword">return</span> Service.START_NOT_STICKY;
+    }
+
+    Message msg = mServiceHandler.obtainMessage();
+    msg.arg1 = startId;
+    msg.obj = intent.getExtras();
+    mServiceHandler.sendMessage(msg);<span class="comment">//发消息，最终由工作线程处理</span>
+
+    <span class="comment">// Try again later if we are killed before we can finish scanning.</span>
+    <span class="keyword">return</span> Service.START_REDELIVER_INTENT;
+}
+</code></pre><p>onStartCommand将 扫描请求信息 投递到 工作线程中 去处理。</p>
+<h2 id="2-3处理扫描请求">2.3处理扫描请求</h2><pre><code><span class="keyword">private</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">ServiceHandler</span> <span class="keyword"><span class="keyword">extends</span></span> <span class="title">Handler</span>
+</span>{
+    <span class="annotation">@Override</span>
+    public void handleMessage(<span class="type">Message</span> msg)
+    {
+        <span class="type">Bundle</span> arguments = (<span class="type">Bundle</span>) msg.obj;
+        <span class="type">String</span> filePath = arguments.getString(<span class="string">"filepath"</span>);
+
+        <span class="keyword">try</span> {
+            ……
+            } <span class="keyword">else</span> {
+                <span class="type">String</span> volume = arguments.getString(<span class="string">"volume"</span>);
+                <span class="type">String</span>[] directories = <span class="literal">null</span>;
+
+                <span class="keyword">if</span> (<span class="type">MediaProvider</span>.<span class="type">INTERNAL_VOLUME</span>.equals(volume)) {
+                    <span class="comment">//扫描内部存储，Environment.getRootDirectory()：/system ，Environment.getOemDirectory() ： /oem </span>
+                    <span class="comment">// scan internal media storage</span>
+                    directories = <span class="keyword">new</span> <span class="type">String</span>[] {
+                            <span class="type">Environment</span>.getRootDirectory() + <span class="string">"/media"</span>,
+                            <span class="type">Environment</span>.getOemDirectory() + <span class="string">"/media"</span>,
+                    };
+                }
+                <span class="keyword">else</span> <span class="keyword">if</span> (<span class="type">MediaProvider</span>.<span class="type">EXTERNAL_VOLUME</span>.equals(volume)) {
+                    <span class="comment">// scan external storage volumes</span>
+                    directories = mExternalStoragePaths;<span class="comment">// [/storage/emulated/0]</span>
+                }
+
+                <span class="keyword">if</span> (directories != <span class="literal">null</span>) {
+                    <span class="keyword">if</span> (<span class="literal">false</span>) <span class="type">Log</span>.d(<span class="type">TAG</span>, <span class="string">"start scanning volume "</span> + volume + <span class="string">": "</span>
+                            + <span class="type">Arrays</span>.toString(directories));
+                    <span class="comment">//调用scan函数扫描文件夹，可以一次设置多个目标文件夹</span>
+                    scan(directories, volume);
+                    <span class="keyword">if</span> (<span class="literal">false</span>) <span class="type">Log</span>.d(<span class="type">TAG</span>, <span class="string">"done scanning volume "</span> + volume);
+                }
+            }
+        } <span class="keyword">catch</span> (<span class="type">Exception</span> e) {
+            <span class="type">Log</span>.e(<span class="type">TAG</span>, <span class="string">"Exception in handleMessage"</span>, e);
+        }
+
+        stopSelf(msg.arg1);
+    }
+};
+</code></pre><h2 id="2-4_MediaScannerService的scan函数">2.4 MediaScannerService的scan函数</h2><pre><code>private <span class="keyword">void</span> scan(<span class="built_in">String</span>[] directories, <span class="built_in">String</span> volumeName) {
+    <span class="built_in">Uri</span> uri = <span class="built_in">Uri</span>.parse(<span class="string">"file://"</span> + directories[<span class="number">0</span>]);
+    <span class="comment">// don't sleep while scanning</span>
+    mWakeLock.acquire();
+
+    <span class="keyword">try</span> {
+        ContentValues values = <span class="keyword">new</span> ContentValues();
+        values.put(MediaStore.MEDIA_SCANNER_VOLUME, volumeName);
+        <span class="comment">//MediaScannerService通过insert这个特殊的Uri让MediaProvider做一些准备工作</span>
+        <span class="comment">//MediaStore.getMediaScannerUri(): content://media/none/media_scanner</span>
+        <span class="built_in">Uri</span> scanUri = getContentResolver().insert(MediaStore.getMediaScannerUri(), values);
+
+        <span class="comment">//发ACTION_MEDIA_SCANNER_STARTED广播</span>
+        sendBroadcast(<span class="keyword">new</span> Intent(Intent.ACTION_MEDIA_SCANNER_STARTED, uri));
+
+        <span class="keyword">try</span> {
+            <span class="keyword">if</span> (volumeName.equals(MediaProvider.EXTERNAL_VOLUME)) {
+                <span class="comment">//打开数据库</span>
+                openDatabase(volumeName);
+            }
+
+            <span class="comment">//创建MediaScanner，调用scanDirectories扫描目标文件夹</span>
+            MediaScanner scanner = createMediaScanner();
+            scanner.scanDirectories(directories, volumeName);
+        } <span class="keyword">catch</span> (Exception e) {
+            Log.e(TAG, <span class="string">"exception in MediaScanner.scan()"</span>, e);
+        }
+        <span class="comment">//通过 特殊Uri 让MediaProvider 做一些清理工作</span>
+        getContentResolver().delete(scanUri, <span class="keyword">null</span>, <span class="keyword">null</span>);
+
+    } <span class="keyword">finally</span> {
+        <span class="comment">//发送ACTION_MEDIA_SCANNER_FINISHED广播</span>
+        sendBroadcast(<span class="keyword">new</span> Intent(Intent.ACTION_MEDIA_SCANNER_FINISHED, uri));
+        mWakeLock.release();
+    }
+}
+<span class="comment">//openDatabase()通过insert这个特殊的Uri 让MediaProvider打开数据库</span>
+private <span class="keyword">void</span> openDatabase(<span class="built_in">String</span> volumeName) {
+    <span class="keyword">try</span> {
+        ContentValues values = <span class="keyword">new</span> ContentValues();
+        values.put(<span class="string">"name"</span>, volumeName);
+        getContentResolver().insert(<span class="built_in">Uri</span>.parse(<span class="string">"content://media/"</span>), values);
+    } <span class="keyword">catch</span> (IllegalArgumentException ex) {
+        Log.w(TAG, <span class="string">"failed to open media database"</span>);
+    }         
+}
+</code></pre><p>上边代码中，比较复杂的是 MediaScannerService和MediaProvider交互。除了后文的正常数据库操作外，MediaScannerService还经常会使用一些特殊的Uri来做数据库操作，而MediaProvider针对Uri会做一些特殊处理，如打开数据库文件等。</p>
+<pre><code><span class="keyword">private</span> MediaScanner createMediaScanner() {
+    MediaScanner scanner = <span class="literal">new</span> MediaScanner(this);
+    <span class="comment">//获取当前系统使用的区域信息，扫描的时候 将 媒体文件信息 转换成 当前系统的语言</span>
+    <span class="built_in">Locale</span> <span class="built_in">locale</span> = getResources()<span class="built_in">.</span>getConfiguration()<span class="built_in">.</span><span class="built_in">locale</span>;
+    <span class="keyword">if</span> (<span class="built_in">locale</span> != <span class="built_in">null</span>) {
+        <span class="built_in">String</span> language = <span class="built_in">locale</span><span class="built_in">.</span>getLanguage();
+        <span class="built_in">String</span> country = <span class="built_in">locale</span><span class="built_in">.</span>getCountry();
+        <span class="built_in">String</span> localeString = <span class="built_in">null</span>;
+        <span class="keyword">if</span> (language != <span class="built_in">null</span>) {
+            <span class="keyword">if</span> (country != <span class="built_in">null</span>) {
+                <span class="comment">//为扫描器 设置当前系统使用的 国家和语言</span>
+                scanner<span class="built_in">.</span>setLocale(language + <span class="string">"_"</span> + country);
+            } <span class="keyword">else</span> {
+                scanner<span class="built_in">.</span>setLocale(language);
+            }
+        }    
+    }
+
+    <span class="keyword">return</span> scanner;
+}
+</code></pre><h2 id="2-3媒体扫描工作总结">2.3媒体扫描工作总结</h2><p>MediaScannerReceiver和MediaScannerService交互，流程：</p>
+<ul>
+<li>MediaScannerReceiver 接收 外部发来 的扫描请求，通过startService启动MediaScannerService处理</li>
+<li>MediaScannerService的 主线程接收 MediaScannerReceiver收到的请求，然后 投递给 工作线程去处理</li>
+<li>工作线程做一些 前期处理工作（例如 向系统发 扫描开始的 广播），创建MediaScanner来处理扫描目标</li>
+<li>MediaScanner扫描完成后，工作线程 做后期处理，然后向系统 发扫描完毕的广播</li>
+</ul>
+<h1 id="3-MediaScanner分析">3.MediaScanner分析</h1><p>MediaScanner工作原理，跨 Java层、JNI层 Native层。</p>
+<h2 id="3-1_Java层">3.1 Java层</h2><h3 id="3-1-1_创建MediaScanner">3.1.1 创建MediaScanner</h3><pre><code>public <span class="class"><span class="keyword">class</span> <span class="title">MediaScanner</span></span>
+{
+    static {
+            <span class="constant">System</span>.loadLibrary(<span class="string">"media_jni"</span>);<span class="regexp">//</span>加载system/<span class="class"><span class="keyword">lib</span>/<span class="title">libmedia_jni</span>.<span class="title">so</span></span>
+        native_init();
+    }
+    ……
+    public <span class="constant">MediaScanner</span>(<span class="constant">Context</span> c) {
+        native_setup();<span class="regexp">//</span>调用<span class="constant">JNI</span>层 做一些初始化 工作
+        ……
+    }
+}
+</code></pre><h3 id="3-1-2_scanDirectories分析">3.1.2 scanDirectories分析</h3><pre><code><span class="comment">/** whether to use bulk inserts or individual inserts for each item */</span>
+<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="built_in">boolean</span> ENABLE_BULK_INSERTS = <span class="keyword">true</span>;
+
+<span class="keyword">public</span> <span class="keyword">void</span> scanDirectories(<span class="keyword">String</span>[] directories, <span class="keyword">String</span> volumeName) {
+    <span class="keyword">try</span> {
+        <span class="keyword">long</span> start = System.currentTimeMillis();
+        initialize(volumeName);<span class="comment">//（1）初始化</span>
+        prescan(<span class="keyword">null</span>, <span class="keyword">true</span>);<span class="comment">//（2）扫描前的预处理</span>
+        <span class="keyword">long</span> prescan = System.currentTimeMillis();
+
+        <span class="keyword">if</span> (ENABLE_BULK_INSERTS) {
+            <span class="comment">//MediaInserter: A MediaScanner helper class which enables us to do lazy insertion on the given provider. This class manages buffers internally and flushes when they are full. Note that you should call flushAll() after using this class.</span>
+            <span class="comment">// create MediaInserter for bulk inserts</span>
+            mMediaInserter = <span class="keyword">new</span> MediaInserter(mMediaProvider, mPackageName, <span class="number">500</span>);
+        }
+
+        <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; directories.length; i++) {
+            <span class="comment">//processDirectory是一个native函数，调用它 扫描目标文件夹</span>
+            <span class="comment">//mClient是MyMediaScannerClient类型，派生自MediaScannerClient，其作用后面再分析</span>
+            processDirectory(directories[i], mClient);
+        }
+
+        <span class="keyword">if</span> (ENABLE_BULK_INSERTS) {
+            <span class="comment">// flush remaining inserts</span>
+            mMediaInserter.flushAll();
+            mMediaInserter = <span class="keyword">null</span>;
+        }
+
+        <span class="keyword">long</span> scan = System.currentTimeMillis();
+        postscan(directories);<span class="comment">//(4)扫描后 处理</span>
+        <span class="keyword">long</span> end = System.currentTimeMillis();
+
+        <span class="keyword">if</span> (<span class="keyword">false</span>) {
+            Log.d(TAG, <span class="string">" prescan time: "</span> + (prescan - start) + <span class="string">"ms\n"</span>);
+            Log.d(TAG, <span class="string">"    scan time: "</span> + (scan - prescan) + <span class="string">"ms\n"</span>);
+            Log.d(TAG, <span class="string">"postscan time: "</span> + (end - scan) + <span class="string">"ms\n"</span>);
+            Log.d(TAG, <span class="string">"   total time: "</span> + (end - start) + <span class="string">"ms\n"</span>);
+        }
+    } <span class="keyword">catch</span> (SQLException e) {
+        <span class="comment">// this might happen if the SD card is removed while the media scanner is running</span>
+        Log.e(TAG, <span class="string">"SQLException in MediaScanner.scan()"</span>, e);
+    } <span class="keyword">catch</span> (UnsupportedOperationException e) {
+        <span class="comment">// this might happen if the SD card is removed while the media scanner is running</span>
+        Log.e(TAG, <span class="string">"UnsupportedOperationException in MediaScanner.scan()"</span>, e);
+    } <span class="keyword">catch</span> (RemoteException e) {
+        Log.e(TAG, <span class="string">"RemoteException in MediaScanner.scan()"</span>, e);
+    } <span class="keyword">finally</span> {
+        releaseResources();
+    }
+}
+</code></pre><p><strong> （1）initialize分析 </strong><br>initialize主要是 初始化一些Uri<br>扫描时 需要把文件的信息 插入到媒体库中，媒体库中 针对 Video、Audio、Image文件有对应的表，表的地址由Uri表示。</p>
+<pre><code><span class="keyword">private</span> <span class="literal">void</span> initialize(<span class="built_in">String</span> volumeName) {
+    mMediaProvider = mContext<span class="built_in">.</span>getContentResolver()<span class="built_in">.</span>acquireProvider(<span class="string">"media"</span>);
+
+    mAudioUri = Audio<span class="built_in">.</span>Media<span class="built_in">.</span>getContentUri(volumeName);<span class="comment">//音频表的地址，对应audio_meta表</span>
+    mVideoUri = Video<span class="built_in">.</span>Media<span class="built_in">.</span>getContentUri(volumeName);<span class="comment">//视频表地址，对应video表</span>
+    mImagesUri = Images<span class="built_in">.</span>Media<span class="built_in">.</span>getContentUri(volumeName);<span class="comment">//图片表地址，对应images表</span>
+    mThumbsUri = Images<span class="built_in">.</span>Thumbnails<span class="built_in">.</span>getContentUri(volumeName);<span class="comment">//缩略图地址，对应thumbnails表</span>
+    mFilesUri = Files<span class="built_in">.</span>getContentUri(volumeName);<span class="comment">//所有文件的地址，对应files表</span>
+    mFilesUriNoNotify = mFilesUri<span class="built_in">.</span>buildUpon()<span class="built_in">.</span>appendQueryParameter(<span class="string">"nonotify"</span>, <span class="string">"1"</span>)<span class="built_in">.</span>build();
+
+    <span class="keyword">if</span> (<span class="subst">!</span>volumeName<span class="built_in">.</span><span class="keyword">equals</span>(<span class="string">"internal"</span>)) {
+        <span class="comment">//如果扫描的是 外部存储，支持 播放列表、音乐的流派等内容</span>
+        <span class="comment">// we only support playlists on external media</span>
+        mProcessPlaylists = <span class="literal">true</span>;
+        mProcessGenres = <span class="literal">true</span>;
+        mPlaylistsUri = Playlists<span class="built_in">.</span>getContentUri(volumeName);
+
+        mCaseInsensitivePaths = <span class="literal">true</span>;<span class="comment">//Sd卡存储区域一般使用FAT文件系统，文件名与大小写无关</span>
+    }
+}
+</code></pre><p><strong> （2）prescan分析 </strong><br>媒体扫描的问题：假设扫描之前SD卡有100个媒体文件，数据库中有100个关于文件的记录，因某种原因 删除了50个媒体文件，那么 数据库什么时候更新呢？</p>
+<p>prescan函数的主要作用就是 在扫描之前 把数据库中 和文件关联的信息 取出并保存，这些信息主要是 媒体文件的路径 所属表的Uri。上边的例子，prescan会从数据库中 取出这100个文件 的文件信息。</p>
+<pre><code><span class="keyword">private</span> <span class="keyword">void</span> prescan(<span class="keyword">String</span> filePath, <span class="built_in">boolean</span> prescanFiles) <span class="keyword">throws</span> RemoteException {
+    Cursor c = <span class="keyword">null</span>;
+    <span class="keyword">String</span> where = <span class="keyword">null</span>;
+    <span class="keyword">String</span>[] selectionArgs = <span class="keyword">null</span>;
+
+    <span class="comment">//保存从数据库中获取的文件信息</span>
+    <span class="keyword">if</span> (mPlayLists == <span class="keyword">null</span>) {
+        mPlayLists = <span class="keyword">new</span> ArrayList&lt;FileEntry&gt;();
+    } <span class="keyword">else</span> {
+        mPlayLists.<span class="built_in">clear</span>();
+    }
+
+    <span class="keyword">if</span> (filePath != <span class="keyword">null</span>) {
+        <span class="comment">//查询file信息</span>
+        <span class="comment">// query for only one file</span>
+        where = MediaStore.Files.FileColumns._ID + <span class="string">"&gt;?"</span> +
+            <span class="string">" AND "</span> + Files.FileColumns.DATA + <span class="string">"=?"</span>;
+        selectionArgs = <span class="keyword">new</span> <span class="keyword">String</span>[] { <span class="string">""</span>, filePath };
+    } <span class="keyword">else</span> {
+        where = MediaStore.Files.FileColumns._ID + <span class="string">"&gt;?"</span>;
+        selectionArgs = <span class="keyword">new</span> <span class="keyword">String</span>[] { <span class="string">""</span> };
+    }
+
+    <span class="comment">// Tell the provider to not delete the file.</span>
+    <span class="comment">// If the file is truly gone the delete is unnecessary, and we want to avoid</span>
+    <span class="comment">// accidentally deleting files that are really there (this may happen if the</span>
+    <span class="comment">// filesystem is mounted and unmounted while the scanner is running).</span>
+    Uri.Builder builder = mFilesUri.buildUpon();
+    builder.appendQueryParameter(MediaStore.PARAM_DELETE_DATA, <span class="string">"false"</span>);
+    MediaBulkDeleter deleter = <span class="keyword">new</span> MediaBulkDeleter(mMediaProvider, mPackageName,
+            builder.build());
+
+    <span class="comment">// Build the list of files from the content provider</span>
+    <span class="keyword">try</span> {
+        <span class="keyword">if</span> (prescanFiles) {
+            <span class="comment">// First read existing files from the files table.</span>
+            <span class="comment">// Because we'll be deleting entries for missing files as we go,</span>
+            <span class="comment">// we need to query the database in small batches, to avoid problems</span>
+            <span class="comment">// with CursorWindow positioning.</span>
+            <span class="keyword">long</span> lastId = Long.MIN_VALUE;
+            Uri limitUri = mFilesUri.buildUpon().appendQueryParameter(<span class="string">"limit"</span>, <span class="string">"1000"</span>).build();
+            mWasEmptyPriorToScan = <span class="keyword">true</span>;
+
+            <span class="keyword">while</span> (<span class="keyword">true</span>) {
+                selectionArgs[<span class="number">0</span>] = <span class="string">""</span> + lastId;
+                <span class="keyword">if</span> (c != <span class="keyword">null</span>) {
+                    c.close();
+                    c = <span class="keyword">null</span>;
+                }
+                <span class="comment">//查询files信息</span>
+                c = mMediaProvider.query(mPackageName, limitUri, FILES_PRESCAN_PROJECTION,
+                        where, selectionArgs, MediaStore.Files.FileColumns._ID, <span class="keyword">null</span>);
+                <span class="keyword">if</span> (c == <span class="keyword">null</span>) {
+                    <span class="keyword">break</span>;
+                }
+
+                <span class="built_in">int</span> num = c.getCount();
+
+                <span class="keyword">if</span> (num == <span class="number">0</span>) {
+                    <span class="keyword">break</span>;
+                }
+                mWasEmptyPriorToScan = <span class="keyword">false</span>;
+                <span class="keyword">while</span> (c.moveToNext()) {
+                    <span class="keyword">long</span> rowId = c.getLong(FILES_PRESCAN_ID_COLUMN_INDEX);
+                    <span class="keyword">String</span> path = c.getString(FILES_PRESCAN_PATH_COLUMN_INDEX);<span class="comment">//查询文件路径</span>
+                    <span class="built_in">int</span> format = c.getInt(FILES_PRESCAN_FORMAT_COLUMN_INDEX);
+                    <span class="keyword">long</span> lastModified = c.getLong(FILES_PRESCAN_DATE_MODIFIED_COLUMN_INDEX);
+                    lastId = rowId;
+
+                    <span class="comment">// Only consider entries with absolute path names.</span>
+                    <span class="comment">// This allows storing URIs in the database without the</span>
+                    <span class="comment">// media scanner removing them.</span>
+                    <span class="keyword">if</span> (path != <span class="keyword">null</span> &amp;&amp; path.startsWith(<span class="string">"/"</span>)) {
+                        <span class="built_in">boolean</span> exists = <span class="keyword">false</span>;
+                        <span class="keyword">try</span> {
+                            exists = Os.access(path, android.system.OsConstants.F_OK);
+                        } <span class="keyword">catch</span> (ErrnoException e1) {
+                        }
+                        <span class="keyword">if</span> (!exists &amp;&amp; !MtpConstants.isAbstractObject(format)) {
+                            <span class="comment">// do not delete missing playlists, since they may have been</span>
+                            <span class="comment">// modified by the user.</span>
+                            <span class="comment">// The user can delete them in the media player instead.</span>
+                            <span class="comment">// instead, clear the path and lastModified fields in the row</span>
+                            MediaFile.MediaFileType mediaFileType = MediaFile.getFileType(path);
+                            <span class="built_in">int</span> fileType = (mediaFileType == <span class="keyword">null</span> ? <span class="number">0</span> : mediaFileType.fileType);
+
+                            <span class="keyword">if</span> (!MediaFile.isPlayListFileType(fileType)) {
+                                deleter.delete(rowId);
+                                <span class="keyword">if</span> (path.toLowerCase(Locale.US).endsWith(<span class="string">"/.nomedia"</span>)) {
+                                    deleter.flush();
+                                    <span class="keyword">String</span> parent = <span class="keyword">new</span> File(path).getParent();
+                                    mMediaProvider.call(mPackageName, MediaStore.UNHIDE_CALL,
+                                            parent, <span class="keyword">null</span>);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    <span class="keyword">finally</span> {
+        <span class="keyword">if</span> (c != <span class="keyword">null</span>) {
+            c.close();
+        }
+        deleter.flush();
+    }
+
+    <span class="comment">// compute original size of images</span>
+    mOriginalCount = <span class="number">0</span>;
+    c = mMediaProvider.query(mPackageName, mImagesUri, ID_PROJECTION, <span class="keyword">null</span>, <span class="keyword">null</span>, <span class="keyword">null</span>, <span class="keyword">null</span>);
+    <span class="keyword">if</span> (c != <span class="keyword">null</span>) {
+        mOriginalCount = c.getCount();
+        c.close();
+    }
+}
+</code></pre><p><strong> （3）processDirectory 和 postscan分析 </strong></p>
+<pre><code><span class="keyword">private</span> <span class="keyword">native</span> <span class="function"><span class="keyword">void</span> <span class="title">processDirectory</span><span class="params">(String path, MediaScannerClient client)</span></span>;
+
+
+<span class="keyword">private</span> <span class="function"><span class="keyword">void</span> <span class="title">postscan</span><span class="params">(String[] directories)</span> <span class="keyword">throws</span> RemoteException </span>{
+
+    <span class="comment">// handle playlists last, after we know what media files are on the storage.</span>
+    <span class="keyword">if</span> (mProcessPlaylists) {
+        processPlayLists();
+    }
+
+    <span class="keyword">if</span> (mOriginalCount == <span class="number">0</span> &amp;&amp; mImagesUri.equals(Images.Media.getContentUri(<span class="string">"external"</span>)))
+        pruneDeadThumbnailFiles();
+
+    <span class="comment">// allow GC to clean up</span>
+    mPlayLists = <span class="keyword">null</span>;
+    mMediaProvider = <span class="keyword">null</span>;
+}
+</code></pre><p>processDirectory是一个native函数，JNI层实现。processDirectory扫描SD卡</p>
+<pre><code><span class="keyword">private</span> <span class="function"><span class="keyword">void</span> <span class="title">processPlayLists</span><span class="params">()</span> <span class="keyword">throws</span> RemoteException </span>{
+    Iterator&lt;FileEntry&gt; iterator = mPlayLists.iterator();
+    Cursor fileList = <span class="keyword">null</span>;
+    <span class="keyword">try</span> {
+        <span class="comment">// use the files uri and projection because we need the format column,</span>
+        <span class="comment">// but restrict the query to just audio files</span>
+        fileList = mMediaProvider.query(mPackageName, mFilesUri, FILES_PRESCAN_PROJECTION,
+                <span class="string">"media_type=2"</span>, <span class="keyword">null</span>, <span class="keyword">null</span>, <span class="keyword">null</span>);
+        <span class="keyword">while</span> (iterator.hasNext()) {
+            FileEntry entry = iterator.next();
+            <span class="comment">// only process playlist files if they are new or have been modified since the last scan</span>
+            <span class="keyword">if</span> (entry.mLastModifiedChanged) {
+                processPlayList(entry, fileList);
+            }
+        }
+    } <span class="keyword">catch</span> (RemoteException e1) {
+    } <span class="keyword">finally</span> {
+        <span class="keyword">if</span> (fileList != <span class="keyword">null</span>) {
+            fileList.close();
+        }
+    }
+}
+
+
+<span class="keyword">private</span> <span class="function"><span class="keyword">void</span> <span class="title">processPlayList</span><span class="params">(FileEntry entry, Cursor fileList)</span> <span class="keyword">throws</span> RemoteException </span>{
+    String path = entry.mPath;
+    ContentValues values = <span class="keyword">new</span> ContentValues();
+    <span class="keyword">int</span> lastSlash = path.lastIndexOf(<span class="string">'/'</span>);
+    <span class="keyword">if</span> (lastSlash &lt; <span class="number">0</span>) <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"bad path "</span> + path);
+    Uri uri, membersUri;
+    <span class="keyword">long</span> rowId = entry.mRowId;
+
+    <span class="comment">// make sure we have a name</span>
+    String name = values.getAsString(MediaStore.Audio.Playlists.NAME);
+    <span class="keyword">if</span> (name == <span class="keyword">null</span>) {
+        name = values.getAsString(MediaStore.MediaColumns.TITLE);
+        <span class="keyword">if</span> (name == <span class="keyword">null</span>) {
+            <span class="comment">// extract name from file name</span>
+            <span class="keyword">int</span> lastDot = path.lastIndexOf(<span class="string">'.'</span>);
+            name = (lastDot &lt; <span class="number">0</span> ? path.substring(lastSlash + <span class="number">1</span>)
+                    : path.substring(lastSlash + 1, lastDot));
+        }
+    }
+
+    values.put(MediaStore.Audio.Playlists.NAME, name);
+    values.put(MediaStore.Audio.Playlists.DATE_MODIFIED, entry.mLastModified);
+
+    <span class="keyword">if</span> (rowId == <span class="number">0</span>) {
+        values.put(MediaStore.Audio.Playlists.DATA, path);
+        uri = mMediaProvider.insert(mPackageName, mPlaylistsUri, values);
+        rowId = ContentUris.parseId(uri);
+        membersUri = Uri.withAppendedPath(uri, Playlists.Members.CONTENT_DIRECTORY);
+    } <span class="keyword">else</span> {
+        uri = ContentUris.withAppendedId(mPlaylistsUri, rowId);
+        mMediaProvider.update(mPackageName, uri, values, <span class="keyword">null</span>, <span class="keyword">null</span>);
+
+        <span class="comment">// delete members of existing playlist</span>
+        membersUri = Uri.withAppendedPath(uri, Playlists.Members.CONTENT_DIRECTORY);
+        mMediaProvider.delete(mPackageName, membersUri, <span class="keyword">null</span>, <span class="keyword">null</span>);
+    }
+
+    String playListDirectory = path.substring(<span class="number">0</span>, lastSlash + <span class="number">1</span>);
+    MediaFile.MediaFileType mediaFileType = MediaFile.getFileType(path);
+    <span class="keyword">int</span> fileType = (mediaFileType == <span class="keyword">null</span> ? <span class="number">0</span> : mediaFileType.fileType);
+
+    <span class="keyword">if</span> (fileType == MediaFile.FILE_TYPE_M3U) {
+        processM3uPlayList(path, playListDirectory, membersUri, values, fileList);
+    } <span class="function"><span class="keyword">else</span> <span class="title">if</span> <span class="params">(fileType == MediaFile.FILE_TYPE_PLS)</span> </span>{
+        processPlsPlayList(path, playListDirectory, membersUri, values, fileList);
+    } <span class="function"><span class="keyword">else</span> <span class="title">if</span> <span class="params">(fileType == MediaFile.FILE_TYPE_WPL)</span> </span>{
+        processWplPlayList(path, playListDirectory, membersUri, values, fileList);
+    }
+}
+</code></pre><h2 id="3-2_JNI层">3.2 JNI层</h2><h3 id="3-2-1_native_init">3.2.1 native_init</h3><p>MediaScanner的static块中调用</p>
+<pre><code><span class="comment">// This function gets a field ID, which in turn causes class initialization.</span>
+<span class="comment">// It is called from a static block in MediaScanner, which won't run until the</span>
+<span class="comment">// first time an instance of this class is used.</span>
+<span class="function"><span class="keyword">static</span> <span class="keyword">void</span>
+<span class="title">android_media_MediaScanner_native_init</span><span class="params">(JNIEnv *env)</span>
+</span>{
+    ALOGV(<span class="string">"native_init"</span>);
+    jclass clazz = env-&gt;FindClass(kClassMediaScanner);
+    <span class="keyword">if</span> (clazz == <span class="literal">NULL</span>) {
+           <span class="keyword">return</span>;
+    }
+
+    <span class="comment">//取得Java层MediaScanner类的mNativeContext信息，Native对象的指针保存到Java层MediaScanner对象的mNativeContext中</span>
+    fields.context = env-&gt;GetFieldID(clazz, <span class="string">"mNativeContext"</span>, <span class="string">"J"</span>);
+    <span class="keyword">if</span> (fields.context == <span class="literal">NULL</span>) {
+        <span class="keyword">return</span>;
+    }
+}
+</code></pre><h3 id="3-2-2_native_setup">3.2.2 native_setup</h3><pre><code>static void
+android_media_MediaScanner_native_setup<span class="list">(<span class="keyword">JNIEnv</span> <span class="variable">*env, jobject thiz)
+{
+    ALOGV("native_setup");
+    MediaScanner *</span>mp = new StagefrightMediaScanner<span class="comment">;//创建Native层的MediaScanner对象</span>
+
+    if <span class="list">(<span class="keyword">mp</span> == NULL)</span> {
+        jniThrowException<span class="list">(<span class="keyword">env</span>, kRunTimeException, <span class="string">"Out of memory"</span>)</span><span class="comment">;</span>
+        return<span class="comment">;</span>
+    }
+
+    env-&gt;SetLongField<span class="list">(<span class="keyword">thiz</span>, fields.context, <span class="list">(<span class="keyword">jlong</span>)</span>mp)</span><span class="comment">;</span>
+}</span>
+</code></pre><h3 id="3-2-3_processDirectory">3.2.3 processDirectory</h3><pre><code><span class="keyword">static</span> <span class="type">void</span>
+android_media_MediaScanner_processDirectory(
+        <span class="type">JNIEnv</span> *env, jobject thiz, jstring path, jobject client)
+{
+    <span class="type">ALOGV</span>(<span class="string">"processDirectory"</span>);
+    <span class="type">MediaScanner</span> *mp = getNativeScanner_l(env, thiz);
+    <span class="keyword">if</span> (mp == <span class="type">NULL</span>) {
+        jniThrowException(env, kRunTimeException, <span class="string">"No scanner available"</span>);
+        <span class="keyword">return</span>;
+    }
+
+    <span class="keyword">if</span> (path == <span class="type">NULL</span>) {
+        jniThrowException(env, kIllegalArgumentException, <span class="type">NULL</span>);
+        <span class="keyword">return</span>;
+    }
+
+    <span class="keyword">const</span> <span class="type">char</span> *pathStr = env-&gt;<span class="type">GetStringUTFChars</span>(path, <span class="type">NULL</span>);
+    <span class="keyword">if</span> (pathStr == <span class="type">NULL</span>) {  // <span class="type">Out</span> <span class="keyword">of</span> memory
+        <span class="keyword">return</span>;
+    }
+
+    //构造<span class="type">Native</span>层的<span class="type">MyMediaScannerClient</span>，并使用<span class="type">Java</span>层的<span class="type">Client</span>对象做参数
+    <span class="type">MyMediaScannerClient</span> myClient(env, client);
+    <span class="type">MediaScanResult</span> <span class="literal">result</span> = mp-&gt;processDirectory(pathStr, myClient);//调用<span class="type">Native</span>层的<span class="type">MediaScanner</span>扫描文件夹，并把<span class="type">Native</span>的<span class="type">MyMediaScannerClient</span>传进去
+    <span class="keyword">if</span> (<span class="literal">result</span> == <span class="type">MEDIA_SCAN_RESULT_ERROR</span>) {
+        <span class="type">ALOGE</span>(<span class="string">"An error occurred while scanning directory '%s'."</span>, pathStr);
+    }
+    env-&gt;<span class="type">ReleaseStringUTFChars</span>(path, pathStr);
+}
+</code></pre>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/framework/">framework</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
     <article id="post-数据结构3-树-上-——3-1-树与树的表示" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -218,13 +1001,97 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h1 id="3-1_树与树的表示">3.1 树与树的表示</h1><h2 id="3-1-1什么是树">3.1.1什么是树</h2><p>客观世界中 许多事物 存在的 层次关系</p>
+<ul>
+<li>家谱</li>
+<li>社会组织结构</li>
+<li>图书信息管理</li>
+</ul>
+<p>分层次组织 在管理上 具有更高的效率。</p>
+<h2 id="查找">查找</h2><p>查找： 根据 关键字K，从 集合R中 找出与K相同的记录</p>
+<ul>
+<li>静态查找：集合中 记录是固定的<ul>
+<li>没有插入和删除操作，只有查找</li>
+<li>举例：查字典</li>
+</ul>
+</li>
+<li>动态查找： 集合中 记录是动态变化的<ul>
+<li>除查找，还可以 插入和删除</li>
+</ul>
+</li>
+</ul>
+<h2 id="静态查找">静态查找</h2><h3 id="方法1：顺序查找">方法1：顺序查找</h3><pre><code><span class="keyword">int</span> SequentialSearch(StaticTable *Tbl, ElementType K){
+    <span class="comment">//在表Tbl[1]-Tbl[n]中查找关键字为K的元素</span>
+    <span class="keyword">int</span> i;
+    Tbl-&gt;Element[<span class="number">0</span>] = K;<span class="comment">//建立哨兵</span>
+    <span class="keyword">for</span>(i = Tbl-&gt;Length; Tbl-&gt;Element[i] != K; i--);
+    <span class="keyword">return</span> i;<span class="comment">//找不到返回0</span>
+}
+</code></pre><p>//数据从1开始存储，时间复杂度O(n)</p>
+<p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/d5b1cc1c621830d978ae1b046cc820a0ec0bde80/201512/%E9%A1%BA%E5%BA%8F%E6%9F%A5%E6%89%BE.PNG" alt="顺序查找"></p>
+<p><strong> 顺序查找的另一种实现：不用哨兵 </strong></p>
+<pre><code><span class="built_in">int</span> SequentailSearch(StaticTable *Tbl, ElementType K){
+    <span class="built_in">int</span> i<span class="comment">;</span>
+    <span class="keyword">for</span>(i = Tbl-&gt;Length<span class="comment">; i&gt;0 &amp;&amp; Tbl-&gt;Element[i]!=K; i--);</span>
+    <span class="keyword">return</span> i<span class="comment">;</span>
+} 
+</code></pre><h2 id="3-1-2_方法2：二分查找">3.1.2 方法2：二分查找</h2><p>假设n个数据元素时有序的：<br>    K1 &lt; K2 &lt; … &lt; Kn<br>并且 连续存放（数组），可以进行二分查找。</p>
+<p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/481c80d2db16be5cf93e1eb25728031b295736b3/201512/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E4%B8%BE%E4%BE%8B.PNG" alt="二分查找举例"></p>
+<h2 id="3-1-3_二分查找_代码实现">3.1.3 二分查找 代码实现</h2><pre><code>int <span class="type">BinarySearch</span>(<span class="type">StaticTable</span> *<span class="type">Tbl</span>, <span class="type">ElementType</span> <span class="type">K</span>){
+    <span class="comment">//在表Tbl中查找K</span>
+    int <span class="keyword">left</span>, <span class="keyword">right</span>, mid, <span class="type">NoFound</span> = -<span class="number">1</span>;
+
+    <span class="keyword">left</span> = <span class="number">1</span>;<span class="comment">//初始左边界</span>
+    <span class="keyword">right</span> = <span class="type">Tbl</span>-&gt;<span class="type">Length</span>;<span class="comment">//初始右边界</span>
+    <span class="keyword">while</span>(<span class="keyword">left</span> &lt;= <span class="keyword">right</span>){
+        mid = (<span class="keyword">left</span> + <span class="keyword">right</span>) / <span class="number">2</span>;<span class="comment">//计算中间坐标</span>
+        <span class="keyword">if</span>(<span class="type">K</span> &lt; <span class="type">Tbl</span>-&gt;<span class="type">Element</span>[mid]){
+            <span class="keyword">right</span> = mid - <span class="number">1</span>;<span class="comment">//调整右边界</span>
+        } <span class="keyword">else</span> <span class="keyword">if</span>(<span class="type">K</span> &gt; <span class="type">Tbl</span>-&gt;<span class="type">Element</span>[mid]){
+            <span class="keyword">left</span> = mid + <span class="number">1</span>;<span class="comment">//调整左边界</span>
+        } <span class="keyword">else</span> {
+            <span class="keyword">return</span> mid;
+        }
+    }
+    <span class="keyword">return</span> <span class="type">NotFound</span>;<span class="comment">//查找不成功，返回-1</span>
+}
+</code></pre><p>二分查找的 时间复杂度O(logN)</p>
+<p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/b6a841cd9f31188ed06fc23784503b1b1295673c/201512/%E5%88%A4%E5%AE%9A%E6%A0%91.PNG" alt="判定树"></p>
+<h2 id="3-1-4_树的定义">3.1.4 树的定义</h2><p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/9092a46a668c1b08c73485b36ec8387f69408e80/201512/%E6%A0%91%E7%9A%84%E5%AE%9A%E4%B9%89.PNG" alt="树的定义"></p>
+<p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/fb3108289afb901f102b5a04bbf23625becb91a7/201512/%E6%A0%91%E4%B8%8E%E9%9D%9E%E6%A0%91.PNG" alt="树与非树"></p>
+<h3 id="树的术语">树的术语</h3><ul>
+<li>1.结点的度（Degree）：结点的子树个数</li>
+<li>2.树的度：树的所有结点中 最大的度数</li>
+<li>3.叶结点（Leaf）：度为0 的点，没有子树 的点</li>
+<li>4.父结点（Parent）：有子树的结点 是其子树 的根结点 的父结点</li>
+<li>5.子结点（Child）：若A结点是B结点的父结点，则称 B结点 是A结点 的子结点；子结点 也称 孩子结点</li>
+<li>6.兄弟结点（Sibling）：具有 同一父结点 的各结点 彼此是 兄弟结点。</li>
+<li>7.路径和 路径长度：从 结点n1到nk的路径 为 一个结点序列n1，n2，…，nk， ni是ni+1的父结点。路径 所包含的个数 为 路径长度</li>
+<li>8.祖先结点（Ancestor）：沿 树根 到某一结点 路径上 的所以结点 都是 这个结点 的祖先结点</li>
+<li>9.子孙结点（Descendant）：某一结点 的子树 中的 所有结点 是这个结点的子孙</li>
+<li>10.结点的层次（Level）：规定 根结点在1层，其他 任一结点的层数 是其 父结点 的层数+1</li>
+<li>11.树的深度（Depth）：树中所有结点中 的最大层次 是这棵树的 深度。</li>
+</ul>
+<h2 id="3-1-5_树的表示">3.1.5 树的表示</h2><p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/90438b87d183998de2ce8be0e50a14382013674e/201512/%E6%A0%91%E7%9A%84%E8%A1%A8%E7%A4%BA1.PNG" alt="树的表示1"></p>
+<p><strong> 方式1：数组 </strong><br>数组 表示不了 谁是谁的父结点</p>
+<p><strong> 方式二：链表 </strong></p>
+<p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/dc9e459ca97f628e6c57a33a48604119a8ba69ee/201512/%E6%A0%91%E7%9A%84%E8%A1%A8%E7%A4%BA-%E9%93%BE%E8%A1%A8.PNG" alt="树的表示"></p>
+<p>A有3个指针，B有2个指针，C有3个指针。<br>每个元素设置几个指针？都设置3个，空的指针个数很多，浪费资源。</p>
+<p><strong> 方式三：儿子-兄弟表示法 </strong></p>
+<p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/9f6e8da5b232e8001a0272f4ef5249f98c36019d/201512/%E5%84%BF%E5%AD%90%E5%85%84%E5%BC%9F%E8%A1%A8%E7%A4%BA%E6%B3%95.PNG" alt="儿子-兄弟表示法"></p>
+<p>儿子-兄弟 表示法 旋转45°，变成 二叉树</p>
+<p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/855520711dfedd3ed8d726039f5427185fee44fa/201512/%E4%BA%8C%E5%8F%89%E6%A0%91.PNG" alt="二叉树"></p>
+
       
     </div>
     
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构/">数据结构</a></li></ul>
+	</div>
+
       
 
       
@@ -353,6 +1220,10 @@ Polynomial P1,P2;
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构/">数据结构</a></li></ul>
+	</div>
+
       
 
       
@@ -473,6 +1344,10 @@ LinkQueue *PtrQ;
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构/">数据结构</a></li></ul>
+	</div>
+
       
 
       
@@ -689,6 +1564,10 @@ LinkStack *Top;
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构/">数据结构</a></li></ul>
+	</div>
+
       
 
       
@@ -948,6 +1827,10 @@ List L, *PtrL;
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构/">数据结构</a></li></ul>
+	</div>
+
       
 
       
@@ -1052,6 +1935,10 @@ List L, *PtrL;
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构/">数据结构</a></li></ul>
+	</div>
+
       
 
       
@@ -1176,143 +2063,10 @@ List L, *PtrL;
     <div class="article-info article-info-index">
       
       
-      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构/">数据结构</a></li></ul>
+	</div>
 
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-数据结构1 基本概念——1-1什么是数据结构" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/11/09/数据结构1 基本概念——1-1什么是数据结构/" class="article-date">
-  	<time datetime="2015-11-09T02:48:32.000Z" itemprop="datePublished">2015-11-09</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/11/09/数据结构1 基本概念——1-1什么是数据结构/">数据结构1 基本概念——1-1什么是数据结构？</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="基本概念">基本概念</h1><h2 id="1-1什么是数据结构？">1.1什么是数据结构？</h2><h3 id="1-例1-如何在书架上摆放图书？">1.例1.如何在书架上摆放图书？</h3><p>图书摆放要求2个操作方便实现：</p>
-<ul>
-<li>操作1：新书怎么插入？</li>
-<li>操作2：怎么找到指定的书？</li>
-</ul>
-<p><strong> 方法1：随便放 </strong><br>插入容易，查找难<br><strong> 方法2：按书名的拼音字母顺序排放 </strong><br>二分法<br>如何插入？<br>旧书不断移动，插入难<br><strong> 方法3：分类 </strong><br>书架分几个区域，每个区域摆放一类书，每类书按字母顺序排放<br>如何查找？<br>先找类别，再二分查找<br>如何插入？<br>先确定类别，再根据字母顺序插入。</p>
-<ul>
-<li>每类分多少书架？类别分多细？ *</li>
-</ul>
-<p><strong> 解决问题方法的效率，跟数据的组织方式有关 </strong></p>
-<h3 id="2-例2：写一个函数printN，输入正整数N，顺序打印出1-N的全部正整数。">2.例2：写一个函数printN，输入正整数N，顺序打印出1-N的全部正整数。</h3><p>方法1：循环实现</p>
-<pre><code><span class="function"><span class="keyword">void</span> <span class="title">printN</span><span class="params">(<span class="keyword">int</span> N)</span>
-</span>{
-    <span class="keyword">int</span> i;
-    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= N; i++){
-        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, i );
-    }
-    <span class="keyword">return</span>;
-}
-</code></pre><p>方法2:递归实现</p>
-<pre><code><span class="function"><span class="keyword">void</span> <span class="title">printN</span><span class="params">(inr N)</span>
-</span>{
-    <span class="keyword">if</span>(N){
-        printN(N - <span class="number">1</span>);
-        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, N);
-    }
-    <span class="keyword">return</span>;
-}
-</code></pre><p>当 N = 10w 时，递归不能正常打印。</p>
-<p><strong> 解决问题方法的效率，跟空间的利用效率有关 </strong></p>
-<h3 id="3-例3-计算给定多项式在给定点x处的值">3.例3.计算给定多项式在给定点x处的值</h3><p><img src="https://github.com/FloraJieQiong/pages-pics/blob/master/20151109/%E4%BE%8B3-20151109.PNG?raw=true" alt="多项式"></p>
-<p>计算两种方式耗时：<br>clock() : 捕捉从程序开始运行到clock()被调用时所耗费的时间，单位是clock tick，“时钟打点”<br>CLK_TCK : 机器时钟每秒所走的时钟打点数</p>
-<pre><code><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span>
-<span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;time.h&gt;</span></span>
-<span class="keyword">clock_t</span> start, stop;
-<span class="keyword">double</span> duration;
-
-<span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span>
-</span>{
-    start = clock();
-    MyFunction(); <span class="comment">/*测试函数*/</span>
-    stop = clock();
-    duration = ((<span class="keyword">double</span>) (stop - start)) / CLK_TCK;
-
-    <span class="keyword">return</span> <span class="number">0</span>;
-}
-</code></pre><p>运行一次，duration可能为0.<br>解决方式：重复运行多次，再取平均值。</p>
-<p><strong> 解决问题方法的效率，跟算法的巧妙程度有关 </strong></p>
-<h3 id="总结"><strong> 总结 </strong></h3><ul>
-<li>数据对象在计算机中的组织方式： <ul>
-<li>逻辑结构</li>
-<li>物理存储结构 </li>
-</ul>
-</li>
-<li>数据对象必定与一系列加在其上的操作相关联</li>
-<li>完成这些操作所用的方法就是算法</li>
-</ul>
-<h3 id="4-_抽象数据类型">4. 抽象数据类型</h3><ul>
-<li>数据类型<ul>
-<li>数据对象集</li>
-<li>数据集合相关联的操作集</li>
-</ul>
-</li>
-<li>抽象： 描述数据类型的方法不依赖于具体实现<ul>
-<li>与存放数据的机器无关</li>
-<li>与数据存储的物理结构无关</li>
-<li>与实现操作的算法和编程语言均无关<br>即 只描述数据对象集和相关操作集“是什么”，不涉及“如何做到”的问题</li>
-</ul>
-</li>
-</ul>
-<h3 id="例4：“矩阵”的抽象数据类型定义">例4：“矩阵”的抽象数据类型定义</h3><ul>
-<li>类型名称：矩阵</li>
-<li>数据对象集：一个MxN的矩阵</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/54aeba3ef0e841b0d113516ccb3382a9274071a1/20151109/4-%E7%9F%A9%E9%98%B5-20151109.PNG" alt="矩阵"></p>
-<p>由MxN个三元组<a,i,j>构成，其中a是矩阵元素的值，i是元素所在的行号，j是元素所在的列号。（a是抽象的，不管a具体是什么，二维数组？一维数据？十字链表？）</a,i,j></p>
-<ul>
-<li>操作集：对于任意矩阵 A、B、C 属于 Matrix，以及整数 i、j、M、N<ul>
-<li>Matrix Create(int M, int N) 返回一个M x N的空矩阵</li>
-<li>int GetMaxRow(Matrix A) 返回矩阵A的总行数</li>
-<li>int GetMaxCol(Matrix A) 返回矩阵A的总列数</li>
-<li>ElementType GetEntry(Matrix A, int i, int j) 返回矩阵A的第i行、第j列的元素</li>
-<li>Matrix Add(Matrix A, Matrix B) 如果A和B的行、列数一致，则返回矩阵C = A + B，否则返回错误标志。（C = A + B是抽象的，先按行加？先按列加？什么语言？）</li>
-<li>Matrix Multiply(Matrix A, Matrix B) 如果A的列数等于B的行数，则返回矩阵C = A B，否则返回错误标志。</li>
-</ul>
-</li>
-</ul>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
       
 
       
@@ -1330,115 +2084,10 @@ List L, *PtrL;
 
 
   
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
   
-    <div class="article-meta">
-      <a href="/2015/11/06/hello-world/" class="article-date">
-  	<time datetime="2015-11-06T05:45:58.856Z" itemprop="datePublished">2015-11-06</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/11/06/hello-world/">Hello World</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick_Start">Quick Start</h2><h3 id="Create_a_new_post">Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run_server">Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate_static_files">Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy_to_remote_sites">Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-Hello-World-0" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/11/03/Hello-World-0/" class="article-date">
-  	<time datetime="2015-11-03T12:03:20.000Z" itemprop="datePublished">2015-11-03</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/11/03/Hello-World-0/">Hello-World</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
+    <nav id="page-nav">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+    </nav>
   
 </div>
       <footer id="footer">
