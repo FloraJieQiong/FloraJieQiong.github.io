@@ -5,16 +5,54 @@
   
   <title>数据结构3-树-上-——3-3-二叉树的遍历 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description">
+  <meta name="description" content="3.3 二叉树的遍历3.3.1 二叉树的遍历(1)先序遍历 遍历过程： 
+
+1.访问 根结点
+2.遍历 左子树
+3.遍历 右子树
+
+递归实现
+void PreOrderTraversal(BinTree BT){
+    if(BT){
+        printf(&quot;%d&quot;, BT-&amp;gt;Data);//访问 根结点
+        PreOrderTraversal(BT-&amp;gt;Left)">
 <meta property="og:type" content="article">
 <meta property="og:title" content="数据结构3-树-上-——3-3-二叉树的遍历">
 <meta property="og:url" content="http://yoursite.com/2015/12/04/数据结构3-树-上-——3-3-二叉树的遍历/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description">
-<meta property="og:updated_time" content="2015-12-04T01:54:01.581Z">
+<meta property="og:description" content="3.3 二叉树的遍历3.3.1 二叉树的遍历(1)先序遍历 遍历过程： 
+
+1.访问 根结点
+2.遍历 左子树
+3.遍历 右子树
+
+递归实现
+void PreOrderTraversal(BinTree BT){
+    if(BT){
+        printf(&quot;%d&quot;, BT-&amp;gt;Data);//访问 根结点
+        PreOrderTraversal(BT-&amp;gt;Left)">
+<meta property="og:image" content="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/5fac93dd29dd9d994c8de6aad6369524eb793f59/201512/%E5%85%88%E5%BA%8F%E9%81%8D%E5%8E%86.PNG">
+<meta property="og:image" content="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/6157a3e3d7e42a1b755a7d502baa381224848bc6/201512/%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86.PNG">
+<meta property="og:image" content="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/6871cb78c8ef977f98ea9877c65ec8f18a411a33/201512/%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86.PNG">
+<meta property="og:image" content="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/d35a42204a3293aabaa4baefba490d1ec39585ac/201512/%E9%81%8D%E5%8E%86%E8%BF%87%E7%A8%8B.PNG">
+<meta property="og:image" content="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/02f4b68e424b0a989368b126d46cff512b212cda/201512/%E9%98%9F%E5%88%97%E5%AE%9E%E7%8E%B01.PNG">
+<meta property="og:image" content="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/929170c6ed445d81a7ca8b29bfcf3771ed6dff9d/201512/%E4%BA%8C%E5%85%83%E8%BF%90%E7%AE%97.PNG">
+<meta property="og:image" content="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/376d2fc8bbb1c6ca806e512f0cb3c3821af40029/201512/%E9%81%8D%E5%8E%86%E7%A1%AE%E5%AE%9A%E4%BA%8C%E5%8F%89%E6%A0%91.PNG">
+<meta property="og:image" content="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/faa917aa96ac702ca310e7037a2ef2131bb0f576/201512/%E5%85%88%E5%BA%8F%E5%92%8C%E4%B8%AD%E5%BA%8F%E7%A1%AE%E5%AE%9A%E4%BA%8C%E5%8F%89%E6%A0%91.PNG">
+<meta property="og:updated_time" content="2015-12-07T11:20:52.686Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据结构3-树-上-——3-3-二叉树的遍历">
-<meta name="twitter:description">
+<meta name="twitter:description" content="3.3 二叉树的遍历3.3.1 二叉树的遍历(1)先序遍历 遍历过程： 
+
+1.访问 根结点
+2.遍历 左子树
+3.遍历 右子树
+
+递归实现
+void PreOrderTraversal(BinTree BT){
+    if(BT){
+        printf(&quot;%d&quot;, BT-&amp;gt;Data);//访问 根结点
+        PreOrderTraversal(BT-&amp;gt;Left)">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -228,7 +266,167 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h1 id="3-3_二叉树的遍历">3.3 二叉树的遍历</h1><h2 id="3-3-1_二叉树的遍历">3.3.1 二叉树的遍历</h2><h3 id="(1)先序遍历">(1)先序遍历</h3><p><strong> 遍历过程： </strong></p>
+<ul>
+<li>1.访问 根结点</li>
+<li>2.遍历 左子树</li>
+<li>3.遍历 右子树</li>
+</ul>
+<p>递归实现</p>
+<pre><code><span class="label">void</span> PreOrderTraversal(<span class="keyword">BinTree </span><span class="keyword">BT){
+</span>    <span class="preprocessor">if</span>(<span class="keyword">BT){
+</span>        printf(<span class="string">"%d"</span>, <span class="keyword">BT-&gt;Data);//访问 </span>根结点
+        PreOrderTraversal(<span class="keyword">BT-&gt;Left);
+</span>        PreOrderTraversal(<span class="keyword">BT-&gt;Right);
+</span>    }
+}
+</code></pre><p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/5fac93dd29dd9d994c8de6aad6369524eb793f59/201512/%E5%85%88%E5%BA%8F%E9%81%8D%E5%8E%86.PNG" alt="先序遍历"></p>
+<p>先序遍历：A (B D F E) ，(C G H I)</p>
+<h3 id="(2)中序遍历">(2)中序遍历</h3><p><strong> 遍历过程： </strong></p>
+<ul>
+<li>1.中序遍历 左子树</li>
+<li>2.访问根结点</li>
+<li>3.中序遍历 右子树</li>
+</ul>
+<hr>
+<pre><code><span class="label">void</span> InOrderTraversal(<span class="keyword">BinTree </span><span class="keyword">BT){
+</span>    <span class="preprocessor">if</span>(<span class="keyword">BT){
+</span>        InOrderTraversal(<span class="keyword">BT-&gt;Left);
+</span>        printf(<span class="string">"%d"</span>, <span class="keyword">BT-&gt;Data);
+</span>        InOrderTraversal(<span class="keyword">BT-&gt;Right);
+</span>    }
+}
+</code></pre><p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/6157a3e3d7e42a1b755a7d502baa381224848bc6/201512/%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86.PNG" alt="中序遍历"></p>
+<p>中序遍历：（D B E F）A （G H C I）</p>
+<h3 id="(3)后序遍历">(3)后序遍历</h3><p><strong> 遍历过程： </strong></p>
+<ul>
+<li>1.后序遍历 左子树</li>
+<li>2.后序遍历 右子树</li>
+<li>3.访问 根结点</li>
+</ul>
+<hr>
+<pre><code><span class="label">void</span> PostOrderTraversal(<span class="keyword">BinTree </span><span class="keyword">BT){
+</span>    <span class="preprocessor">if</span>(<span class="keyword">BT){
+</span>        PostOrderTraversal(<span class="keyword">BT-&gt;Left);
+</span>        PostOrderTraversal(<span class="keyword">BT-&gt;Right);
+</span>        printf(<span class="string">"%d"</span>, <span class="keyword">BT-&gt;Data);
+</span>    }
+}
+</code></pre><p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/6871cb78c8ef977f98ea9877c65ec8f18a411a33/201512/%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86.PNG" alt="后序遍历"></p>
+<p>后序遍历：(D E F B) (H G I C) A</p>
+<h3 id="先序、中序和后序遍历过程：">先序、中序和后序遍历过程：</h3><p>遍历过程中 经过的结点的 路线一样，只是访问各结点的时机不同。</p>
+<p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/d35a42204a3293aabaa4baefba490d1ec39585ac/201512/%E9%81%8D%E5%8E%86%E8%BF%87%E7%A8%8B.PNG" alt="遍历过程"></p>
+<p>以上遍历都是通过 递归 实现的，递归本质是用 堆栈 实现的</p>
+<h2 id="3-3-2_二叉树_的_非递归遍历">3.3.2 二叉树 的 非递归遍历</h2><h3 id="中序遍历_非递归_实现：使用堆栈">中序遍历 非递归 实现：使用堆栈</h3><p>算法：</p>
+<ul>
+<li>遇到一个结点，压入栈，遍历它的左子树</li>
+<li>当 左子树 遍历结束后，从 栈顶 弹出一个结点，并访问它</li>
+<li>然后按其 右指针 再去 中序遍历 该结点的右子树</li>
+</ul>
+<hr>
+<pre><code><span class="literal">void</span> InOrderTraversal(BinTree BT){
+    BinTree T = BT;
+    <span class="built_in">Stack</span> S = CreateStack(MaxSize);<span class="comment">//创建并初始化堆栈S</span>
+    <span class="keyword">while</span>(T <span class="subst">||</span> <span class="subst">!</span>IsEmpty(S)){
+        <span class="comment">//树T不为空，或者 堆栈S不为空</span>
+
+        <span class="keyword">while</span>(T){
+            <span class="comment">//一直向左 并将 沿途结点 压入堆栈</span>
+            Push(S, T);
+            T = T<span class="subst">-&gt;</span>Left;<span class="comment">//往左走</span>
+        }
+
+        <span class="keyword">if</span>(<span class="subst">!</span>IsEmpty(S)){
+            T = Pop(S);<span class="comment">//结点弹出堆栈</span>
+            printf(<span class="string">"%5d"</span>, T<span class="subst">-&gt;</span><span class="built_in">Data</span>);<span class="comment">//访问（打印）结点</span>
+            T = T<span class="subst">-&gt;</span>Right;<span class="comment">//转向 右子树</span>
+        }
+    }
+} 
+</code></pre><h3 id="先序遍历_的_非递归_实现：">先序遍历 的 非递归 实现：</h3><pre><code><span class="literal">void</span> InOrderTraversal(BinTree BT){
+    BinTree T = BT;
+    <span class="built_in">Stack</span> S = CreateStack(MaxSize);<span class="comment">//创建并初始化堆栈S</span>
+    <span class="keyword">while</span>(T <span class="subst">||</span> <span class="subst">!</span>IsEmpty(S)){
+        <span class="keyword">while</span>(T){
+            <span class="comment">//一直向左，并将 沿途结点 压入堆栈</span>
+            Push(S, T);
+            printf(<span class="string">"%5d"</span>, T<span class="subst">-&gt;</span><span class="built_in">Data</span>);<span class="comment">//访问（打印）结点</span>
+            T = T<span class="subst">-&gt;</span>Left;
+        }
+
+        <span class="keyword">if</span>(<span class="subst">!</span>IsEmpty(S)){
+            T = Pop(S);<span class="comment">//结点 弹出堆栈        </span>
+            T = T<span class="subst">-&gt;</span>Right;<span class="comment">//转向 右子树</span>
+        }
+    }
+}
+</code></pre><h2 id="3-3-3_层序遍历">3.3.3 层序遍历</h2><h3 id="层序遍历">层序遍历</h3><p><strong> 二叉树 遍历 的核心问题： </strong> 二维结构的 线性化</p>
+<ul>
+<li>从结点 访问 其左、右儿子结点</li>
+<li>访问左儿子后，右儿子 结点 怎么办？<ul>
+<li>需要一个存储结构 保存 暂时不访问的结点</li>
+<li>存储结构：堆栈、队列</li>
+</ul>
+</li>
+</ul>
+<h3 id="队列实现：">队列实现：</h3><p>遍历 从 根结点 开始，首先将 根结点 入队，然后 开始执行循环：结点出队、访问该结点、其左右儿子入队</p>
+<p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/02f4b68e424b0a989368b126d46cff512b212cda/201512/%E9%98%9F%E5%88%97%E5%AE%9E%E7%8E%B01.PNG" alt="队列实现1"></p>
+<h3 id="层序基本过程">层序基本过程</h3><p>先根结点入队，然后：<br>1.从队列中 取出一个元素<br>2.访问 该元素指向的结点<br>3.若元素所指向的结点 的左、右孩子结点 非空，则将其 左、右孩子的指针顺序入队</p>
+<pre><code><span class="literal">void</span> LevelOrderTraversal(BinTree BT){
+    <span class="built_in">Queue</span> Q;
+    BinTree T;
+
+    <span class="keyword">if</span>(<span class="subst">!</span>BT){
+        <span class="keyword">return</span>;<span class="comment">//若 是空树 ，则返回</span>
+    }
+
+    Q = CreateQueue(maxSize);<span class="comment">//创建 并 初始化 队列Q</span>
+    AddQ(Q, BT);<span class="comment">//根结点 放到 队列中</span>
+
+    <span class="keyword">while</span>(<span class="subst">!</span>IsEmptyQ(Q)){
+        T = DeleteQ(Q);<span class="comment">//队列中 抛出一个元素</span>
+        printf(<span class="string">"%d\n"</span>, T<span class="subst">-&gt;</span><span class="built_in">Data</span>);<span class="comment">//访问 取出 队列的结点</span>
+        <span class="keyword">if</span>(T<span class="subst">-&gt;</span>Left){
+            AddQ(Q, T<span class="subst">-&gt;</span>Left)l;
+        }
+        <span class="keyword">if</span>(T<span class="subst">-&gt;</span>Right){
+            AddQ(Q, T<span class="subst">-&gt;</span>Right);
+        }
+    }
+}
+</code></pre><h2 id="3-3-4_遍历应用例子">3.3.4 遍历应用例子</h2><h3 id="[例]遍历_二叉树的应用：_输出_二叉树中的_叶子结点">[例]遍历 二叉树的应用： 输出 二叉树中的 叶子结点</h3><p>叶子结点：左右子树 都为空</p>
+<pre><code><span class="label">void</span> PreOrderPrintLeaves(<span class="keyword">BinTree </span><span class="keyword">BT){
+</span>    <span class="preprocessor">if</span>(<span class="keyword">BT){
+</span>        <span class="preprocessor">if</span>(!<span class="keyword">BT-&gt;Left </span>&amp;&amp; !<span class="keyword">BT-&gt;Right){
+</span>            printf(<span class="string">"%d"</span>, <span class="keyword">BT-&gt;Data);
+</span>        }
+        PreOrderPrintLeaves(<span class="keyword">BT-&gt;Left);
+</span>        PreOrderPrintLeaves(<span class="keyword">BT_&gt;Right);
+</span>    }
+}
+</code></pre><h3 id="[例]求二叉树的高度">[例]求二叉树的高度</h3><p>二叉树的高度：Height = max（左子树高， 右子树高）+ 1</p>
+<pre><code><span class="function"><span class="keyword">int</span> <span class="title">PostOrderGetHeight</span><span class="params">(BinTree BT)</span></span>{
+    <span class="keyword">int</span> HL, HR, MaxH;
+    <span class="keyword">if</span>(BT){
+        HL = PostOrderGetHeight(BT-&gt;Left);<span class="comment">//左子树的 深度</span>
+        HR = PostOrderGetHeight(BT-&gt;Right);<span class="comment">//右子树 的深度</span>
+        MaxH = (HL &gt; HR) ? HL : HR;<span class="comment">//取左 右子树 最大深度</span>
+        <span class="keyword">return</span> MaxH + <span class="number">1</span>;
+    } <span class="keyword">else</span> {
+        <span class="keyword">return</span> <span class="number">0</span>;<span class="comment">//空树 深度为0</span>
+    }        
+}
+</code></pre><h3 id="[例]二元运算表达式_树_及其遍历">[例]二元运算表达式 树 及其遍历</h3><p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/929170c6ed445d81a7ca8b29bfcf3771ed6dff9d/201512/%E4%BA%8C%E5%85%83%E8%BF%90%E7%AE%97.PNG" alt="二元运算"><br>三种遍历得到的结果：<br>先序遍历 得到 前缀表达式：+ + a <em> b c </em> + <em> d e f g<br>中序遍历 得到 中缀表达式：a + b </em> c + d <em> e + f </em> g<br>后序遍历 得到 后缀表达式： a b c <em> +  d e </em> f + g * +</p>
+<p>中缀 表达式 受 运算符优先级 影响</p>
+<h3 id="[例]由两种遍历序列_确定_二叉树">[例]由两种遍历序列 确定 二叉树</h3><p>必须要有 中序遍历才行</p>
+<p>没有中序 的困扰：</p>
+<ul>
+<li>先序遍历序列：A B</li>
+<li>后序遍历序列：B A</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/376d2fc8bbb1c6ca806e512f0cb3c3821af40029/201512/%E9%81%8D%E5%8E%86%E7%A1%AE%E5%AE%9A%E4%BA%8C%E5%8F%89%E6%A0%91.PNG" alt="先序、后序 不能确定 唯一的二叉树"></p>
+<h3 id="先序和中序遍历_序列_确定二叉树">先序和中序遍历 序列 确定二叉树</h3><p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/faa917aa96ac702ca310e7037a2ef2131bb0f576/201512/%E5%85%88%E5%BA%8F%E5%92%8C%E4%B8%AD%E5%BA%8F%E7%A1%AE%E5%AE%9A%E4%BA%8C%E5%8F%89%E6%A0%91.PNG" alt="先序和中序遍历 序列 确定二叉树"></p>
+
       
     </div>
     
@@ -236,6 +434,15 @@
   
     
 <nav id="article-nav">
+  
+    <a href="/2015/12/07/数据结构3-树-中-——4-1-二叉搜索树/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          数据结构3-树-中-——4-1-二叉搜索树
+        
+      </div>
+    </a>
   
   
     <a href="/2015/12/03/数据结构3-树-上-——3-2-二叉树与存储结构/" id="article-nav-older" class="article-nav-link-wrap">

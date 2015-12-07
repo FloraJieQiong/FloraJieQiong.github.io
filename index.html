@@ -192,6 +192,60 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-数据结构3-树-中-——4-1-二叉搜索树" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/12/07/数据结构3-树-中-——4-1-二叉搜索树/" class="article-date">
+  	<time datetime="2015-12-07T11:26:42.000Z" itemprop="datePublished">2015-12-07</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/12/07/数据结构3-树-中-——4-1-二叉搜索树/">数据结构3-树-中-——4-1-二叉搜索树</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构/">数据结构</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
     <article id="post-数据结构3-树-上-——3-3-二叉树的遍历" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -218,7 +272,167 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h1 id="3-3_二叉树的遍历">3.3 二叉树的遍历</h1><h2 id="3-3-1_二叉树的遍历">3.3.1 二叉树的遍历</h2><h3 id="(1)先序遍历">(1)先序遍历</h3><p><strong> 遍历过程： </strong></p>
+<ul>
+<li>1.访问 根结点</li>
+<li>2.遍历 左子树</li>
+<li>3.遍历 右子树</li>
+</ul>
+<p>递归实现</p>
+<pre><code><span class="label">void</span> PreOrderTraversal(<span class="keyword">BinTree </span><span class="keyword">BT){
+</span>    <span class="preprocessor">if</span>(<span class="keyword">BT){
+</span>        printf(<span class="string">"%d"</span>, <span class="keyword">BT-&gt;Data);//访问 </span>根结点
+        PreOrderTraversal(<span class="keyword">BT-&gt;Left);
+</span>        PreOrderTraversal(<span class="keyword">BT-&gt;Right);
+</span>    }
+}
+</code></pre><p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/5fac93dd29dd9d994c8de6aad6369524eb793f59/201512/%E5%85%88%E5%BA%8F%E9%81%8D%E5%8E%86.PNG" alt="先序遍历"></p>
+<p>先序遍历：A (B D F E) ，(C G H I)</p>
+<h3 id="(2)中序遍历">(2)中序遍历</h3><p><strong> 遍历过程： </strong></p>
+<ul>
+<li>1.中序遍历 左子树</li>
+<li>2.访问根结点</li>
+<li>3.中序遍历 右子树</li>
+</ul>
+<hr>
+<pre><code><span class="label">void</span> InOrderTraversal(<span class="keyword">BinTree </span><span class="keyword">BT){
+</span>    <span class="preprocessor">if</span>(<span class="keyword">BT){
+</span>        InOrderTraversal(<span class="keyword">BT-&gt;Left);
+</span>        printf(<span class="string">"%d"</span>, <span class="keyword">BT-&gt;Data);
+</span>        InOrderTraversal(<span class="keyword">BT-&gt;Right);
+</span>    }
+}
+</code></pre><p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/6157a3e3d7e42a1b755a7d502baa381224848bc6/201512/%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86.PNG" alt="中序遍历"></p>
+<p>中序遍历：（D B E F）A （G H C I）</p>
+<h3 id="(3)后序遍历">(3)后序遍历</h3><p><strong> 遍历过程： </strong></p>
+<ul>
+<li>1.后序遍历 左子树</li>
+<li>2.后序遍历 右子树</li>
+<li>3.访问 根结点</li>
+</ul>
+<hr>
+<pre><code><span class="label">void</span> PostOrderTraversal(<span class="keyword">BinTree </span><span class="keyword">BT){
+</span>    <span class="preprocessor">if</span>(<span class="keyword">BT){
+</span>        PostOrderTraversal(<span class="keyword">BT-&gt;Left);
+</span>        PostOrderTraversal(<span class="keyword">BT-&gt;Right);
+</span>        printf(<span class="string">"%d"</span>, <span class="keyword">BT-&gt;Data);
+</span>    }
+}
+</code></pre><p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/6871cb78c8ef977f98ea9877c65ec8f18a411a33/201512/%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86.PNG" alt="后序遍历"></p>
+<p>后序遍历：(D E F B) (H G I C) A</p>
+<h3 id="先序、中序和后序遍历过程：">先序、中序和后序遍历过程：</h3><p>遍历过程中 经过的结点的 路线一样，只是访问各结点的时机不同。</p>
+<p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/d35a42204a3293aabaa4baefba490d1ec39585ac/201512/%E9%81%8D%E5%8E%86%E8%BF%87%E7%A8%8B.PNG" alt="遍历过程"></p>
+<p>以上遍历都是通过 递归 实现的，递归本质是用 堆栈 实现的</p>
+<h2 id="3-3-2_二叉树_的_非递归遍历">3.3.2 二叉树 的 非递归遍历</h2><h3 id="中序遍历_非递归_实现：使用堆栈">中序遍历 非递归 实现：使用堆栈</h3><p>算法：</p>
+<ul>
+<li>遇到一个结点，压入栈，遍历它的左子树</li>
+<li>当 左子树 遍历结束后，从 栈顶 弹出一个结点，并访问它</li>
+<li>然后按其 右指针 再去 中序遍历 该结点的右子树</li>
+</ul>
+<hr>
+<pre><code><span class="literal">void</span> InOrderTraversal(BinTree BT){
+    BinTree T = BT;
+    <span class="built_in">Stack</span> S = CreateStack(MaxSize);<span class="comment">//创建并初始化堆栈S</span>
+    <span class="keyword">while</span>(T <span class="subst">||</span> <span class="subst">!</span>IsEmpty(S)){
+        <span class="comment">//树T不为空，或者 堆栈S不为空</span>
+
+        <span class="keyword">while</span>(T){
+            <span class="comment">//一直向左 并将 沿途结点 压入堆栈</span>
+            Push(S, T);
+            T = T<span class="subst">-&gt;</span>Left;<span class="comment">//往左走</span>
+        }
+
+        <span class="keyword">if</span>(<span class="subst">!</span>IsEmpty(S)){
+            T = Pop(S);<span class="comment">//结点弹出堆栈</span>
+            printf(<span class="string">"%5d"</span>, T<span class="subst">-&gt;</span><span class="built_in">Data</span>);<span class="comment">//访问（打印）结点</span>
+            T = T<span class="subst">-&gt;</span>Right;<span class="comment">//转向 右子树</span>
+        }
+    }
+} 
+</code></pre><h3 id="先序遍历_的_非递归_实现：">先序遍历 的 非递归 实现：</h3><pre><code><span class="literal">void</span> InOrderTraversal(BinTree BT){
+    BinTree T = BT;
+    <span class="built_in">Stack</span> S = CreateStack(MaxSize);<span class="comment">//创建并初始化堆栈S</span>
+    <span class="keyword">while</span>(T <span class="subst">||</span> <span class="subst">!</span>IsEmpty(S)){
+        <span class="keyword">while</span>(T){
+            <span class="comment">//一直向左，并将 沿途结点 压入堆栈</span>
+            Push(S, T);
+            printf(<span class="string">"%5d"</span>, T<span class="subst">-&gt;</span><span class="built_in">Data</span>);<span class="comment">//访问（打印）结点</span>
+            T = T<span class="subst">-&gt;</span>Left;
+        }
+
+        <span class="keyword">if</span>(<span class="subst">!</span>IsEmpty(S)){
+            T = Pop(S);<span class="comment">//结点 弹出堆栈        </span>
+            T = T<span class="subst">-&gt;</span>Right;<span class="comment">//转向 右子树</span>
+        }
+    }
+}
+</code></pre><h2 id="3-3-3_层序遍历">3.3.3 层序遍历</h2><h3 id="层序遍历">层序遍历</h3><p><strong> 二叉树 遍历 的核心问题： </strong> 二维结构的 线性化</p>
+<ul>
+<li>从结点 访问 其左、右儿子结点</li>
+<li>访问左儿子后，右儿子 结点 怎么办？<ul>
+<li>需要一个存储结构 保存 暂时不访问的结点</li>
+<li>存储结构：堆栈、队列</li>
+</ul>
+</li>
+</ul>
+<h3 id="队列实现：">队列实现：</h3><p>遍历 从 根结点 开始，首先将 根结点 入队，然后 开始执行循环：结点出队、访问该结点、其左右儿子入队</p>
+<p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/02f4b68e424b0a989368b126d46cff512b212cda/201512/%E9%98%9F%E5%88%97%E5%AE%9E%E7%8E%B01.PNG" alt="队列实现1"></p>
+<h3 id="层序基本过程">层序基本过程</h3><p>先根结点入队，然后：<br>1.从队列中 取出一个元素<br>2.访问 该元素指向的结点<br>3.若元素所指向的结点 的左、右孩子结点 非空，则将其 左、右孩子的指针顺序入队</p>
+<pre><code><span class="literal">void</span> LevelOrderTraversal(BinTree BT){
+    <span class="built_in">Queue</span> Q;
+    BinTree T;
+
+    <span class="keyword">if</span>(<span class="subst">!</span>BT){
+        <span class="keyword">return</span>;<span class="comment">//若 是空树 ，则返回</span>
+    }
+
+    Q = CreateQueue(maxSize);<span class="comment">//创建 并 初始化 队列Q</span>
+    AddQ(Q, BT);<span class="comment">//根结点 放到 队列中</span>
+
+    <span class="keyword">while</span>(<span class="subst">!</span>IsEmptyQ(Q)){
+        T = DeleteQ(Q);<span class="comment">//队列中 抛出一个元素</span>
+        printf(<span class="string">"%d\n"</span>, T<span class="subst">-&gt;</span><span class="built_in">Data</span>);<span class="comment">//访问 取出 队列的结点</span>
+        <span class="keyword">if</span>(T<span class="subst">-&gt;</span>Left){
+            AddQ(Q, T<span class="subst">-&gt;</span>Left)l;
+        }
+        <span class="keyword">if</span>(T<span class="subst">-&gt;</span>Right){
+            AddQ(Q, T<span class="subst">-&gt;</span>Right);
+        }
+    }
+}
+</code></pre><h2 id="3-3-4_遍历应用例子">3.3.4 遍历应用例子</h2><h3 id="[例]遍历_二叉树的应用：_输出_二叉树中的_叶子结点">[例]遍历 二叉树的应用： 输出 二叉树中的 叶子结点</h3><p>叶子结点：左右子树 都为空</p>
+<pre><code><span class="label">void</span> PreOrderPrintLeaves(<span class="keyword">BinTree </span><span class="keyword">BT){
+</span>    <span class="preprocessor">if</span>(<span class="keyword">BT){
+</span>        <span class="preprocessor">if</span>(!<span class="keyword">BT-&gt;Left </span>&amp;&amp; !<span class="keyword">BT-&gt;Right){
+</span>            printf(<span class="string">"%d"</span>, <span class="keyword">BT-&gt;Data);
+</span>        }
+        PreOrderPrintLeaves(<span class="keyword">BT-&gt;Left);
+</span>        PreOrderPrintLeaves(<span class="keyword">BT_&gt;Right);
+</span>    }
+}
+</code></pre><h3 id="[例]求二叉树的高度">[例]求二叉树的高度</h3><p>二叉树的高度：Height = max（左子树高， 右子树高）+ 1</p>
+<pre><code><span class="function"><span class="keyword">int</span> <span class="title">PostOrderGetHeight</span><span class="params">(BinTree BT)</span></span>{
+    <span class="keyword">int</span> HL, HR, MaxH;
+    <span class="keyword">if</span>(BT){
+        HL = PostOrderGetHeight(BT-&gt;Left);<span class="comment">//左子树的 深度</span>
+        HR = PostOrderGetHeight(BT-&gt;Right);<span class="comment">//右子树 的深度</span>
+        MaxH = (HL &gt; HR) ? HL : HR;<span class="comment">//取左 右子树 最大深度</span>
+        <span class="keyword">return</span> MaxH + <span class="number">1</span>;
+    } <span class="keyword">else</span> {
+        <span class="keyword">return</span> <span class="number">0</span>;<span class="comment">//空树 深度为0</span>
+    }        
+}
+</code></pre><h3 id="[例]二元运算表达式_树_及其遍历">[例]二元运算表达式 树 及其遍历</h3><p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/929170c6ed445d81a7ca8b29bfcf3771ed6dff9d/201512/%E4%BA%8C%E5%85%83%E8%BF%90%E7%AE%97.PNG" alt="二元运算"><br>三种遍历得到的结果：<br>先序遍历 得到 前缀表达式：+ + a <em> b c </em> + <em> d e f g<br>中序遍历 得到 中缀表达式：a + b </em> c + d <em> e + f </em> g<br>后序遍历 得到 后缀表达式： a b c <em> +  d e </em> f + g * +</p>
+<p>中缀 表达式 受 运算符优先级 影响</p>
+<h3 id="[例]由两种遍历序列_确定_二叉树">[例]由两种遍历序列 确定 二叉树</h3><p>必须要有 中序遍历才行</p>
+<p>没有中序 的困扰：</p>
+<ul>
+<li>先序遍历序列：A B</li>
+<li>后序遍历序列：B A</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/376d2fc8bbb1c6ca806e512f0cb3c3821af40029/201512/%E9%81%8D%E5%8E%86%E7%A1%AE%E5%AE%9A%E4%BA%8C%E5%8F%89%E6%A0%91.PNG" alt="先序、后序 不能确定 唯一的二叉树"></p>
+<h3 id="先序和中序遍历_序列_确定二叉树">先序和中序遍历 序列 确定二叉树</h3><p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/faa917aa96ac702ca310e7037a2ef2131bb0f576/201512/%E5%85%88%E5%BA%8F%E5%92%8C%E4%B8%AD%E5%BA%8F%E7%A1%AE%E5%AE%9A%E4%BA%8C%E5%8F%89%E6%A0%91.PNG" alt="先序和中序遍历 序列 确定二叉树"></p>
+
       
     </div>
     
@@ -1928,134 +2142,6 @@ List L, *PtrL;
 }
 </code></pre><p>T(N) = O(N)<br>举例[-1,3，-2,4，-6,1,6，-1]<br>MaxSum = 7</p>
 <p>“在线”的意思是指 每输入一个数据 就进行 及时处理，在任何一个地方中止输入，算法都能正确给出当前的解。</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构/">数据结构</a></li></ul>
-	</div>
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-数据结构1 基本概念——1-2什么是算法" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/11/10/数据结构1 基本概念——1-2什么是算法/" class="article-date">
-  	<time datetime="2015-11-10T01:21:45.000Z" itemprop="datePublished">2015-11-10</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/11/10/数据结构1 基本概念——1-2什么是算法/">数据结构1 基本概念——1-2什么是算法</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="基本概念">基本概念</h1><h2 id="1-2什么是算法？">1.2什么是算法？</h2><h3 id="1-算法">1.算法</h3><ul>
-<li>一个有限指令集</li>
-<li>接受一些输入（有些情况下不需要输入）</li>
-<li>产生输出</li>
-<li>一定在有限步骤后终止</li>
-<li>每一条指令必须<ul>
-<li>有充分明确的目标，不可以有歧义</li>
-<li>计算机能处理的范围之内</li>
-<li>描述应该抽象，不依赖于任何一种计算机语言以及具体实现手段</li>
-</ul>
-</li>
-</ul>
-<h3 id="例1-选择排序算法的伪码描述">例1.选择排序算法的伪码描述</h3><pre><code><span class="keyword">void</span> SelectionSort(<span class="built_in">int</span> <span class="built_in">List</span>[], <span class="built_in">int</span> N)
-{
-    <span class="comment">/*将N个整数List[0]...List[N - 1] 进行从小到大排序*/</span>
-    <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; N; i++){
-        MinPosition = ScanForMin(<span class="built_in">List</span>, i, N - <span class="number">1</span>);
-        <span class="comment">/*从List[i]到List[N - 1]中找最小元，并将其位置赋给MinPosition*/</span>
-        Swap(<span class="built_in">List</span>[i], <span class="built_in">List</span>[MinPosition]);
-        <span class="comment">/*将未排序部分的最小元换到有序部分的最后位置*/</span>
-    }
-}
-</code></pre><p>抽象的体现：</p>
-<pre><code>-<span class="ruby"> <span class="constant">List</span>是数组还是链表？
-</span>-<span class="ruby"> <span class="constant">Swap</span>用函数还是用宏去实现？</span>
-</code></pre><h3 id="2-什么是好的算法？">2.什么是好的算法？</h3><ul>
-<li>空间复杂度S(n) —— 根据算法写成的程序在执行时 占用存储单元的长度。这个长度往往与输入数据的规模有关。空间复杂度过高的算法可能导致使用的内存超限，造成程序非正常中断。</li>
-<li>时间复杂度T(n) —— 根据算法写成的程序在执行时耗费时间的长度。这个长度往往也与输入数据的规模有关。时间负责度过高的低效算法可能导致我们在有生之年都等不到运行结果。</li>
-</ul>
-<h3 id="1-1_例2_递归打印出1-N">1.1 例2 递归打印出1-N</h3><pre><code><span class="function"><span class="keyword">void</span> <span class="title">PrintN</span><span class="params">(<span class="keyword">int</span> N)</span>
-</span>{
-    <span class="keyword">if</span>(N){
-        PrintN(N - <span class="number">1</span>);
-        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, N);
-    }
-    <span class="keyword">return</span>;
-}
-</code></pre><p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/fda4725e78496f986a4ecef9cf662f55721bfd24/2015111/%E9%80%92%E5%BD%92%E6%89%93%E5%8D%B0%E5%A4%8D%E6%9D%82%E5%BA%A6.PNG" alt="递归复杂度"></p>
-<p>S(N)= CN,空间复杂度是一个N的函数，C是一个常亮，空间复杂度随着N的增加而变大。<br>每个程序可用空间有限，当N很大，需要的空间大于当前程序拥有的空间时，程序异常退出。不能输出正确结果。</p>
-<h3 id="1-1_例3_多项式求值">1.1 例3 多项式求值</h3><pre><code><span class="function"><span class="keyword">double</span> <span class="title">f</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">double</span> a[], <span class="keyword">double</span> x)</span>
-</span>{
-    <span class="keyword">int</span> i;
-    <span class="keyword">double</span> p = a[<span class="number">0</span>];
-    <span class="keyword">for</span>(i = <span class="number">1</span>; i &lt;= n; i++){
-        p += (a(i) * <span class="built_in">pow</span>(x, i));
-    }
-    <span class="keyword">return</span> p;
-}
-</code></pre><p>执行了多少次乘法？<br>for循环执行了n次，<br>pow(x,i)是求x的i次方，执行了i-1次乘法，<br>每一次循环中，执行了i次乘法。<br>一共执行了(1+2+…+n) = (n ^2 + n) / 2 次乘法。<br>时间复杂度 T(n) = C1 n^2 + C2 n</p>
-<hr>
-<pre><code><span class="function"><span class="keyword">double</span> <span class="title">f</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">double</span> a[], <span class="keyword">double</span> x)</span>
-</span>{
-    <span class="keyword">int</span> i;
-    <span class="keyword">double</span> p = a[n];
-    <span class="keyword">for</span>(i = n; i &gt; <span class="number">0</span>; i--){
-        p = a[i - <span class="number">1</span>] + x * p;
-    }
-    <span class="keyword">return</span> p;
-}
-</code></pre><p>执行了多少次乘法？<br>每次循环执行1次乘法，执行了n次循环，一共执行了n次乘法。<br>时间复杂度 T(n) = C n</p>
-<h3 id="什么是最好的算法？">什么是最好的算法？</h3><ul>
-<li>在分析一般算法的效率时，我们经常关注下边两种复杂度<ul>
-<li>最坏情况复杂度 T worst (n)</li>
-<li>平均复杂度 T avg (n)</li>
-</ul>
-</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/cba4f701419095c52a853a42825a2b8512acce76/2015111/%E5%85%B3%E6%B3%A8%E7%9A%84%E5%A4%8D%E6%9D%82%E5%BA%A6.PNG" alt="关注的复杂度"></p>
-<p>我们更关注T worst</p>
-<h3 id="复杂度的渐进表示法">复杂度的渐进表示法</h3><p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/ba5e3e91c45d632d6c88dbbe9f7e4c8ed8388810/2015111/%E5%A4%8D%E6%9D%82%E5%BA%A6%E6%B8%90%E8%BF%9B%E8%A1%A8%E7%A4%BA.PNG" alt="复杂度渐进表示"></p>
-<p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/304c7259057cbbadb315548c6e411a674670a743/2015111/%E8%BE%93%E5%85%A5%E8%A7%84%E6%A8%A1.PNG" alt="输入规模"></p>
-<p>设计函数要避免出现n!</p>
-<p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/304c7259057cbbadb315548c6e411a674670a743/2015111/%E5%87%BD%E6%95%B0%E5%9B%BE.PNG" alt="函数图"><br>增长率高的函数尽量转化为增长率低的函数</p>
-<p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/c6c2b2a01384bd60305f77ebbcad1421735fe187/2015111/%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90%E7%AA%8D%E9%97%A8.PNG" alt="复杂度分析窍门"></p>
 
       
     </div>
