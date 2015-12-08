@@ -192,10 +192,64 @@
 </nav>
       <div class="body-wrap">
   
-    <article id="post-数据结构3-树-中-——4-1-二叉搜索树" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-数据结构4-树-中-——4-2-平衡二叉树" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/12/07/数据结构3-树-中-——4-1-二叉搜索树/" class="article-date">
+      <a href="/2015/12/08/数据结构4-树-中-——4-2-平衡二叉树/" class="article-date">
+  	<time datetime="2015-12-08T04:58:19.000Z" itemprop="datePublished">2015-12-08</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/12/08/数据结构4-树-中-——4-2-平衡二叉树/">数据结构4-树-中-——4-2-平衡二叉树</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构/">数据结构</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+    <article id="post-数据结构4-树-中-——4-1-二叉搜索树" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/12/07/数据结构4-树-中-——4-1-二叉搜索树/" class="article-date">
   	<time datetime="2015-12-07T11:26:42.000Z" itemprop="datePublished">2015-12-07</time>
 </a>
     </div>
@@ -209,7 +263,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/12/07/数据结构3-树-中-——4-1-二叉搜索树/">数据结构3-树-中-——4-1-二叉搜索树</a>
+      <a class="article-title" href="/2015/12/07/数据结构4-树-中-——4-1-二叉搜索树/">数据结构4-树-中-——4-1-二叉搜索树</a>
     </h1>
   
 
@@ -218,7 +272,140 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h1 id="4-1_二叉搜索树">4.1 二叉搜索树</h1><h2 id="4-1-1_二叉搜索树及查找">4.1.1 二叉搜索树及查找</h2><h3 id="什么是二叉搜索树">什么是二叉搜索树</h3><p>二叉搜索树（也称 二叉排序树 或 二叉查找树）：<br>一棵 二叉树，可以为空；如果 不为空，需要满足以下性质：</p>
+<ul>
+<li>1.非空 左子树 的所有键值 小于 其根结点的键值</li>
+<li>2.非空 右子树 的所有键值 大于 其根结点的键值</li>
+<li>3.左、右子树 都是 二叉搜索树</li>
+</ul>
+<p>函数：</p>
+<ul>
+<li>Position Find(ElementType X, BinTree BST):从 二叉搜索树BST中 查找元素X。返回其 所在结点的 地址</li>
+<li>Position FindMin(BinTree BST)：从 二叉搜索树BST中 查找并返回 最小元素 所在结点的 地址</li>
+<li>Position FindMax(BinTree BST)：从 二叉搜索树BST中 查找并返回 最大元素 所在结点的 地址</li>
+<li>BinTree Insert(ElementType X, BinTree BST)：二叉搜索树BST中 插入元素X</li>
+<li>BinTree Delete(ElementType X, BinTree BST):二叉搜索树BST中 删除元素X</li>
+</ul>
+<h3 id="二叉搜索树_查找操作：Find">二叉搜索树 查找操作：Find</h3><ul>
+<li>从根结点 开始，如果树为空，返回NULL</li>
+<li>搜索树非空，将 根结点 关键字 和X比较，进行不同处理：<ul>
+<li>1.X 小于 根结点键值，在 左子树中 继续搜索</li>
+<li>2.X 大于 根结点键值，在 右子树中 继续搜索</li>
+<li>3.X 等于 根结点键值，搜索完成，返回此结点的 指针</li>
+</ul>
+</li>
+</ul>
+<hr>
+<pre><code>Position Find(ElementType X, BinTree BST){
+    <span class="keyword">if</span>(<span class="subst">!</span>BST){
+        <span class="keyword">return</span> <span class="built_in">NULL</span>;<span class="comment">//查找失败</span>
+    }
+    <span class="keyword">if</span>(X &gt; BST<span class="subst">-&gt;</span><span class="built_in">Data</span>){
+        <span class="keyword">return</span> Find(X, BST<span class="subst">-&gt;</span>Right);<span class="comment">//右子树 中继续查找</span>
+    } <span class="keyword">else</span> <span class="keyword">if</span>(X &lt; BST<span class="subst">-&gt;</span><span class="built_in">Data</span>){
+        <span class="keyword">return</span> Find(X, BST<span class="subst">-&gt;</span>Left);<span class="comment">//左子树中 继续查找</span>
+    } <span class="keyword">else</span>{
+        <span class="comment">//X == BST-&gt;Data</span>
+        <span class="keyword">return</span> BST;<span class="comment">//查找成功，返回结点的地址</span>
+    }
+}
+</code></pre><p>上边的递归是 尾递归，递归效率低，可以改成循环实现</p>
+<pre><code>Position IterFind(ElementType X, BinTree BST){
+    <span class="keyword">while</span>(BST){
+        <span class="keyword">if</span>(X &gt; BST<span class="subst">-&gt;</span><span class="built_in">Data</span>){
+            BST = BST<span class="subst">-&gt;</span>Right;<span class="comment">//向右子树移动，继续查找</span>
+        } <span class="keyword">else</span> <span class="keyword">if</span>(X &lt; BST<span class="subst">-&gt;</span><span class="built_in">Data</span>){
+            BST = BST<span class="subst">-&gt;</span>Left;<span class="comment">//向左子树移动，继续查找</span>
+        } <span class="keyword">else</span> {
+            <span class="comment">//X == BST-&gt;Data;</span>
+            <span class="keyword">return</span> BST;<span class="comment">//查找成功，返回结点的地址</span>
+        }
+    }
+    <span class="keyword">return</span> <span class="built_in">NULL</span>;<span class="comment">//查找失败</span>
+}
+</code></pre><p>查找效率 决定于 树的高度</p>
+<h3 id="查找_最大和最小_元素">查找 最大和最小 元素</h3><p>最大元素 在 树的 最右分支 的端结点上<br>最小元素 在 树的 最左分支 的端结点上</p>
+<p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/600220ea7f6f5b9beb723f1ced9c2272e4b22c79/201512/%E6%90%9C%E7%B4%A2%E6%A0%91%E6%9C%80%E5%80%BC.PNG" alt="二叉搜索树 最值"></p>
+<pre><code>Position FindMin(BinTree BST){
+<span class="comment">//递归实现</span>
+    <span class="keyword">if</span>(<span class="subst">!</span>BST){
+        <span class="keyword">return</span> <span class="built_in">NULL</span>;<span class="comment">//空 二叉搜索树，返回NULL</span>
+    } <span class="keyword">else</span> <span class="keyword">if</span>(<span class="subst">!</span> BST<span class="subst">-&gt;</span>Left){
+        <span class="keyword">return</span> BST;<span class="comment">//找到 最左 叶节点 返回</span>
+    } <span class="keyword">else</span> {
+        <span class="keyword">return</span> FindMin(BST<span class="subst">-&gt;</span>Left);<span class="comment">//沿左分支 继续查找</span>
+    }
+}
+
+Position FindMax(BinTree BST){
+<span class="comment">//迭代实现</span>
+    <span class="keyword">if</span>(BST){
+        <span class="keyword">while</span>(BST<span class="subst">-&gt;</span>Right){
+            BST = BST<span class="subst">-&gt;</span>Right;<span class="comment">//沿右分支 继续查找，直到最右 叶节点</span>
+        }
+    }
+    <span class="keyword">return</span> BST;
+}
+</code></pre><h2 id="4-1-2_二叉搜索树的_插入">4.1.2 二叉搜索树的 插入</h2><p>关键是 找到要 插入的位置</p>
+<pre><code>BinTree Insert(ElementType X, BinTree BST){
+    <span class="keyword">if</span>(<span class="subst">!</span>BST){
+        <span class="comment">//原树为空，生成 并 返回一个结点 的二叉搜索树</span>
+        BST = malloc(sizeof(struct TreeNode));
+        BST<span class="subst">-&gt;</span><span class="built_in">Data</span> = X;
+        BST<span class="subst">-&gt;</span>Left = BST<span class="subst">-&gt;</span>Right = <span class="built_in">NULL</span>;
+    } <span class="keyword">else</span> {
+        <span class="comment">//开始找 要插入元素 的位置</span>
+        <span class="keyword">if</span>(X &lt; BST<span class="subst">-&gt;</span><span class="built_in">Data</span>){
+            BST<span class="subst">-&gt;</span>Left = Insert(X, BST<span class="subst">-&gt;</span>Left);<span class="comment">//递归 插入 左子树</span>
+        } <span class="keyword">else</span> <span class="keyword">if</span>(X &gt; BST<span class="subst">-&gt;</span><span class="built_in">Data</span>){
+            BST<span class="subst">-&gt;</span>Right = Insert(X, BST<span class="subst">-&gt;</span>Right);<span class="comment">//递归 插入 右子树</span>
+        }<span class="comment">//else X已经存在，什么都不做</span>
+    }
+    <span class="keyword">return</span> BST;
+}
+</code></pre><p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/8e0554d4dbc7e064aecc7d9baf67e139c1e2e779/201512/%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E6%8F%92%E5%85%A5%E4%BE%8B%E5%AD%90.PNG" alt="二叉搜索树插入例子"></p>
+<p>按字母排序顺序插入</p>
+<h2 id="4-1-3_二叉搜索树_的删除">4.1.3 二叉搜索树 的删除</h2><p>三种情况：</p>
+<ul>
+<li>要删除 叶节点：直接删除，再修改其 父结点指针 —— 置为NULL</li>
+<li><p>要删除的结点 只有一个孩子结点：<br>将其父结点 的指针 指向 要删除结点的 孩子结点<br><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/250f44d5ec40a7e7157bbd681e3ea7c96b20fff8/201512/%E5%88%A0%E9%99%A4%E4%B8%80%E4%B8%AA%E5%AD%90%E7%BB%93%E7%82%B9%E7%9A%84%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91.PNG" alt="删除一个子结点的二叉搜索树"></p>
+</li>
+<li><p>要删除的结点 有左、右两颗子树<br>用另一个结点 替代 被删除的结点：右子树 的最小元素 或者 左子树的最大元素</p>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/9ef7dbc0f223790772bc7c7da9184e1c1bcc416b/201512/%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E5%88%A0%E9%99%A4%E7%BB%93%E7%82%B91.PNG" alt="右子树 最小元素 替代"></p>
+<p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/7d4692673021bb3eec757ba485fc7474ba8ce6ce/201512/%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E5%88%A0%E9%99%A4%E7%BB%93%E7%82%B92.PNG" alt="左子树 最大元素 替代"></p>
+<pre><code>BinTree Delete(ElementType X, BinTree BST){
+    Position Tmp;
+    <span class="keyword">if</span>(<span class="subst">!</span>BST){
+        printf(<span class="string">"要删除的元素未找到"</span>);
+    } <span class="keyword">else</span> <span class="keyword">if</span>(X &lt; BST<span class="subst">-&gt;</span><span class="built_in">Data</span>){
+        BST<span class="subst">-&gt;</span>Left = Delete(X, BST<span class="subst">-&gt;</span>Left);<span class="comment">//左子树 递归删除</span>
+    } <span class="keyword">else</span> <span class="keyword">if</span>(X &gt; BST<span class="subst">-&gt;</span><span class="built_in">Data</span>) {
+        BST<span class="subst">-&gt;</span>Right = Delete(X, BST<span class="subst">-&gt;</span>Right);<span class="comment">//右子树递归删除</span>
+    } <span class="keyword">else</span> {
+        <span class="comment">//找到要删除的结点</span>
+        <span class="keyword">if</span>(BST<span class="subst">-&gt;</span>Left <span class="subst">&amp;&amp;</span> BST<span class="subst">-&gt;</span>Right){
+            <span class="comment">//被删除的几点 有 左右两个子结点</span>
+            Tmp = FindMin(BST<span class="subst">-&gt;</span>Right);<span class="comment">//右子树中找最小的元素 填充 删除结点</span>
+            BST<span class="subst">-&gt;</span><span class="built_in">Data</span> = Tmp-?<span class="built_in">Data</span>;
+            BST<span class="subst">-&gt;</span>Right = Delete(BST<span class="subst">-&gt;</span><span class="built_in">Data</span>, BST<span class="subst">-&gt;</span>Right);<span class="comment">//删除结点的 右子树中 删除 最小元素</span>
+        } <span class="keyword">else</span> {
+            <span class="comment">//被删除结点 有一个或无 子结点</span>
+            Tmp = BST;
+            <span class="keyword">if</span>(<span class="subst">!</span>BST<span class="subst">-&gt;</span>Left){
+                <span class="comment">//有 右孩子 或 无 子结点</span>
+                BST = BST<span class="subst">-&gt;</span>Right;
+            }<span class="keyword">else</span> <span class="keyword">if</span>(<span class="subst">!</span>BST<span class="subst">-&gt;</span>Right){
+                <span class="comment">//有左孩子 或无 子结点</span>
+                BST = BST<span class="subst">-&gt;</span>Left;
+            }
+        }
+        free(Tmp);
+    }
+    <span class="keyword">return</span> BST;
+}
+</code></pre>
       
     </div>
     
@@ -2034,114 +2221,6 @@ List L, *PtrL;
 <p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/9f84e90dfb17d2d28890f98e260c3943cb0c51ed/2015111/%E5%8D%81%E5%AD%97%E9%93%BE%E8%A1%A8.PNG" alt="十字链表"></p>
 <p>Head是行或列的头结点<br><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/9f84e90dfb17d2d28890f98e260c3943cb0c51ed/2015111/%E5%85%A5%E5%8F%A3%E7%BB%93%E7%82%B9.PNG" alt="入口结点"><br>Term是稀疏矩阵的非零项<br>左上角的Term结点，是入口结点，表示有4行5列，7个非零项</p>
 <p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/9f84e90dfb17d2d28890f98e260c3943cb0c51ed/2015111/union%E6%95%B4%E5%90%88term_head.PNG" alt="Union整合Term和Head"></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构/">数据结构</a></li></ul>
-	</div>
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-数据结构1 基本概念——1-3最大子列和问题" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/11/16/数据结构1 基本概念——1-3最大子列和问题/" class="article-date">
-  	<time datetime="2015-11-16T01:06:35.000Z" itemprop="datePublished">2015-11-16</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/11/16/数据结构1 基本概念——1-3最大子列和问题/">数据结构1 基本概念——1-3最大子列和问题</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="1-最大子列和问题">1.最大子列和问题</h3><p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/54256bbe25da63466c83cf5045f48b6461a3d9ba/2015111/%E6%9C%80%E5%A4%A7%E5%AD%90%E5%88%97%E5%92%8C.PNG" alt="最大子列和"></p>
-<p><strong> 算法1 </strong></p>
-<pre><code><span class="function"><span class="keyword">int</span> <span class="title">MaxSubseqSum1</span><span class="params">(<span class="keyword">int</span> A[], <span class="keyword">int</span> N)</span></span>{
-    <span class="keyword">int</span> ThisSum, MaxSum = <span class="number">0</span>;
-    <span class="keyword">int</span> i, j, k;
-    <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; N; i++){
-        <span class="keyword">for</span>(j = i; j &lt; N; j++){
-            ThisSum = <span class="number">0</span>;
-            <span class="keyword">for</span>(k = i; k &lt;=j; k++){
-                ThisSum += A[k];
-                <span class="keyword">if</span>(ThisSum &gt; MaxSum)
-                    MaxSum = ThisSum;
-            }
-        }<span class="comment">//j循环结束</span>
-    }<span class="comment">//i循环结束</span>
-    <span class="keyword">return</span> MaxSum;
-}
-</code></pre><p>复杂度 T(N) = O(N^3)</p>
-<p><strong> 算法2 </strong></p>
-<pre><code><span class="function"><span class="keyword">int</span> <span class="title">MaxSubseqSum2</span><span class="params">(<span class="keyword">int</span> A[], <span class="keyword">int</span> N)</span></span>{
-    <span class="keyword">int</span> ThisSum, MaxSum = <span class="number">0</span>;
-    <span class="keyword">int</span> i, j;
-    <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; N; i++){
-        ThisSum = <span class="number">0</span>;
-        <span class="keyword">for</span>(j = i; j &lt; N; j++){
-            ThisSum += A[j];<span class="comment">//对于相同的i，不同的j，只要在j-1次循环的基础上累加1即可</span>
-            <span class="keyword">if</span>(ThisSum &gt; MaxSum){
-                MaxSum = ThisSum;
-            }
-        }
-    }
-    <span class="keyword">return</span> MaxSum;
-}
-</code></pre><p>复杂度 T(N) = O(N^2)</p>
-<p><strong> 算法3：分而治之 </strong></p>
-<p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/5ea20416e949700f79ef7a9c55234674a18b8f34/2015111/%E5%88%86%E8%80%8C%E6%B2%BB%E4%B9%8B.PNG" alt="分而治之"></p>
-<p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/36a3a0330c1b382d780067f85154bd09e1168ca2/2015111/%E5%88%86%E8%80%8C%E6%B2%BB%E4%B9%8B2.PNG" alt="分而治之举例"></p>
-<p><strong> 算法4:在线处理 </strong></p>
-<pre><code><span class="function"><span class="keyword">int</span> <span class="title">MaxSubseqSum4</span><span class="params">(<span class="keyword">int</span> A[], <span class="keyword">int</span> N)</span></span>{
-    <span class="keyword">int</span> ThisSum, MaxSum;
-    <span class="keyword">int</span> i;
-    ThisSum = MaxSum = <span class="number">0</span>;
-    <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; N; i++){
-        ThisSum += A[i];<span class="comment">//向右累加</span>
-        <span class="keyword">if</span>(ThisSum &gt; MaxSum){
-            MaxSum = ThisSum;<span class="comment">//发现更大的，更新当前结果</span>
-        }<span class="keyword">else</span> <span class="keyword">if</span>(ThisSum &lt; <span class="number">0</span>){
-            ThisSum = <span class="number">0</span>;<span class="comment">//不能使后边的部分和增大，抛弃</span>
-            }
-    }
-    <span class="keyword">return</span> MaxSum;
-}
-</code></pre><p>T(N) = O(N)<br>举例[-1,3，-2,4，-6,1,6，-1]<br>MaxSum = 7</p>
-<p>“在线”的意思是指 每输入一个数据 就进行 及时处理，在任何一个地方中止输入，算法都能正确给出当前的解。</p>
 
       
     </div>
