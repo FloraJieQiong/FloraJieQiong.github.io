@@ -23,7 +23,7 @@ MediaScannerReceiver：接收外界发来的扫描请求，MediaScanner对外提
 
 1.MediaScannerReceiver@Override
 public void onReceive(Co">
-<meta property="og:updated_time" content="2015-12-03T11:07:53.099Z">
+<meta property="og:updated_time" content="2015-12-09T05:45:17.324Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="framework--MediaScanner">
 <meta name="twitter:description" content="MediaScanner涉及组件
@@ -848,6 +848,256 @@ android_media_MediaScanner_processDirectory(
         <span class="type">ALOGE</span>(<span class="string">"An error occurred while scanning directory '%s'."</span>, pathStr);
     }
     env-&gt;<span class="type">ReleaseStringUTFChars</span>(path, pathStr);
+}
+</code></pre><p>frameworks/av/media/libmedia/MediaScanner.cpp</p>
+<pre><code><span class="type">MediaScanResult</span> <span class="type">MediaScanner</span>::processDirectory(
+        <span class="keyword">const</span> <span class="type">char</span> *path, <span class="type">MediaScannerClient</span> &amp;client) {
+     ……
+    client.setLocale(locale());//给<span class="type">Native</span>的<span class="type">MyMediaScannerClient</span>设置local信息
+
+    <span class="type">MediaScanResult</span> <span class="literal">result</span> = doProcessDirectory(pathBuffer, pathRemaining, client, <span class="literal">false</span>);//调用doProcessDirectory扫描文件夹
+
+    free(pathBuffer);
+
+    <span class="keyword">return</span> <span class="literal">result</span>;
+}
+
+
+
+<span class="type">MediaScanResult</span> <span class="type">MediaScanner</span>::doProcessDirectory(
+        <span class="type">char</span> *path, <span class="type">int</span> pathRemaining, <span class="type">MediaScannerClient</span> &amp;client, <span class="type">bool</span> noMedia) {
+    ……//忽略.nomedia文件夹
+
+    <span class="type">DIR</span>* dir = opendir(path);
+    <span class="keyword">if</span> (!dir) {
+        <span class="type">ALOGW</span>(<span class="string">"Error opening directory '%s', skipping: %s."</span>, path, strerror(errno));
+        <span class="keyword">return</span> <span class="type">MEDIA_SCAN_RESULT_SKIPPED</span>;
+    }
+
+    <span class="type">MediaScanResult</span> <span class="literal">result</span> = <span class="type">MEDIA_SCAN_RESULT_OK</span>;
+    <span class="keyword">while</span> ((entry = readdir(dir))) {
+        <span class="keyword">if</span> (doProcessDirectoryEntry(path, pathRemaining, client, noMedia, entry, fileSpot)
+                == <span class="type">MEDIA_SCAN_RESULT_ERROR</span>) {
+            <span class="literal">result</span> = <span class="type">MEDIA_SCAN_RESULT_ERROR</span>;
+            <span class="keyword">break</span>;
+        }
+    }
+    closedir(dir);
+    <span class="keyword">return</span> <span class="literal">result</span>;
+}
+
+
+
+<span class="type">MediaScanResult</span> <span class="type">MediaScanner</span>::doProcessDirectoryEntry(
+        <span class="type">char</span> *path, <span class="type">int</span> pathRemaining, <span class="type">MediaScannerClient</span> &amp;client, <span class="type">bool</span> noMedia,
+        struct dirent* entry, <span class="type">char</span>* fileSpot) {
+    struct stat statbuf;
+    <span class="keyword">const</span> <span class="type">char</span>* name = entry-&gt;d_name;//枚举目录中的文件和子文件夹信息
+
+    // ignore <span class="string">"."</span> <span class="keyword">and</span> <span class="string">".."</span>
+    <span class="keyword">if</span> (name[<span class="number">0</span>] == '.' &amp;&amp; (name[<span class="number">1</span>] == <span class="number">0</span> || (name[<span class="number">1</span>] == '.' &amp;&amp; name[<span class="number">2</span>] == <span class="number">0</span>))) {
+        <span class="keyword">return</span> <span class="type">MEDIA_SCAN_RESULT_SKIPPED</span>;
+    }
+
+    <span class="type">int</span> nameLength = strlen(name);
+    <span class="keyword">if</span> (nameLength + <span class="number">1</span> &gt; pathRemaining) {
+        // path too long!
+        <span class="keyword">return</span> <span class="type">MEDIA_SCAN_RESULT_SKIPPED</span>;
+    }
+    strcpy(fileSpot, name);
+
+    <span class="type">int</span> <span class="keyword">type</span> = entry-&gt;d_type;
+    <span class="keyword">if</span> (<span class="keyword">type</span> == <span class="type">DT_UNKNOWN</span>) {
+        // <span class="type">If</span> the <span class="keyword">type</span> <span class="keyword">is</span> unknown, stat() the file instead.
+        // <span class="type">This</span> <span class="keyword">is</span> sometimes necessary <span class="keyword">when</span> accessing <span class="type">NFS</span> mounted filesystems, but
+        // could be needed <span class="keyword">in</span> other cases well.
+        <span class="keyword">if</span> (stat(path, &amp;statbuf) == <span class="number">0</span>) {
+            <span class="keyword">if</span> (<span class="type">S_ISREG</span>(statbuf.st_mode)) {
+                <span class="keyword">type</span> = <span class="type">DT_REG</span>;
+            } <span class="keyword">else</span> <span class="keyword">if</span> (<span class="type">S_ISDIR</span>(statbuf.st_mode)) {
+                <span class="keyword">type</span> = <span class="type">DT_DIR</span>;
+            }
+        } <span class="keyword">else</span> {
+            <span class="type">ALOGD</span>(<span class="string">"stat() failed for %s: %s"</span>, path, strerror(errno) );
+        }
+    }
+    <span class="keyword">if</span> (<span class="keyword">type</span> == <span class="type">DT_DIR</span>) {
+        //文件夹
+        <span class="type">bool</span> childNoMedia = noMedia;
+        // <span class="type">set</span> noMedia flag on directories <span class="keyword">with</span> a name that starts <span class="keyword">with</span> '.'
+        // <span class="keyword">for</span> example, the <span class="type">Mac</span> <span class="string">".Trashes"</span> directory
+        <span class="keyword">if</span> (name[<span class="number">0</span>] == '.')
+            childNoMedia = <span class="literal">true</span>;
+
+        // report the directory to the client
+        <span class="keyword">if</span> (stat(path, &amp;statbuf) == <span class="number">0</span>) {
+            status_t status = client.scanFile(path, statbuf.st_mtime, <span class="number">0</span>,
+                    <span class="literal">true</span> /*isDirectory*/, childNoMedia);
+            <span class="keyword">if</span> (status) {
+                <span class="keyword">return</span> <span class="type">MEDIA_SCAN_RESULT_ERROR</span>;
+            }
+        }
+
+        // <span class="keyword">and</span> now process its contents
+        strcat(fileSpot, <span class="string">"/"</span>);
+        //如果是子文件夹，递归调用doProcessDirectory
+        <span class="type">MediaScanResult</span> <span class="literal">result</span> = doProcessDirectory(path, pathRemaining - nameLength - <span class="number">1</span>,
+                client, childNoMedia);
+        <span class="keyword">if</span> (<span class="literal">result</span> == <span class="type">MEDIA_SCAN_RESULT_ERROR</span>) {
+            <span class="keyword">return</span> <span class="type">MEDIA_SCAN_RESULT_ERROR</span>;
+        }
+    } <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">type</span> == <span class="type">DT_REG</span>) {
+        stat(path, &amp;statbuf);//取出文件修改时间和大小
+        status_t status = client.scanFile(path, statbuf.st_mtime, statbuf.st_size,
+                <span class="literal">false</span> /*isDirectory*/, noMedia);//调用<span class="type">MyMediaScannerClient</span>的scanFile函数
+        <span class="keyword">if</span> (status) {
+            <span class="keyword">return</span> <span class="type">MEDIA_SCAN_RESULT_ERROR</span>;
+        }
+    }
+
+    <span class="keyword">return</span> <span class="type">MEDIA_SCAN_RESULT_OK</span>;
+}
+</code></pre><h3 id="3-2-4_MyMediaScannerClient的scanFile分析">3.2.4 MyMediaScannerClient的scanFile分析</h3><p>(1)JNI层的scanFile<br>android_media_MediaScanner.cpp</p>
+<pre><code>virtual status_t scanFile(<span class="keyword">const</span> <span class="keyword">char</span>* path, <span class="keyword">long</span> <span class="keyword">long</span> lastModified,
+        <span class="keyword">long</span> <span class="keyword">long</span> fileSize, <span class="keyword">bool</span> isDirectory, <span class="keyword">bool</span> noMedia)
+{
+    ALOGV(<span class="string">"scanFile: path(%s), time(%lld), size(%lld) and isDir(%d)"</span>,
+        path, lastModified, fileSize, isDirectory);
+
+    jstring pathStr;
+    <span class="keyword">if</span> ((pathStr = mEnv-&gt;NewStringUTF(path)) == <span class="keyword">NULL</span>) {
+        mEnv-&gt;ExceptionClear();
+        <span class="keyword">return</span> NO_MEMORY;
+    }
+    <span class="comment">//mClient是Java层的MyMediaScannerClient对象，调用其scanFile函数</span>
+    mEnv-&gt;CallVoidMethod(mClient, mScanFileMethodID, pathStr, lastModified,
+            fileSize, isDirectory, noMedia);
+
+    mEnv-&gt;DeleteLocalRef(pathStr);
+    <span class="keyword">return</span> checkAndClearExceptionFromCallback(mEnv, <span class="string">"scanFile"</span>);
+}
+</code></pre><p>(2)Java层的scanFile函数</p>
+<pre><code>    @Override
+    <span class="keyword">public</span> <span class="keyword">void</span> scanFile(<span class="keyword">String</span> path, <span class="keyword">long</span> lastModified, <span class="keyword">long</span> fileSize,
+            <span class="built_in">boolean</span> isDirectory, <span class="built_in">boolean</span> noMedia) {
+        <span class="comment">// This is the callback funtion from native codes.</span>
+        <span class="comment">// Log.v(TAG, "scanFile: "+path);</span>
+        doScanFile(path, <span class="keyword">null</span>, lastModified, fileSize, isDirectory, <span class="keyword">false</span>, noMedia);<span class="comment">//调用doScanFile函数</span>
+    }
+
+
+
+    <span class="keyword">public</span> Uri doScanFile(<span class="keyword">String</span> path, <span class="keyword">String</span> mimeType, <span class="keyword">long</span> lastModified,
+            <span class="keyword">long</span> fileSize, <span class="built_in">boolean</span> isDirectory, <span class="built_in">boolean</span> scanAlways, <span class="built_in">boolean</span> noMedia) {
+        <span class="comment">//scanAlways：是否强制扫描。有时候有些文件 在两次扫描过程中没有发生变化，MediaScanner可以不处理这些文件。scanAlways为true，则文件没有变化也要扫描</span>
+        Uri result = <span class="keyword">null</span>;
+<span class="comment">//        long t1 = System.currentTimeMillis();</span>
+        <span class="keyword">try</span> {
+            <span class="comment">//beginFile根据lastModified值，判断这个文件在两次扫描的时间段内 是否有修改，如果有修改，则需要重新扫描</span>
+            FileEntry entry = beginFile(path, mimeType, lastModified,
+                    fileSize, isDirectory, noMedia);
+
+            <span class="comment">// if this file was just inserted via mtp, set the rowid to zero</span>
+            <span class="comment">// (even though it already exists in the database), to trigger</span>
+            <span class="comment">// the correct code path for updating its entry</span>
+            <span class="keyword">if</span> (mMtpObjectHandle != <span class="number">0</span>) {
+                entry.mRowId = <span class="number">0</span>;
+            }
+            <span class="comment">// rescan for metadata if file was modified since last scan</span>
+            <span class="keyword">if</span> (entry != <span class="keyword">null</span> &amp;&amp; (entry.mLastModifiedChanged || scanAlways)) {
+                <span class="keyword">if</span> (noMedia) {
+                    result = endFile(entry, <span class="keyword">false</span>, <span class="keyword">false</span>, <span class="keyword">false</span>, <span class="keyword">false</span>, <span class="keyword">false</span>);
+                } <span class="keyword">else</span> {
+                    <span class="keyword">String</span> lowpath = path.toLowerCase(Locale.ROOT);
+                    <span class="built_in">boolean</span> ringtones = (lowpath.indexOf(RINGTONES_DIR) &gt; <span class="number">0</span>);
+                    <span class="built_in">boolean</span> notifications = (lowpath.indexOf(NOTIFICATIONS_DIR) &gt; <span class="number">0</span>);
+                    <span class="built_in">boolean</span> alarms = (lowpath.indexOf(ALARMS_DIR) &gt; <span class="number">0</span>);
+                    <span class="built_in">boolean</span> podcasts = (lowpath.indexOf(PODCAST_DIR) &gt; <span class="number">0</span>);
+                    <span class="built_in">boolean</span> music = (lowpath.indexOf(MUSIC_DIR) &gt; <span class="number">0</span>) ||
+                        (!ringtones &amp;&amp; !notifications &amp;&amp; !alarms &amp;&amp; !podcasts);
+
+                    <span class="built_in">boolean</span> isaudio = MediaFile.isAudioFileType(mFileType);
+                    <span class="built_in">boolean</span> isvideo = MediaFile.isVideoFileType(mFileType);
+                    <span class="built_in">boolean</span> isimage = MediaFile.isImageFileType(mFileType);
+
+                    <span class="keyword">if</span> (isaudio || isvideo || isimage) {
+                        path = Environment.maybeTranslateEmulatedPathToInternal(<span class="keyword">new</span> File(path))
+                                .getAbsolutePath();
+                    }
+
+                    <span class="comment">// we only extract metadata for audio and video files</span>
+                    <span class="keyword">if</span> (isaudio || isvideo) {
+                        processFile(path, mimeType, <span class="keyword">this</span>);<span class="comment">//native方法</span>
+                    }
+
+                    <span class="keyword">if</span> (isimage) {
+                        processImageFile(path);
+                    }
+
+                    result = endFile(entry, ringtones, notifications, alarms, music, podcasts);<span class="comment">//扫描完成后，需要把新的信息插入数据库，或者要将原有的信息更新</span>
+                }
+            }
+        } <span class="keyword">catch</span> (RemoteException e) {
+            Log.e(TAG, <span class="string">"RemoteException in MediaScanner.scanFile()"</span>, e);
+        }
+<span class="comment">//        long t2 = System.currentTimeMillis();</span>
+<span class="comment">//        Log.v(TAG, "scanFile: " + path + " took " + (t2-t1));</span>
+        <span class="keyword">return</span> result;
+    }
+</code></pre><p>(3)JNI层的processFile分析</p>
+<pre><code>static void
+android_media_MediaScanner_processFile<span class="list">(
+        <span class="keyword">JNIEnv</span> <span class="variable">*env, jobject thiz, jstring path,
+        jstring mimeType, jobject client)
+{
+    ALOGV("processFile");
+
+    // Lock already hold by processDirectory
+    MediaScanner *</span>mp = getNativeScanner_l<span class="list">(<span class="keyword">env</span>, thiz)</span><span class="comment">;</span>
+    if <span class="list">(<span class="keyword">mp</span> == NULL)</span> {
+        jniThrowException<span class="list">(<span class="keyword">env</span>, kRunTimeException, <span class="string">"No scanner available"</span>)</span><span class="comment">;</span>
+        return<span class="comment">;</span>
+    }
+
+    if <span class="list">(<span class="keyword">path</span> == NULL)</span> {
+        jniThrowException<span class="list">(<span class="keyword">env</span>, kIllegalArgumentException, NULL)</span><span class="comment">;</span>
+        return<span class="comment">;</span>
+    }
+
+    const char <span class="variable">*pathStr = env-&gt;GetStringUTFChars(path, NULL);
+    if (pathStr == NULL) {  // Out of memory
+        return;
+    }
+
+    const char *</span>mimeTypeStr =
+        <span class="list">(<span class="keyword">mimeType</span> ? env-&gt;GetStringUTFChars<span class="list">(<span class="keyword">mimeType</span>, NULL)</span> : NULL)</span><span class="comment">;</span>
+    if <span class="list">(<span class="keyword">mimeType</span> <span class="keyword">&amp;&amp;</span> mimeTypeStr == NULL)</span> {  // Out of memory
+        // ReleaseStringUTFChars can be called with an exception pending.
+        env-&gt;ReleaseStringUTFChars<span class="list">(<span class="keyword">path</span>, pathStr)</span><span class="comment">;</span>
+        return<span class="comment">;</span>
+    }
+
+    MyMediaScannerClient myClient<span class="list">(<span class="keyword">env</span>, client)</span><span class="comment">;</span>
+    MediaScanResult result = mp-&gt;processFile<span class="list">(<span class="keyword">pathStr</span>, mimeTypeStr, myClient)</span><span class="comment">;</span>
+    if <span class="list">(<span class="keyword">result</span> == MEDIA_SCAN_RESULT_ERROR)</span> {
+        ALOGE<span class="list">(<span class="string">"An error occurred while scanning file '%s'."</span>, pathStr)</span><span class="comment">;</span>
+    }
+    env-&gt;ReleaseStringUTFChars<span class="list">(<span class="keyword">path</span>, pathStr)</span><span class="comment">;</span>
+    if <span class="list">(<span class="keyword">mimeType</span>)</span> {
+        env-&gt;ReleaseStringUTFChars<span class="list">(<span class="keyword">mimeType</span>, mimeTypeStr)</span><span class="comment">;</span>
+    }
+}</span>
+</code></pre><p>frameworks/av/media/libstagefright/StagefrightMediaScanner.cpp</p>
+<pre><code><span class="type">MediaScanResult</span> <span class="type">StagefrightMediaScanner</span>::processFile(
+        <span class="keyword">const</span> <span class="type">char</span> *path, <span class="keyword">const</span> <span class="type">char</span> *mimeType,
+        <span class="type">MediaScannerClient</span> &amp;client) {
+    <span class="type">ALOGV</span>(<span class="string">"processFile '%s'."</span>, path);
+
+    client.setLocale(locale());
+    client.beginFile();
+    <span class="type">MediaScanResult</span> <span class="literal">result</span> = processFileInternal(path, mimeType, client);
+    client.endFile();
+    <span class="keyword">return</span> <span class="literal">result</span>;
 }
 </code></pre>
       

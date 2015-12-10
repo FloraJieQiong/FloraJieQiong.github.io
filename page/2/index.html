@@ -192,6 +192,269 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-数据结构2-线性结构——2-1-线性表及其实现" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/11/16/数据结构2-线性结构——2-1-线性表及其实现/" class="article-date">
+  	<time datetime="2015-11-16T11:53:17.000Z" itemprop="datePublished">2015-11-16</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/11/16/数据结构2-线性结构——2-1-线性表及其实现/">数据结构2 线性结构——2-1 线性表及其实现 </a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="2-1-1">2.1.1</h3><h3 id="多项式的表示">多项式的表示</h3><p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/1c2f096c03766550961019c7f3be6e9c9a198c1e/2015111/%E5%A4%9A%E9%A1%B9%E5%BC%8F%E7%9A%84%E8%A1%A8%E7%A4%BA.PNG" alt="多项式的表示"></p>
+<h4 id="方法1：顺序存储结构直接表示">方法1：顺序存储结构直接表示</h4><p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/0996938c807601aad044797fb63b9a48c37e2e29/2015111/%E9%A1%BA%E5%BA%8F%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84%E7%9B%B4%E6%8E%A5%E8%A1%A8%E7%A4%BA.PNG" alt="顺序存储结构直接表示"><br>x+3x^2000,需要2001项，只有2项非零，造成极大浪费。</p>
+<h4 id="方法2：顺序存储结构表示非零项">方法2：顺序存储结构表示非零项</h4><p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/b626e3693e6a58ad4019b4b8e16b7f5988842523/2015111/%E9%A1%BA%E5%BA%8F%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84%E8%A1%A8%E7%A4%BA%E9%9D%9E%E9%9B%B6%E9%A1%B9.PNG" alt="顺序存储结构表示非零项"><br>按 指数大小 有序存储<br><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/f884bc9330b731b93103338be1f6fcd854a115d7/2015111/%E9%9D%9E%E9%9B%B6%E9%A1%B9%E7%9B%B8%E5%8A%A0%E8%BF%87%E7%A8%8B.PNG" alt="相加过程"></p>
+<h4 id="方法3：链表结构存储非零项">方法3：链表结构存储非零项</h4><p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/cc0cc93d09bd014817018dd8579535f4dccc7451/2015111/%E9%93%BE%E8%A1%A8%E7%BB%93%E6%9E%84%E5%AD%98%E5%82%A8%E9%9D%9E%E9%9B%B6%E9%A1%B9.PNG" alt="链表结构存储非零项"></p>
+<h3 id="什么是线性表">什么是线性表</h3><ul>
+<li><p>多项式表示问题的启示：</p>
+<ul>
+<li>1.同一个问题可以有不同的表示（存储）方式</li>
+<li>2.有一类共性问题：有序线性序列的组织和管理</li>
+</ul>
+</li>
+<li><p>线性表：由同类型数据元素构成有序序列的线性结构</p>
+<ul>
+<li>长度：表中元素个数</li>
+<li>空表：线性表中没有元素</li>
+<li>表头：表起始位置；表尾：表结束位置</li>
+</ul>
+</li>
+</ul>
+<h4 id="线性表的抽象数据类型描述">线性表的抽象数据类型描述</h4><p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/9de69a0f97c39a1666f7b1f7e0ab4e2a9706547e/2015111/%E7%BA%BF%E6%80%A7%E8%A1%A8%E7%9A%84%E6%8A%BD%E8%B1%A1%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E6%8F%8F%E8%BF%B0.PNG" alt="线性表的抽象数据类型描述"></p>
+<h4 id="线性表的顺序存储实现">线性表的顺序存储实现</h4><p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/76a97e03faa9953d0d2ffef0d2ea3a4f721d3212/2015111/%E7%BA%BF%E6%80%A7%E8%A1%A8%E7%9A%84%E9%A1%BA%E5%BA%8F%E5%AD%98%E5%82%A8%E5%AE%9E%E7%8E%B0.PNG" alt="线性表的顺序存储实现"></p>
+<h4 id="主要操作的实现">主要操作的实现</h4><p><strong> 1.初始化（建立空的顺序表） </strong></p>
+<pre><code><span class="built_in">List</span> *MakeEmpty(){
+    <span class="built_in">List</span> *PtrL;
+    PtrL = (<span class="built_in">List</span>*)malloc(sizeof(<span class="built_in">List</span>));
+    PtrL<span class="subst">-&gt;</span>Last = -<span class="number">1</span>;
+    <span class="keyword">return</span> PtrL;
+}
+</code></pre><p><strong> 2.查找 </strong></p>
+<pre><code><span class="keyword">int</span> find(ElementType X, <span class="keyword">List</span> *PtrL){
+    <span class="keyword">int</span> i = <span class="number">0</span>;
+    <span class="keyword">while</span>(i &lt;= PtrL-&gt;Last &amp;&amp; PtrL-&gt;Data[i]!=X){
+        i++;
+    }
+    <span class="keyword">if</span>(i &gt; PtrL-&gt;Last){
+        <span class="keyword">return</span> -<span class="number">1</span>;
+    }<span class="keyword">else</span>{
+        <span class="keyword">return</span> i;<span class="comment">//找到后返回存储位置</span>
+    }
+}
+</code></pre><p>查找成功的平均次数为(n+1)/2，平均时间性能为O(n)</p>
+<p><strong> 3.插入：第i( l&lt;=i &lt;= n+1)个位置上插入一个值为X的新元素 </strong><br>下表是i-1的位置赋值为X，下表i到SIZE-1的部分右移。<br>右移时应从右往左操作。</p>
+<pre><code><span class="function"><span class="keyword">void</span> <span class="title">Insert</span><span class="params">(ElementType X, <span class="keyword">int</span> i, List *PtrL)</span></span>{
+    <span class="keyword">int</span> j;
+    <span class="keyword">if</span>(PtrL-&gt;Last == MAXSIZE - <span class="number">1</span>){
+        <span class="built_in">printf</span>(<span class="string">"表满"</span>);
+        <span class="keyword">return</span>;
+    }
+
+    <span class="keyword">if</span>(i &lt; <span class="number">1</span> || i &gt; PtrL -&gt; Last +<span class="number">2</span>){
+        <span class="built_in">printf</span>(<span class="string">"位置不合法"</span>);
+        <span class="keyword">return</span>;
+    }
+
+    <span class="keyword">for</span>(j = PtrL-&gt;Last; j &gt;= i - <span class="number">1</span>; j--){
+        PtrL-&gt;Data[j + <span class="number">1</span>] = PtrL-&gt;Data[j];<span class="comment">//对a[i]-a[n]倒序赋值</span>
+    }
+    PtrL-&gt;Data[i -<span class="number">1</span>] = X;<span class="comment">//插入新元素</span>
+    PtrL-&gt;Last++;<span class="comment">//Last指向最后元素</span>
+    <span class="keyword">return</span>;
+}
+</code></pre><p><strong> 4.删除：删除表的第i( l &lt;= i &lt;= n)个位置上的元素 </strong><br>删除下表为i-1的元素，后边的元素全部前移一个位置。从左往右移</p>
+<pre><code><span class="function"><span class="keyword">void</span> <span class="title">Delete</span><span class="params">(<span class="keyword">int</span> i, List *PtrL)</span></span>{
+    <span class="keyword">int</span> j;
+    <span class="keyword">if</span>(i &lt; <span class="number">1</span> || i &gt; PtrL -&gt; Last +<span class="number">1</span>){
+        <span class="built_in">printf</span>(<span class="string">"不存在第%d个元素"</span>， i);
+        <span class="keyword">return</span>;
+    }
+
+    <span class="keyword">for</span>(j = i; i &lt;= PtrL -&gt; Last; j++){
+        PtrL -&gt; Data[j - <span class="number">1</span>] = PtrL -&gt; Data[j];<span class="comment">//将a[i+1]到a[n]顺序向前移动</span>
+    }
+    PtrL-&gt; Last--;<span class="comment">//Last指向最后一个元素</span>
+    <span class="keyword">return</span>;
+}
+</code></pre><p>平均移动次数是(n-1)/2<br>平均时间性能为O(n)</p>
+<h4 id="线性表的链式存储实现">线性表的链式存储实现</h4><p>不要求 逻辑上相邻 的两个元素 物理上也相邻：通过 “链” 建立起数据元素之间的逻辑关系。<br>数组是逻辑相邻，且物理相邻的。<br>节点表示：</p>
+<pre><code>typedef struct <span class="keyword">Node</span><span class="identifier"></span><span class="title">{
+    ElementType</span> Data;//节点的数据
+    struct <span class="keyword">Node</span><span class="identifier"> </span><span class="title">*Next</span>;//下一个节点的位置
+}List;
+List L, *PtrL;
+</code></pre><h4 id="主要操作的实现-1">主要操作的实现</h4><p><strong> 1.求表长 </strong></p>
+<pre><code><span class="function"><span class="keyword">int</span> <span class="title">Length</span><span class="params">(List *PtrL)</span></span>{
+    List *p = PtrL;<span class="comment">//p指向表的第一个节点</span>
+    <span class="keyword">int</span> j = <span class="number">0</span>;
+    <span class="keyword">while</span>(p){
+        p = p -&gt; Next;
+        j++; <span class="comment">//当前p指向第j个节点</span>
+    }
+    <span class="keyword">return</span> j;
+}
+</code></pre><p>时间性能为O(n)</p>
+<p><strong> 2.查找 </strong><br>(1)按序号查找：FindKth</p>
+<pre><code><span class="keyword">List</span> *FindKth( <span class="keyword">int</span> K, <span class="keyword">List</span> *PtrL){
+    <span class="keyword">List</span> *p = PtrL;
+    <span class="keyword">int</span> i = <span class="number">1</span>;
+    <span class="keyword">while</span>( p != <span class="keyword">NULL</span> &amp;&amp; i &lt; K){
+        p = p -&gt; Next;
+        i++;
+    }
+
+    <span class="keyword">if</span>( i == k){
+        <span class="keyword">return</span> p;<span class="comment">//找到第k个，返回指针</span>
+    }<span class="keyword">else</span>{
+        <span class="keyword">return</span> <span class="keyword">NULL</span>;
+    }
+}
+</code></pre><p>(2)按值查找：Find</p>
+<pre><code><span class="built_in">List</span> *Find(ElementType X, <span class="built_in">List</span> *PtrL){
+    <span class="built_in">List</span> *p = PtrL;
+    <span class="keyword">while</span>(p != <span class="built_in">NULL</span> <span class="subst">&amp;&amp;</span> p <span class="subst">-&gt; </span><span class="built_in">Data</span> != X){
+        p = p <span class="subst">-&gt; </span>Next;
+    }
+    <span class="keyword">return</span> p;
+}
+</code></pre><p>平均时间性能为O(n)</p>
+<p>** 3.插入（在低 i-1( 1&lt;=i&lt;=n+1)个结点后插入一个值为X的新结点）</p>
+<ul>
+<li>1.先构造一个新结点，用s指向；</li>
+<li>2.再找到链表的第i-1个结点，用p指向；</li>
+<li>3.然后修改指针，插入结点（p之后插入新结点是s）</li>
+<li><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/31a5daa88866f66dc765befe747b7c30616630dc/2015111/%E9%93%BE%E8%A1%A8%E6%8F%92%E5%85%A5.PNG" alt="链表插入"> </li>
+</ul>
+<pre><code><span class="built_in">List</span> *Insert(ElementType X, int i, <span class="built_in">List</span> *PtrL){
+    <span class="built_in">List</span> *p, *s;
+    <span class="keyword">if</span>(i == <span class="number">1</span>){
+        <span class="comment">//新结点插入在表头</span>
+        s = (<span class="built_in">List</span> *)malloc(sizeof(<span class="built_in">List</span>));<span class="comment">//申请空间，填装结点</span>
+        s <span class="subst">-&gt; </span><span class="built_in">Data</span> = X;
+        s <span class="subst">-&gt; </span>Next = PtrL;
+        <span class="keyword">return</span> s;<span class="comment">//返回新表头指针</span>
+    }
+
+    p = FindKth(i -<span class="number">1</span>, PtrL);<span class="comment">//查找第i-1个结点</span>
+    <span class="keyword">if</span>(p == <span class="built_in">NULL</span>){
+        printf(<span class="string">"第i-1个不存在，不能插入"</span>);
+        <span class="keyword">return</span> <span class="built_in">NULL</span>;
+    }<span class="keyword">else</span>{
+        s = (<span class="built_in">List</span> *)malloc(sizeof(<span class="built_in">List</span>));<span class="comment">//申请空间，填装结点</span>
+        s <span class="subst">-&gt; </span><span class="built_in">Data</span> = X;
+        s <span class="subst">-&gt; </span>Next = p <span class="subst">-&gt; </span>Next;<span class="comment">//新结点插入在第i-1个结点后边</span>
+        p <span class="subst">-&gt; </span>Next = s;
+        <span class="keyword">return</span> PtrL;
+    }
+}
+</code></pre><p>** 4.删除（删除链表的第i( 1&lt;=i&lt;=n)个位置上的结点）</p>
+<ul>
+<li>1.先找到链表的第i-1个结点，用p指向；</li>
+<li>2.再用指针s指向要被删除的结点（p的下一个结点）</li>
+<li>3.然后修改指针，删除s所指向的结点 </li>
+<li>4.最后释放s所指结点的空间<br><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/0b7f552537b3d0d6bd4a7c7c4618a495c907b63c/2015111/%E9%93%BE%E8%A1%A8%E5%88%A0%E9%99%A4.PNG" alt="链表删除"></li>
+</ul>
+<pre><code><span class="function">List *<span class="title">Delete</span><span class="params">(<span class="keyword">int</span> i, List *PtrL)</span></span>{
+    List *p, *s;
+    <span class="keyword">if</span>(i == <span class="number">1</span>){
+        <span class="comment">//删除表的第一个结点</span>
+        s = PtrL;<span class="comment">//s指向第1个结点</span>
+        <span class="keyword">if</span>(PtrL != <span class="literal">NULL</span>){
+            PtrL = PtrL -&gt; Next;
+        }<span class="keyword">else</span>{
+            <span class="keyword">return</span> <span class="literal">NULL</span>;
+        }
+        <span class="built_in">free</span>(s);
+        <span class="keyword">return</span> PtrL;
+    }
+
+    p = FindKth(i - <span class="number">1</span>, PtrL);<span class="comment">//查找第i-1个结点</span>
+    <span class="keyword">if</span>(p == <span class="literal">NULL</span>){
+        <span class="built_in">printf</span>(<span class="string">"第%d个结点不存在"</span>, i - <span class="number">1</span>);
+        <span class="keyword">return</span> <span class="literal">NULL</span>;
+    }<span class="keyword">else</span> <span class="keyword">if</span>(p -&gt; Next == <span class="literal">NULL</span>){
+        <span class="built_in">printf</span>(<span class="string">"第%d个结点不存在"</span>, i);
+        <span class="keyword">return</span> <span class="literal">NULL</span>;
+    }<span class="keyword">else</span>{
+        s = p -&gt; Next;<span class="comment">//s指向第i个结点</span>
+        p -&gt; Next = s -&gt; Next;<span class="comment">//从链表删除</span>
+        <span class="built_in">free</span>(s);<span class="comment">//释放被删除的结点</span>
+        <span class="keyword">return</span> <span class="literal">NULL</span>;
+    }
+}
+</code></pre><p>平均查找次数是n/2<br>平均时间性能是O(n)</p>
+<h4 id="广义表">广义表</h4><p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/d9fa830fe28e07674fbefc8471ce35632e049d6b/2015111/%E5%B9%BF%E4%B9%89%E8%A1%A8.PNG" alt="广义表"></p>
+<p><strong> 广义表： </strong></p>
+<ul>
+<li>是线性表的推广</li>
+<li>对于线性表，n个元素都是基本的单元素</li>
+<li>广义表中，这些元素不仅可以是单元素也可以是另一个广义表</li>
+</ul>
+<pre><code>typedef <span class="class"><span class="keyword">struct</span> <span class="title">GNode</span>{</span>
+    int <span class="constant">Tag</span>;<span class="regexp">//</span>标志域：<span class="number">0</span>表示结点是单元素，<span class="number">1</span>表示结点是广义表
+    <span class="class"><span class="keyword">union</span>{</span>
+        /<span class="regexp">/子表指针域Sublist与单元素数据域Data复用，即共用存储空间
+        ElementType Data;
+        struct GNode *SubList;
+    }URegion;
+    struct GNode *Next;/</span><span class="regexp">/指向后继结点
+}GList;</span>
+</code></pre><p>通过Tag来确认数据是Data还是SubList</p>
+<p><strong> 多重链表 </strong><br>多重链表：链表中的节点可能同时隶属于多个链</p>
+<ul>
+<li>多重链表中结点的指针域会有多个，如前面例子包含了Next和SubList两个指针域</li>
+<li>但包含两个指针域的链表并不一定是多重链表，比如在双向链表不是多重链表</li>
+</ul>
+<p><strong> 多重链表的用途 </strong><br>树、图 这样相对复杂的数据结构都可以采用多重链表的方式存储</p>
+<p><strong> 多重链表表示稀疏矩阵 </strong><br><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/9f84e90dfb17d2d28890f98e260c3943cb0c51ed/2015111/%E7%9F%A9%E9%98%B5.PNG" alt="矩阵"></p>
+<p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/9f84e90dfb17d2d28890f98e260c3943cb0c51ed/2015111/%E5%8D%81%E5%AD%97%E9%93%BE%E8%A1%A8.PNG" alt="十字链表"></p>
+<p>Head是行或列的头结点<br><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/9f84e90dfb17d2d28890f98e260c3943cb0c51ed/2015111/%E5%85%A5%E5%8F%A3%E7%BB%93%E7%82%B9.PNG" alt="入口结点"><br>Term是稀疏矩阵的非零项<br>左上角的Term结点，是入口结点，表示有4行5列，7个非零项</p>
+<p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/9f84e90dfb17d2d28890f98e260c3943cb0c51ed/2015111/union%E6%95%B4%E5%90%88term_head.PNG" alt="Union整合Term和Head"></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构/">数据结构</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
     <article id="post-数据结构1 基本概念——1-3最大子列和问题" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
