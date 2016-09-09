@@ -1,11 +1,15 @@
-<!DOCTYPE html>
-<html>
+
+ <!DOCTYPE HTML>
+<html >
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
   
-  <title>数据结构2 线性结构——2-1 线性表及其实现  | Hexo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="2.1.1多项式的表示
+    <title>数据结构2 线性结构——2-1 线性表及其实现  | Hexo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="Jie Qiong">
+    
+    <meta name="description" content="2.1.1多项式的表示
 方法1：顺序存储结构直接表示x+3x^2000,需要2001项，只有2项非零，造成极大浪费。
 方法2：顺序存储结构表示非零项按 指数大小 有序存储
 方法3：链表结构存储非零项
@@ -13,275 +17,83 @@
 多项式表示问题的启示：
 
 1.同一个问题可以有不同的表示（存储）方式
-2.有一类共性问题：有序线性序列的组织和管理
-
-
-线性表：由同类型数据元素构成有序序列的线性结构
-
-长度：表中元素个">
-<meta property="og:type" content="article">
-<meta property="og:title" content="数据结构2 线性结构——2-1 线性表及其实现 ">
-<meta property="og:url" content="http://yoursite.com/2015/11/16/数据结构2-线性结构——2-1-线性表及其实现/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="2.1.1多项式的表示
-方法1：顺序存储结构直接表示x+3x^2000,需要2001项，只有2项非零，造成极大浪费。
-方法2：顺序存储结构表示非零项按 指数大小 有序存储
-方法3：链表结构存储非零项
-什么是线性表
-多项式表示问题的启示：
-
-1.同一个问题可以有不同的表示（存储）方式
-2.有一类共性问题：有序线性序列的组织和管理
-
-
-线性表：由同类型数据元素构成有序序列的线性结构
-
-长度：表中元素个">
-<meta property="og:image" content="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/1c2f096c03766550961019c7f3be6e9c9a198c1e/2015111/%E5%A4%9A%E9%A1%B9%E5%BC%8F%E7%9A%84%E8%A1%A8%E7%A4%BA.PNG">
-<meta property="og:image" content="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/0996938c807601aad044797fb63b9a48c37e2e29/2015111/%E9%A1%BA%E5%BA%8F%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84%E7%9B%B4%E6%8E%A5%E8%A1%A8%E7%A4%BA.PNG">
-<meta property="og:image" content="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/b626e3693e6a58ad4019b4b8e16b7f5988842523/2015111/%E9%A1%BA%E5%BA%8F%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84%E8%A1%A8%E7%A4%BA%E9%9D%9E%E9%9B%B6%E9%A1%B9.PNG">
-<meta property="og:image" content="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/f884bc9330b731b93103338be1f6fcd854a115d7/2015111/%E9%9D%9E%E9%9B%B6%E9%A1%B9%E7%9B%B8%E5%8A%A0%E8%BF%87%E7%A8%8B.PNG">
-<meta property="og:image" content="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/cc0cc93d09bd014817018dd8579535f4dccc7451/2015111/%E9%93%BE%E8%A1%A8%E7%BB%93%E6%9E%84%E5%AD%98%E5%82%A8%E9%9D%9E%E9%9B%B6%E9%A1%B9.PNG">
-<meta property="og:image" content="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/9de69a0f97c39a1666f7b1f7e0ab4e2a9706547e/2015111/%E7%BA%BF%E6%80%A7%E8%A1%A8%E7%9A%84%E6%8A%BD%E8%B1%A1%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E6%8F%8F%E8%BF%B0.PNG">
-<meta property="og:image" content="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/76a97e03faa9953d0d2ffef0d2ea3a4f721d3212/2015111/%E7%BA%BF%E6%80%A7%E8%A1%A8%E7%9A%84%E9%A1%BA%E5%BA%8F%E5%AD%98%E5%82%A8%E5%AE%9E%E7%8E%B0.PNG">
-<meta property="og:image" content="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/31a5daa88866f66dc765befe747b7c30616630dc/2015111/%E9%93%BE%E8%A1%A8%E6%8F%92%E5%85%A5.PNG">
-<meta property="og:image" content="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/0b7f552537b3d0d6bd4a7c7c4618a495c907b63c/2015111/%E9%93%BE%E8%A1%A8%E5%88%A0%E9%99%A4.PNG">
-<meta property="og:image" content="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/d9fa830fe28e07674fbefc8471ce35632e049d6b/2015111/%E5%B9%BF%E4%B9%89%E8%A1%A8.PNG">
-<meta property="og:image" content="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/9f84e90dfb17d2d28890f98e260c3943cb0c51ed/2015111/%E7%9F%A9%E9%98%B5.PNG">
-<meta property="og:image" content="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/9f84e90dfb17d2d28890f98e260c3943cb0c51ed/2015111/%E5%8D%81%E5%AD%97%E9%93%BE%E8%A1%A8.PNG">
-<meta property="og:image" content="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/9f84e90dfb17d2d28890f98e260c3943cb0c51ed/2015111/%E5%85%A5%E5%8F%A3%E7%BB%93%E7%82%B9.PNG">
-<meta property="og:image" content="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/9f84e90dfb17d2d28890f98e260c3943cb0c51ed/2015111/union%E6%95%B4%E5%90%88term_head.PNG">
-<meta property="og:updated_time" content="2015-12-03T04:47:39.529Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="数据结构2 线性结构——2-1 线性表及其实现 ">
-<meta name="twitter:description" content="2.1.1多项式的表示
-方法1：顺序存储结构直接表示x+3x^2000,需要2001项，只有2项非零，造成极大浪费。
-方法2：顺序存储结构表示非零项按 指数大小 有序存储
-方法3：链表结构存储非零项
-什么是线性表
-多项式表示问题的启示：
-
-1.同一个问题可以有不同的表示（存储）方式
-2.有一类共性问题：有序线性序列的组织和管理
-
-
-线性表：由同类型数据元素构成有序序列的线性结构
-
-长度：表中元素个">
-  
-    <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
-  <link rel="stylesheet" href="/css/style.css" type="text/css">
+2.有一类共性问">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
 </head>
-<body>
-  <div id="container">
-    <div class="left-col">
-    <div class="overlay"></div>
-<div class="intrude-less">
-	<header id="header" class="inner">
-		<a href="/" class="profilepic">
-			
-			<img lazy-src="null" class="js-avatar">
-			
-		</a>
 
-		<hgroup>
-		  <h1 class="header-author"><a href="/">John Doe</a></h1>
-		</hgroup>
-
+  <body>
+    <header>
+      <div>
 		
-
-		
-			<div class="switch-btn">
-				<div class="icon">
-					<div class="icon-ctn">
-						<div class="icon-wrap icon-house" data-idx="0">
-							<div class="birdhouse"></div>
-							<div class="birdhouse_holes"></div>
-						</div>
-						<div class="icon-wrap icon-ribbon hide" data-idx="1">
-							<div class="ribbon"></div>
-						</div>
-						
-						<div class="icon-wrap icon-link hide" data-idx="2">
-							<div class="loopback_l"></div>
-							<div class="loopback_r"></div>
-						</div>
-						
-						
-						<div class="icon-wrap icon-me hide" data-idx="3">
-							<div class="user"></div>
-							<div class="shoulder"></div>
-						</div>
-						
-					</div>
-					
-				</div>
-				<div class="tips-box hide">
-					<div class="tips-arrow"></div>
-					<ul class="tips-inner">
-						<li>菜单</li>
-						<li>标签</li>
-						
-						<li>友情链接</li>
-						
-						
-						<li>关于我</li>
-						
-					</ul>
-				</div>
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="Hexo" title="Hexo"/></a>
 			</div>
-		
-
-		<div class="switch-area">
-			<div class="switch-wrap">
-				<section class="switch-part switch-part1">
-					<nav class="header-menu">
-						<ul>
-						
-							<li><a href="/">主页</a></li>
-				        
-							<li><a href="/archives">所有文章</a></li>
-				        
-						</ul>
-					</nav>
-					<nav class="header-nav">
-						<div class="social">
-							
-								<a class="github" target="_blank" href="/#" title="github">github</a>
-					        
-								<a class="weibo" target="_blank" href="/#" title="weibo">weibo</a>
-					        
-								<a class="rss" target="_blank" href="/#" title="rss">rss</a>
-					        
-								<a class="zhihu" target="_blank" href="/#" title="zhihu">zhihu</a>
-					        
-						</div>
-					</nav>
-				</section>
-				
-				
-				<section class="switch-part switch-part2">
-					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/framework/" style="font-size: 10px;">framework</a> <a href="/tags/数据结构/" style="font-size: 20px;">数据结构</a>
-					</div>
-				</section>
-				
-				
-				
-				<section class="switch-part switch-part3">
-					<div id="js-friends">
-					
-			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">奥巴马的博客</a>
-			        
-			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">卡卡的美丽传说</a>
-			        
-			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">本泽马的博客</a>
-			        
-			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">吉格斯的博客</a>
-			        
-			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">习大大大不同</a>
-			        
-			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">托蒂的博客</a>
-			        
-			        </div>
-				</section>
-				
-
-				
-				
-				<section class="switch-part switch-part4">
-				
-					<div id="js-aboutme">FloraJieQiong</div>
-				</section>
-				
-			</div>
-		</div>
-	</header>				
-</div>
-    </div>
-    <div class="mid-col">
-      <nav id="mobile-nav">
-  	<div class="overlay">
-  		<div class="slider-trigger"></div>
-  		<h1 class="header-author js-mobile-header hide">John Doe</h1>
-  	</div>
-	<div class="intrude-less">
-		<header id="header" class="inner">
-			<div class="profilepic">
-				<img lazy-src="null" class="js-avatar">
-			</div>
-			<hgroup>
-			  <h1 class="header-author">John Doe</h1>
-			</hgroup>
 			
-			<nav class="header-menu">
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Hexo">Hexo</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
 				<ul>
-				
-					<li><a href="/">主页</a></li>
-		        
-					<li><a href="/archives">所有文章</a></li>
-		        
-		        <div class="clearfix"></div>
-				</ul>
-			</nav>
-			<nav class="header-nav">
-				<div class="social">
 					
-						<a class="github" target="_blank" href="/#" title="github">github</a>
-			        
-						<a class="weibo" target="_blank" href="/#" title="weibo">weibo</a>
-			        
-						<a class="rss" target="_blank" href="/#" title="rss">rss</a>
-			        
-						<a class="zhihu" target="_blank" href="/#" title="zhihu">zhihu</a>
-			        
-				</div>
-			</nav>
-		</header>				
-	</div>
-</nav>
-      <div class="body-wrap"><article id="post-数据结构2-线性结构——2-1-线性表及其实现" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/11/16/数据结构2-线性结构——2-1-线性表及其实现/" class="article-date">
-  	<time datetime="2015-11-16T11:53:17.000Z" itemprop="datePublished">2015-11-16</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      数据结构2 线性结构——2-1 线性表及其实现 
-    </h1>
-  
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
 
-      </header>
-      
-      <div class="article-info article-info-post">
-        
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构/">数据结构</a></li></ul>
-	</div>
-
-        
-
-        <div class="clearfix"></div>
-      </div>
-      
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
     
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="2-1-1">2.1.1</h3><h3 id="多项式的表示">多项式的表示</h3><p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/1c2f096c03766550961019c7f3be6e9c9a198c1e/2015111/%E5%A4%9A%E9%A1%B9%E5%BC%8F%E7%9A%84%E8%A1%A8%E7%A4%BA.PNG" alt="多项式的表示"></p>
+      <a href="/2015/11/16/数据结构2-线性结构——2-1-线性表及其实现/" title="数据结构2 线性结构——2-1 线性表及其实现 " itemprop="url">数据结构2 线性结构——2-1 线性表及其实现 </a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://yoursite.com" title="Jie Qiong">Jie Qiong</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2015-11-16T11:53:17.000Z" itemprop="datePublished">2015-11-16</time>
+    Updated:<time datetime="2015-12-03T04:47:39.529Z" itemprop="dateModified">2015-12-03</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-1"><span class="toc-number">1.</span> <span class="toc-text">2.1.1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多项式的表示"><span class="toc-number">2.</span> <span class="toc-text">多项式的表示</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#方法1：顺序存储结构直接表示"><span class="toc-number">2.1.</span> <span class="toc-text">方法1：顺序存储结构直接表示</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#方法2：顺序存储结构表示非零项"><span class="toc-number">2.2.</span> <span class="toc-text">方法2：顺序存储结构表示非零项</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#方法3：链表结构存储非零项"><span class="toc-number">2.3.</span> <span class="toc-text">方法3：链表结构存储非零项</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是线性表"><span class="toc-number">3.</span> <span class="toc-text">什么是线性表</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#线性表的抽象数据类型描述"><span class="toc-number">3.1.</span> <span class="toc-text">线性表的抽象数据类型描述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#线性表的顺序存储实现"><span class="toc-number">3.2.</span> <span class="toc-text">线性表的顺序存储实现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#主要操作的实现"><span class="toc-number">3.3.</span> <span class="toc-text">主要操作的实现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#线性表的链式存储实现"><span class="toc-number">3.4.</span> <span class="toc-text">线性表的链式存储实现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#主要操作的实现-1"><span class="toc-number">3.5.</span> <span class="toc-text">主要操作的实现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#广义表"><span class="toc-number">3.6.</span> <span class="toc-text">广义表</span></a></li></ol></li></ol>
+		</div>
+		
+		<h3 id="2-1-1">2.1.1</h3><h3 id="多项式的表示">多项式的表示</h3><p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/1c2f096c03766550961019c7f3be6e9c9a198c1e/2015111/%E5%A4%9A%E9%A1%B9%E5%BC%8F%E7%9A%84%E8%A1%A8%E7%A4%BA.PNG" alt="多项式的表示"></p>
 <h4 id="方法1：顺序存储结构直接表示">方法1：顺序存储结构直接表示</h4><p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/0996938c807601aad044797fb63b9a48c37e2e29/2015111/%E9%A1%BA%E5%BA%8F%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84%E7%9B%B4%E6%8E%A5%E8%A1%A8%E7%A4%BA.PNG" alt="顺序存储结构直接表示"><br>x+3x^2000,需要2001项，只有2项非零，造成极大浪费。</p>
 <h4 id="方法2：顺序存储结构表示非零项">方法2：顺序存储结构表示非零项</h4><p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/b626e3693e6a58ad4019b4b8e16b7f5988842523/2015111/%E9%A1%BA%E5%BA%8F%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84%E8%A1%A8%E7%A4%BA%E9%9D%9E%E9%9B%B6%E9%A1%B9.PNG" alt="顺序存储结构表示非零项"><br>按 指数大小 有序存储<br><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/f884bc9330b731b93103338be1f6fcd854a115d7/2015111/%E9%9D%9E%E9%9B%B6%E9%A1%B9%E7%9B%B8%E5%8A%A0%E8%BF%87%E7%A8%8B.PNG" alt="相加过程"></p>
 <h4 id="方法3：链表结构存储非零项">方法3：链表结构存储非零项</h4><p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/cc0cc93d09bd014817018dd8579535f4dccc7451/2015111/%E9%93%BE%E8%A1%A8%E7%BB%93%E6%9E%84%E5%AD%98%E5%82%A8%E9%9D%9E%E9%9B%B6%E9%A1%B9.PNG" alt="链表结构存储非零项"></p>
@@ -490,135 +302,220 @@ List L, *PtrL;
 <p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/9f84e90dfb17d2d28890f98e260c3943cb0c51ed/2015111/%E5%8D%81%E5%AD%97%E9%93%BE%E8%A1%A8.PNG" alt="十字链表"></p>
 <p>Head是行或列的头结点<br><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/9f84e90dfb17d2d28890f98e260c3943cb0c51ed/2015111/%E5%85%A5%E5%8F%A3%E7%BB%93%E7%82%B9.PNG" alt="入口结点"><br>Term是稀疏矩阵的非零项<br>左上角的Term结点，是入口结点，表示有4行5列，7个非零项</p>
 <p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/9f84e90dfb17d2d28890f98e260c3943cb0c51ed/2015111/union%E6%95%B4%E5%90%88term_head.PNG" alt="Union整合Term和Head"></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
 
-      
-    </div>
-    
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/数据结构/">数据结构</a>
   </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2015/11/19/数据结构2-线性结构——2-2-堆栈/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          数据结构2-线性结构——2-2-堆栈
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2015/11/16/数据结构1 基本概念——1-3最大子列和问题/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">数据结构1 基本概念——1-3最大子列和问题</div>
-      <strong class="article-nav-caption">></strong>
-    </a>
-  
+
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://yoursite.com/2015/11/16/数据结构2-线性结构——2-1-线性表及其实现/" data-title="数据结构2 线性结构——2-1 线性表及其实现  | Hexo" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2015/11/19/数据结构2-线性结构——2-2-堆栈/" title="数据结构2-线性结构——2-2-堆栈">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  数据结构2-线性结构——2-2-堆栈</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2015/11/16/数据结构1 基本概念——1-3最大子列和问题/"  title="数据结构1 基本概念——1-3最大子列和问题">
+ <strong>NEXT:</strong><br/> 
+ <span>数据结构1 基本概念——1-3最大子列和问题
+</span>
+</a>
+</div>
+
 </nav>
 
+	
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-1"><span class="toc-number">1.</span> <span class="toc-text">2.1.1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多项式的表示"><span class="toc-number">2.</span> <span class="toc-text">多项式的表示</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#方法1：顺序存储结构直接表示"><span class="toc-number">2.1.</span> <span class="toc-text">方法1：顺序存储结构直接表示</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#方法2：顺序存储结构表示非零项"><span class="toc-number">2.2.</span> <span class="toc-text">方法2：顺序存储结构表示非零项</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#方法3：链表结构存储非零项"><span class="toc-number">2.3.</span> <span class="toc-text">方法3：链表结构存储非零项</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是线性表"><span class="toc-number">3.</span> <span class="toc-text">什么是线性表</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#线性表的抽象数据类型描述"><span class="toc-number">3.1.</span> <span class="toc-text">线性表的抽象数据类型描述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#线性表的顺序存储实现"><span class="toc-number">3.2.</span> <span class="toc-text">线性表的顺序存储实现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#主要操作的实现"><span class="toc-number">3.3.</span> <span class="toc-text">主要操作的实现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#线性表的链式存储实现"><span class="toc-number">3.4.</span> <span class="toc-text">线性表的链式存储实现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#主要操作的实现-1"><span class="toc-number">3.5.</span> <span class="toc-text">主要操作的实现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#广义表"><span class="toc-number">3.6.</span> <span class="toc-text">广义表</span></a></li></ol></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
   
-</article>
+
+  
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/SELinux/" title="SELinux">SELinux<sup>1</sup></a></li>
+		
+			<li><a href="/tags/framework/" title="framework">framework<sup>1</sup></a></li>
+		
+			<li><a href="/tags/数据结构/" title="数据结构">数据结构<sup>13</sup></a></li>
+		
+		</ul>
+</div>
 
 
-<div class="share">
-	<!-- JiaThis Button BEGIN -->
-	<div class="jiathis_style">
-		<span class="jiathis_txt">分享到：</span>
-		<a class="jiathis_button_tsina"></a>
-		<a class="jiathis_button_cqq"></a>
-		<a class="jiathis_button_douban"></a>
-		<a class="jiathis_button_weixin"></a>
-		<a class="jiathis_button_tumblr"></a>
-		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+  <div class="rsspart">
+	<a href="null" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
 	</div>
-	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
-	<!-- JiaThis Button END -->
+	
+	
+	<div class="social-font clearfix">
+		
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2016 
+		
+		<a href="http://yoursite.com" target="_blank" title="Jie Qiong">Jie Qiong</a>
+		
+		</p>
 </div>
-
-
-
-<div class="duoshuo">
-	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="数据结构2-线性结构——2-1-线性表及其实现" data-title="数据结构2 线性结构——2-1 线性表及其实现 " data-url="http://yoursite.com/2015/11/16/数据结构2-线性结构——2-1-线性表及其实现/"></div>
-	<!-- 多说评论框 end -->
-	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-	<script type="text/javascript">
-	var duoshuoQuery = {short_name:"true"};
-	(function() {
-		var ds = document.createElement('script');
-		ds.type = 'text/javascript';ds.async = true;
-		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-		ds.charset = 'UTF-8';
-		(document.getElementsByTagName('head')[0] 
-		 || document.getElementsByTagName('body')[0]).appendChild(ds);
-	})();
-	</script>
-	<!-- 多说公共JS代码 end -->
-</div>
-
-
-
-
-</div>
-      <footer id="footer">
-  <div class="outer">
-    <div id="footer-info">
-    	<div class="footer-left">
-    		&copy; 2015 John Doe
-    	</div>
-      	<div class="footer-right">
-      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
-      	</div>
-    </div>
-  </div>
 </footer>
-    </div>
-    
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
-
-
-<script>
-	var yiliaConfig = {
-		fancybox: true,
-		mathjax: true,
-		animate: true,
-		isHome: false,
-		isPost: true,
-		isArchive: false,
-		isTag: false,
-		isCategory: false,
-		open_in_new: false
-	}
-</script>
-<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
-<script src="/js/main.js" type="text/javascript"></script>
-
-
-
-
-
-
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-    tex2jax: {
-        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-        processEscapes: true,
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
     }
-});
-
-MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-        all[i].SourceElement().parentNode.className += ' has-jax';                 
-    }       
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
 });
 </script>
 
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
 </script>
 
 
-  </div>
-</body>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+  </body>
 </html>

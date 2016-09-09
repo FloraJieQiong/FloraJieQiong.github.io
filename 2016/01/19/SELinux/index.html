@@ -1,0 +1,792 @@
+
+ <!DOCTYPE HTML>
+<html >
+<head>
+  <meta charset="UTF-8">
+  
+    <title>SELinux | Hexo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="Jie Qiong">
+    
+    <meta name="description" content="参考：http://blog.csdn.net/innost/article/details/19641487
+一、SELinux背景知识1.DAC与MAC1.1 简介
+DAC（Discretionary Access Control）：自主访问控制。进程权限与 执行它的用户权限相同。root用户启">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="Hexo" title="Hexo"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Hexo">Hexo</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/01/19/SELinux/" title="SELinux" itemprop="url">SELinux</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://yoursite.com" title="Jie Qiong">Jie Qiong</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2016-01-19T06:34:19.000Z" itemprop="datePublished">2016-01-19</time>
+    Updated:<time datetime="2016-01-21T06:14:26.619Z" itemprop="dateModified">2016-01-21</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一、SELinux背景知识"><span class="toc-number">1.</span> <span class="toc-text">一、SELinux背景知识</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-DAC与MAC"><span class="toc-number">1.1.</span> <span class="toc-text">1.DAC与MAC</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1_简介"><span class="toc-number">1.2.</span> <span class="toc-text">1.1 简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-SELinux_Policy语言介绍"><span class="toc-number">1.3.</span> <span class="toc-text">1.2.SELinux Policy语言介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#进程的SContext，可通过命令：ps_-Z_查看。"><span class="toc-number">1.3.1.</span> <span class="toc-text">进程的SContext，可通过命令：ps -Z 查看。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#文件的SContext，可通过命令：ls_-Z_查看。"><span class="toc-number">1.3.2.</span> <span class="toc-text">文件的SContext，可通过命令：ls -Z 查看。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#总结："><span class="toc-number">1.3.3.</span> <span class="toc-text">总结：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1_TE介绍"><span class="toc-number">1.4.</span> <span class="toc-text">2.1 TE介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#neverallow的作用："><span class="toc-number">1.4.1.</span> <span class="toc-text">neverallow的作用：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-1_Object_Class和Perm_Set"><span class="toc-number">1.5.</span> <span class="toc-text">2.1.1 Object Class和Perm Set</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Object_Class"><span class="toc-number">1.5.1.</span> <span class="toc-text">Object Class</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Perm_Set"><span class="toc-number">1.5.2.</span> <span class="toc-text">Perm Set</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-2_type,_attribute_和_rule_name等"><span class="toc-number">1.6.</span> <span class="toc-text">2.1.2 type, attribute 和 rule_name等</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#使用attribute有什么好处？"><span class="toc-number">1.6.1.</span> <span class="toc-text">使用attribute有什么好处？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#rule_name"><span class="toc-number">1.6.2.</span> <span class="toc-text">rule_name</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-3_RBAC和constrain"><span class="toc-number">1.7.</span> <span class="toc-text">2.1.3 RBAC和constrain</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Role定义"><span class="toc-number">1.7.1.</span> <span class="toc-text">Role定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#user定义"><span class="toc-number">1.7.2.</span> <span class="toc-text">user定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Roles_和_Users中有什么样的权限控制呢？"><span class="toc-number">1.7.3.</span> <span class="toc-text">Roles 和 Users中有什么样的权限控制呢？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#expression包含的关键词如下："><span class="toc-number">1.7.4.</span> <span class="toc-text">expression包含的关键词如下：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#constrain补充知识点："><span class="toc-number">1.7.5.</span> <span class="toc-text">constrain补充知识点：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RBAC和constrain到底想要干什么"><span class="toc-number">1.7.6.</span> <span class="toc-text">RBAC和constrain到底想要干什么</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2_Labeling介绍"><span class="toc-number">1.8.</span> <span class="toc-text">2.2 Labeling介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-1_sid和sid_context"><span class="toc-number">1.9.</span> <span class="toc-text">2.2.1 sid和sid_context</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#initial_sids_和_initial_sid_context:"><span class="toc-number">1.9.1.</span> <span class="toc-text">initial_sids 和 initial_sid_context:</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-2_Domain/Type_Transition_和宏"><span class="toc-number">1.10.</span> <span class="toc-text">2.2.2 Domain/Type Transition 和宏</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#为什么需要上述3个权限？"><span class="toc-number">1.10.1.</span> <span class="toc-text">为什么需要上述3个权限？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#针对死的东西打标签"><span class="toc-number">1.10.2.</span> <span class="toc-text">针对死的东西打标签</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-3_File/File_System_打_label"><span class="toc-number">1.11.</span> <span class="toc-text">2.2.3 File/File System 打 label</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-4_给_网络数据包/端口_打标签"><span class="toc-number">1.12.</span> <span class="toc-text">2.2.4 给 网络数据包/端口 打标签</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3_Security_Level_和_MLS"><span class="toc-number">1.13.</span> <span class="toc-text">2.3 Security Level 和 MLS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-1_Security_Level"><span class="toc-number">1.14.</span> <span class="toc-text">2.3.1 Security Level</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-2_mlsconstrain_和_no_read_down/write_up"><span class="toc-number">1.15.</span> <span class="toc-text">2.3.2 mlsconstrain 和 no read down/write up</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-3_MLS_in_Android"><span class="toc-number">1.16.</span> <span class="toc-text">2.3.3 MLS in Android</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-4_编译安全策略文件"><span class="toc-number">1.17.</span> <span class="toc-text">2.4 编译安全策略文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-5_拓展讨论"><span class="toc-number">1.18.</span> <span class="toc-text">2.5 拓展讨论</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二、SEAndroid源码分析"><span class="toc-number">2.</span> <span class="toc-text">二、SEAndroid源码分析</span></a></li></ol>
+		</div>
+		
+		<p>参考：<a href="http://blog.csdn.net/innost/article/details/19641487" target="_blank" rel="external">http://blog.csdn.net/innost/article/details/19641487</a></p>
+<h1 id="一、SELinux背景知识">一、SELinux背景知识</h1><h2 id="1-DAC与MAC">1.DAC与MAC</h2><h2 id="1-1_简介">1.1 简介</h2><ul>
+<li>DAC（Discretionary Access Control）：自主访问控制。进程权限与 执行它的用户权限相同。root用户启动Browser，Browser就有root权限。</li>
+<li>MAC（Mandatory Access Control）：强制访问机制。进程想在SELinux系统中做事，要先在 安全策略配置文件 中 赋予权限。没有出现在 安全策略配置文件中 的权限，进程就没有该权限。</li>
+</ul>
+<p>【例1】SELinux中权限举例：</p>
+<hr>
+<pre><code><span class="comment">#允许（allow）netd域（domain）中的进程 写（write）类型为proc_net文件</span>
+<span class="comment">#路径:external/sepolicy/netd.te</span>
+allow netd proc_net:<span class="type">file</span> <span class="command">write</span>;
+</code></pre><ul>
+<li>总结：<ul>
+<li>Linux系统先做 DAC权限检查。如果 没有通过DAC，则操作失败；如果 通过DAC检查，再做MAC权限检查；</li>
+<li>SELinux中也有用户的概念，和Linux中 原有的user概念 不是同一个东西。Linux中root在 SELinux中可以 没权限，由SELinux安全策略 制定者决定。</li>
+</ul>
+</li>
+<li>学习目标：<ul>
+<li>看懂现有的安全策略文件；</li>
+<li>编写符合特定需求的 安全策略文件。</li>
+</ul>
+</li>
+</ul>
+<h2 id="1-2-SELinux_Policy语言介绍">1.2.SELinux Policy语言介绍</h2><p>SELinux Policy语言：编写 安全策略文件 的规则。</p>
+<p>Linux中有2中东西：</p>
+<ul>
+<li>死的（Inactive）:文件。万物皆文件</li>
+<li>活的（Active）：进程。能发起动作</li>
+</ul>
+<p>SELinux中，每种东西都被赋予一个 安全属性： Security Context（以后称为SContext）。Security Context是一个字符串。</p>
+<h3 id="进程的SContext，可通过命令：ps_-Z_查看。">进程的SContext，可通过命令：ps -Z 查看。</h3><p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/eb8dc683295707e7a3286ae1952d80d24e97bc42/20160119/ps-Z.PNG" alt="ps -Z"></p>
+<p>左边第一列 是SContext，以init进程的SContext为例，其值为：u:r:init:s0。</p>
+<ul>
+<li>u：user。SEAndroid中定义了一个SELinux用户，值为u。</li>
+<li>r：role。是SELinux中更方便的 权限管理思路（Role Based Access Control，基于角色的访问控制，RBAC）。一个u可以属于多个role，不同的role具有不同的权限。</li>
+<li>init：该进程所属的 domain 为 init。MAC的基础管理思路是 TEAC（Type Enforcement Access Contr，简称TEAC，一般用TE表示），对于进程，Type就是Domain。init这个domain有什么权限，需要通过allow语句说明。</li>
+<li>s0：与MLS（Multi-Level Security）机制有关。MLS将 系统的 进程和文件 进行分级，不同级别的资源 需要不同级别的进程才能访问。</li>
+</ul>
+<h3 id="文件的SContext，可通过命令：ls_-Z_查看。">文件的SContext，可通过命令：ls -Z 查看。</h3><p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/53648baf809ab1fc2b213b8b9fd85f6bae4914ca/20160119/ls-Z.PNG" alt="ls -Z"></p>
+<p>倒数第二列是 文件和目录的SContext信息，以root目录为例，其信息为：u:object_r:rootfs:s0</p>
+<ul>
+<li>u:user。代表创建这个文件的SELinux user。</li>
+<li>object_r:role。死的东西用object_r表示它的role。</li>
+<li>rootfs:type。root目录对应的Type是rootfs。</li>
+<li>s0：MLS的级别。</li>
+</ul>
+<h3 id="总结：">总结：</h3><p>SContext字符串格式为：<br>user:role:type[:range]<br>s0是range中的一部分，SContext核心是前3个部分：user:role:type</p>
+<p>MAC基本管理单位是TEAC（Type Enforcement Access Control），然后是高一级别的RBAC（Role Based Access Control）。RBAC是基于TE的，TE是SELinux中最主要的部分。</p>
+<h2 id="2-1_TE介绍">2.1 TE介绍</h2><p>【例2】</p>
+<pre><code><span class="comment">#路径:external/sepolicy/netd.te</span>
+allow netd proc_net:<span class="type">file</span> <span class="command">write</span>;
+</code></pre><ul>
+<li>allow：allow语句，表示授权。除了allow，还有auditallow， dontaudit， neverallow等</li>
+<li>netd：source type，也叫subject，domain</li>
+<li>proc_net：target type，代表其后的file对应的type</li>
+<li>file：Object Class。代表能够给subject操作的一类东西。如File，Dir，Socket等。Android中的Binder，在其他Linux中是没有没有这个Object Class的。</li>
+<li>write：该类Object Class中所定义的操作。</li>
+</ul>
+<p><strong> 语句格式： </strong><br>rule_name source_type target_type : class perm_set<br>【例3】</p>
+<pre><code><span class="preprocessor">#路径：/external/sepolicy/zygote.te:</span>
+<span class="preprocessor">#允许 zygote域中的进程 search或getattr 类型为appdomain的目录，多个perm_set可用{}括起来</span>
+allow zygote appdomain:dir { getattr search };
+<span class="preprocessor"># ~表示除了，target_type为一组，除了appdomain  和system_server；</span>
+<span class="preprocessor">#特殊符号：~表示 除了，-表示去除某项，*表示所有内容</span>
+<span class="preprocessor">#neverallow表示 绝对不允许。</span>
+neverallow zygote ~{ appdomain system_server }:process dyntransition;
+
+<span class="preprocessor">#路径：./external/sepolicy/domain.te</span>
+<span class="preprocessor">#source_type属于 domain，但是不属于 kernel，ueventd，init</span>
+<span class="preprocessor"># *表示和所有chr_file 相关的权限</span>
+neverallow { domain -kernel -ueventd -init } kmem_device:chr_file *;
+</code></pre><h3 id="neverallow的作用：">neverallow的作用：</h3><p>权限必须要 显示声明，没有声明的话 默认就是 没有权限。neverallow有存在的必要吗？<br>neverallow的作用：在生成 安全策略文件时 进行检查，判断 是否有违反 neverallow语句的 allow语句。生成 安全策略文件时 监测到冲突：<br><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/82d4f9b82a29918486f60f8a0605c83eda0bb5b7/20160119/neverallow%E4%BD%9C%E7%94%A8.PNG" alt="neverallow作用"></p>
+<h2 id="2-1-1_Object_Class和Perm_Set">2.1.1 Object Class和Perm Set</h2><h3 id="Object_Class">Object Class</h3><p>Object Class 很难说清楚定义，常见的Object Class如下：<br>路径：external/sepolicy/security_classes<br><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/b28f6e3f5261cb9a7ce52d28026cf915066e7bc9/20160119/ObjectClass.PNG" alt="Object Class"></p>
+<ul>
+<li>Object Class需要class语句声明，这些声明一般放在security_classes文件中</li>
+<li>这些class与kernel中相关模块 紧密结合。kernel编译时会 根据security_classes文件生成对应的头文件，该文件一般不需要修改。</li>
+</ul>
+<h3 id="Perm_Set">Perm Set</h3><p>路径： external/sepolicy/access_vectors</p>
+<p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/f7160353f03fa3d0dd5d2657fadbeef922ffd7cd/20160119/PermSet.PNG" alt="Perm Set"></p>
+<h2 id="2-1-2_type,_attribute_和_rule_name等">2.1.2 type, attribute 和 rule_name等</h2><p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/38981d83d22823464b00ba9e1ef6e4397b7388d2/20160119/type_attribute.PNG" alt="type attribute"></p>
+<ul>
+<li>type和attribute在同一个命名空间，即不能用type命令 和 attribute命令定义相同名字的东西</li>
+<li>attribute类似type(或domain) group这样的概念。type A与 attribute B关联，就是说 type A属于 group B中的一员</li>
+</ul>
+<h3 id="使用attribute有什么好处？">使用attribute有什么好处？</h3><p>系统会定义很多Type，每个Type用allow语句设置相应的权限，安全策略文件编起来 非常麻烦。<br>有了attribute，可以将Type与某个attribute关联起来，用一个allow语句，将source_type设置为这个attribute：</p>
+<ul>
+<li>这也是 type和attribute在同一个命名空间的原因</li>
+<li>这种做法减轻了TE文件编写者的烦恼，编译 安全策略文件时，会将attribute拓展为其包含的type：<br>【例4】：</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/4f9666cfece8686b1b7b6ed46ac769d46b8829bf/20160119/type%E4%BE%8B%E5%AD%90.PNG" alt="type例子"></p>
+<p>TE的完整格式为：<br>rule_name source_type target_type : class perm_set<br>attribute可以出现在source_type和target_type中</p>
+<p>SEAndroid中定义的attribute都在external/sepolicy/attributes中，如果分不清是type还是attribute，可以查看该文件。</p>
+<h3 id="rule_name">rule_name</h3><ul>
+<li>allow：赋予某项权限</li>
+<li>auditallow：audit就是记录某项操作。默认情况SELinux只记录 权限检查失败的操作。auditallow使得 权限检查成功 的操作 也被记录。auditallowshi允许记录，与 赋予权限没关系。</li>
+<li>dontaudit：对 那些权限检查失败的操作 不做记录。</li>
+<li>neverallow：绝对不允许。用于检查 安全策略文件中 是否有 违反该项规则的allow语句。</li>
+</ul>
+<h2 id="2-1-3_RBAC和constrain">2.1.3 RBAC和constrain</h2><p>绝大多数情况下，SELinux的安全配置策略 需要编写各种xx.te文件， .te文件汇总包含各种 allow，type等语句。这些都是TEAC，是SELinux MAC中的核心组成部分。<br>REAC是一种基于Role的安全策略。</p>
+<h3 id="Role定义">Role定义</h3><p>路径：external/sepolicy/roles</p>
+<pre><code><span class="comment">#Android只定义了一个role，名字是r</span>
+<span class="keyword">role</span> <span class="title">r</span>;
+<span class="comment">#将上边定义的r和 attribute domain关联起来</span>
+<span class="keyword">role</span> <span class="title">r</span> types domain;
+</code></pre><h3 id="user定义">user定义</h3><p>路径：external/sepolicy/users</p>
+<pre><code><span class="preprocessor">#支持MLS的user格式定义为：</span>
+<span class="preprocessor">#user seuser_id roles role_id level mls_level range mls_range;</span>
+<span class="preprocessor">#不支持MLS user定义格式为：</span>
+<span class="preprocessor">#user seuser_id roles role_id;</span>
+<span class="preprocessor">#SEAndroid使用了支持MLS的格式。下面定义的这个user u 将和 role r关联。一个user可以和多个role关联</span>
+<span class="preprocessor">#level之后的是该user具有的 安全级别。s0为最低级，也就是默认的级别；</span>
+<span class="preprocessor">#mls_systemhigh为u所能获得的 最高安全级别（security level）</span>
+user u roles { r } level s0 range s0 - mls_systemhigh;
+</code></pre><h3 id="Roles_和_Users中有什么样的权限控制呢？">Roles 和 Users中有什么样的权限控制呢？</h3><p><strong>1.</strong> 允许从一个role切换到另一个role，SELinux中用transition表达 切换 之意</p>
+<pre><code><span class="preprocessor">#注意，关键字也是allow，但是和 前面TE中的allow 不是一个东西</span>
+<span class="preprocessor">#下面的allow允许 from_role_id 切换到 to_role_id</span>
+allow from_role_id to_role_id;
+</code></pre><p><strong>2.</strong> 角色之间的关系。SELinux中，Role和Role之间的关系 和公司中的管理人员的层级关系类似</p>
+<pre><code><span class="comment">#dominance语句属于deprecated语句，MLS中有新的定义层级相关的语句，此处介绍的是SELinux中的层级关系</span>
+<span class="comment">#下面这句话表示 super_r dominate(统治， dom) sysadm_r 和 secadm_r 两个角色</span>
+<span class="comment">#反过来说，sysadm_r 和 secadm_r bominate by（被统治，domby）super_r</span>
+<span class="comment">#从type 角度看，super_r 将自动继承 sysadm_r 和 secadm_r 所关联的type(或attribute)</span>
+dominance { <span class="keyword">role</span> <span class="title">super_r</span> {<span class="keyword">role</span> <span class="title">sysadm_r</span>; <span class="keyword">role</span> <span class="title">secadm_r</span>; }}
+</code></pre><p><strong>3.</strong>其他内容，SEAndroid没有使用，可参考其它文献。<br>怎么实现基于Role或User的权限控制呢？SELinux提供了一个新的关键词：constrain</p>
+<pre><code>#<span class="keyword">constrain</span>标准格式为：
+#<span class="keyword">constrain</span> object_class_set perm_set <span class="keyword">expression</span>;
+#下面这句话 表示 只有<span class="keyword">source</span>和target的user相同，并且role也相同，才允许 write object_class 为<span class="keyword">file</span>
+<span class="keyword">constrain</span> <span class="keyword">file</span> write (u1 == u2 and r1 == r2);
+</code></pre><h3 id="expression包含的关键词如下：">expression包含的关键词如下：</h3><ul>
+<li>u1,r1,t1:代表source的user，role和type</li>
+<li>u2,r2,t2:代表target的user，role和type</li>
+<li>== 和 !=: ==表示相等或属于，!=表示不等或不属于。 对于u，r，==和!=表示相等或 不等；对于t1 == 或 != 某个attribute时，表示 源type 属于或不属于 这个attribute</li>
+<li>dom，domby，incomp，eq：仅针对role，表示：统治、被统治、没关系 和 相同（和== 一样）</li>
+</ul>
+<h3 id="constrain补充知识点：">constrain补充知识点：</h3><ul>
+<li>SEAndroid中没有使用constrain，而是用了MLS的mlsconstrain</li>
+<li>constrain是对TEAC的加强。<br>TEAC仅针对Type和Domain，没有针对user和role，所以constrain在TEAC基础上，进一步加强了权限控制。<br>实际使用中，SELinux进行权限检查时，先检查TE是否满足条件，然后再检查constrain是否也满足条件。二者都满足，权限才能满足。</li>
+</ul>
+<h3 id="RBAC和constrain到底想要干什么">RBAC和constrain到底想要干什么</h3><p>TE是Type Enforcement，没有user和role什么事，而RBAC则可通过constrain语句来在user和role上再加一些限制。constrain也可以对type进行限制。</p>
+<h2 id="2-2_Labeling介绍">2.2 Labeling介绍</h2><p>SContext最开始是怎么赋给这些 死的 活的 东西的？<br>SELinux中，设置或分配SContext给进程或文件的工作叫 Security Labeling，即 打标签。</p>
+<h2 id="2-2-1_sid和sid_context">2.2.1 sid和sid_context</h2><p>Android系统启动之后，init进程 会将 一个编译完的 安全策略文件 传递给 kernel 以初始化kernel中的 SELinux相关模块（先用Linux Security Module：LSM表示，略有不准，先这样表示），然后LSM根据其中的信息，给相关 Object 打标签。</p>
+<h3 id="initial_sids_和_initial_sid_context:">initial_sids 和 initial_sid_context:</h3><p>保存LSM初始化时 所需信息 及 SContext信息</p>
+<ul>
+<li>initial_sids :<br>路径：external/sepolicy/initial_sids<br>定义了LSM初始化时的相关信息。<br>sid是SELinux中的一个概念，全称是 Security Identifier。<br>sid类似SContext的key值，实际运行时，SELinux会用sid来匹配某个SContext，因为SContext是字符串，一直比较字符串会 严重影响效率。</li>
+<li>initial_sid_contexts<br>路径：external/sepolicy/initial_sid_contexts<br>sid设置最初的SContext信息。</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/68d68ea68ff4f63f2d0b695f1e3c26ea4881c8ce/20160119/initial_sid%20and%20context.PNG" alt="initial_sids 和 initial_sid_context"></p>
+<p>sid的细节需要查看LSM的实现。这两个文件和Kernel紧密相连，一般不用修改。</p>
+<h2 id="2-2-2_Domain/Type_Transition_和宏">2.2.2 Domain/Type Transition 和宏</h2><p>SEAndroid中，init进程的SContext为u:r:init:s0，而init 创建的子进程 的SContext 不可能和 init进程的 SContext一样，否则 根据TE，子进程在MAC层面上 有了和 init一样的权限。<br>这些子进程的SContext 是怎么被打上 和其父进程 不一样的SContext呢？</p>
+<p>SELinux中，上述问题被称为 Domain Transition，即 某个进程的domain 切换到 一个更合适的domain中去。<br>Domain Transition也需要我们在 安全策略文件中 配置，有相关的关键词。</p>
+<p>【例7-1】<br><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/98f92086a4db6e7807ffb0c54d544c81a378ece0/20160119/type_transition.PNG" alt="type_transition"></p>
+<ul>
+<li>当init_t Domain 中的进程 执行 type为 apache_exec_t的可执行文件（fork并execv）时，其class（此处是process）所属的Domain 需要切换到 apache_t域。</li>
+</ul>
+<p>要做DT，需要先fork一个子进程，然后通过execv打开一个新的可执行文件，从而进入这个可执行文件 对应的 活物。</p>
+<ul>
+<li>在type_transition语句中，target_type往往是 那个可执行文件（死物）的type。</li>
+<li>default_type则表示execv执行后，这个活物默认的Domain。</li>
+<li>对DT来说，class一定回事process。</li>
+</ul>
+<p>DT属于Labeling的一部分，打标签也需要相关权限。要真正实施成功这个 DT，还需要下边至少3个allow语句配合：<br>【例7-2】</p>
+<pre><code><span class="preprocessor">#首先，你得让 init_t 域中 的进程 能够执行 type为apache_exec_t的文件</span>
+allow <span class="keyword">init_t</span> <span class="keyword">apache_exec_t</span> : file execute;
+<span class="preprocessor">#然后，告诉SELinux，允许 init_t 做DT切换 以 进入 apache_t域</span>
+allow <span class="keyword">init_t</span> <span class="keyword">apache_t</span> : process transition;
+<span class="preprocessor">#最后，告诉SELinux，切换入口（对应为entrypoint权限）为执行 apache_exec_t 类型的文件</span>
+allow <span class="keyword">apache_t</span> <span class="keyword">apache_exec_t</span> : file entrypoint;
+</code></pre><h3 id="为什么需要上述3个权限？">为什么需要上述3个权限？</h3><p>Kernel中，从fork到execv一共设置了3处Security检查点，所以需要3个权限。</p>
+<p>SELinux支持宏，可以定义 一个宏语句，包含上述4个步骤。<br>SEAndroid中，系统定义的宏全在 external/sepolicy/te_macros中</p>
+<pre><code><span class="comment">#####################################</span>
+<span class="comment"># domain_trans(olddomain, type, newdomain)</span>
+<span class="comment"># Allow a transition from olddomain to newdomain</span>
+<span class="comment"># upon executing a file labeled with type.</span>
+<span class="comment"># This only allows the transition; it does not</span>
+<span class="comment"># cause it to occur automatically - use domain_auto_trans</span>
+<span class="comment"># if that is what you want.</span>
+<span class="comment">#定义 domain_trans宏，$1 $2等 代表宏的第1个，第2个……参数</span>
+define(`domain_trans', `
+<span class="comment"># Old domain may exec the file and transition to the new domain.</span>
+<span class="comment">#SEAndroid在上述 3个最小权限上，添加了自己的一些权限</span>
+allow <span class="variable">$1</span> <span class="variable">$2</span>:file { getattr <span class="literal">open</span> read execute }<span class="comment">;</span>
+allow <span class="variable">$1</span> <span class="variable">$3</span>:process transition<span class="comment">;</span>
+<span class="comment"># New domain is entered by executing the file.</span>
+allow <span class="variable">$3</span> <span class="variable">$2</span>:file { entrypoint <span class="literal">open</span> read execute getattr }<span class="comment">;</span>
+<span class="comment"># New domain can send SIGCHLD to its caller.</span>
+allow <span class="variable">$3</span> <span class="variable">$1</span>:process sigchld<span class="comment">;</span>
+<span class="comment"># Enable AT_SECURE, i.e. libc secure mode.</span>
+dontaudit <span class="variable">$1</span> <span class="variable">$3</span>:process noatsecure<span class="comment">;</span>
+<span class="comment"># XXX dontaudit candidate but requires further study.</span>
+allow <span class="variable">$1</span> <span class="variable">$3</span>:process { siginh rlimitinh }<span class="comment">;</span>
+')
+
+<span class="comment">#####################################</span>
+<span class="comment"># domain_auto_trans(olddomain, type, newdomain)</span>
+<span class="comment"># Automatically transition from olddomain to newdomain</span>
+<span class="comment"># upon executing a file labeled with type.</span>
+<span class="comment"># 例7中，该宏的用法是：domain_auto_trans(init_t, apache_exec_t, apache_t)</span>
+define(`domain_auto_trans', `
+<span class="comment"># Allow the necessary permissions. allow相关权限</span>
+domain_trans(<span class="variable">$1</span>,<span class="variable">$2</span>,<span class="variable">$3</span>)
+<span class="comment"># Make the transition occur by default.设置type_transition</span>
+type_transition <span class="variable">$1</span> <span class="variable">$2</span>:process <span class="variable">$3</span><span class="comment">;</span>
+')
+</code></pre><p>external/sepolicy/init.te中有上述宏的用法:  </p>
+<pre><code><span class="function"><span class="title">domain_auto_trans</span><span class="params">(init, logcat_exec, logd)</span></span>
+</code></pre><h3 id="针对死的东西打标签">针对死的东西打标签</h3><p>除了DT外，还有 针对Type的Transition。<br>假设目录A的SContext为 u:r:dir_a，默认情况下 该目录下 创建的文件 都具有 u:r:dir_a这个SContext。所以也要 针对 死的东西 打标签。</p>
+<p>TT语句也是type_transition。要顺利完成Transition，也要申请权限。直接看 external/sepolicy/te_macros 中 TT所需要的宏的定义：</p>
+<pre><code><span class="comment">#####################################</span>
+<span class="comment"># file_type_trans(domain, dir_type, file_type)</span>
+<span class="comment"># Allow domain to create a file labeled file_type in a</span>
+<span class="comment"># directory labeled dir_type.</span>
+<span class="comment"># This only allows the transition; it does not</span>
+<span class="comment"># cause it to occur automatically - use file_type_auto_trans</span>
+<span class="comment"># if that is what you want.</span>
+<span class="comment">#</span>
+define(`file_type_trans', `
+<span class="comment"># Allow the domain to add entries to the directory.ra_dir_perms是一个宏，在global_macros中定义</span>
+allow <span class="variable">$1</span> <span class="variable">$2</span>:dir ra_dir_perms<span class="comment">;</span>
+<span class="comment"># Allow the domain to create the file.create_file_perms也是一个宏，在global_macros中定义</span>
+allow <span class="variable">$1</span> <span class="variable">$3</span>:notdevfile_class_set create_file_perms<span class="comment">;</span>
+allow <span class="variable">$1</span> <span class="variable">$3</span>:dir create_dir_perms<span class="comment">;</span>
+')
+
+
+<span class="comment">#####################################</span>
+<span class="comment"># file_type_auto_trans(domain, dir_type, file_type)</span>
+<span class="comment"># Automatically label new files with file_type when</span>
+<span class="comment"># they are created by domain in directories labeled dir_type.</span>
+<span class="comment">#该宏的含义是：当domain域中的 进程 在某个 type为 dir_type的目录中 创建文件时，该文件的 SContext应该是 file_type</span>
+define(`file_type_auto_trans', `
+<span class="comment"># Allow the necessary permissions.</span>
+file_type_trans(<span class="variable">$1</span>, <span class="variable">$2</span>, <span class="variable">$3</span>)
+<span class="comment"># Make the transition occur by default.notdevfile_class_set是一个宏</span>
+type_transition <span class="variable">$1</span> <span class="variable">$2</span>:dir <span class="variable">$3</span><span class="comment">;</span>
+type_transition <span class="variable">$1</span> <span class="variable">$2</span>:notdevfile_class_set <span class="variable">$3</span><span class="comment">;</span>
+')
+</code></pre><p>ra_dir_perms是一个宏，在external/sepolicy/global_macros 中定义</p>
+<pre><code><span class="keyword">define</span>(`<span class="title">ra_dir_perms</span><span class="string">', `{ r_dir_perms add_name write }'</span>)
+
+<span class="keyword">define</span>(`<span class="title">create_file_perms</span><span class="string">', `{ create rename setattr unlink rw_file_perms }'</span>)
+
+<span class="keyword">define</span>(`<span class="title">r_dir_perms</span><span class="string">', `{ open getattr read search ioctl }'</span>)
+
+<span class="keyword">define</span>(`<span class="title">rw_dir_perms</span><span class="string">', `{ r_dir_perms w_dir_perms }'</span>)
+
+<span class="keyword">define</span>(`<span class="title">create_dir_perms</span><span class="string">', `{ create reparent rename rmdir setattr rw_dir_perms }'</span>)
+
+<span class="keyword">define</span>(`<span class="title">notdevfile_class_set</span><span class="string">', `{ file lnk_file sock_file fifo_file }'</span>)
+</code></pre><p>【例8】官方文档最小声明：<br><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/e2be936bad7d53915341f56c83d191d6b4ccf643/20160119/tt%E6%9C%80%E5%B0%8F%E5%A3%B0%E6%98%8E.PNG" alt="tt最小声明"></p>
+<h2 id="2-2-3_File/File_System_打_label">2.2.3 File/File System 打 label</h2><p>前面都是Transition，即从一种Type或domain 进入 另一种 type或domain。<br>最初的type是怎么来的呢？<br>SELinux中，与file相关的死东西 还有一些特殊的语句</p>
+<p>external/sepolicy/file_contexts中</p>
+<p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/b0082f9adf058d360bd6a57dac96198a5289e736/20160119/file_context.PNG" alt="file_contexts"></p>
+<p>1.external/sepolicy/fs_use，fs表示file system，fs_use描述了SELinux的labeling信息 在不同文件系统时 的处理方式</p>
+<pre><code>#对于常规的文件系统，<span class="tag">SContext</span>信息 存储在 文件结点（<span class="tag">inode</span>）的属性中，系统可通过 <span class="tag">getattr</span>函数 读取<span class="tag">inode</span>中的 <span class="tag">SContext</span>信息。
+#对于<span class="tag">labeling</span>方式，<span class="tag">SELinux</span>定义了<span class="tag">fs_use_xattr</span> 关键词。这种<span class="tag">SContext</span> 永久性的保存在文件系统中。
+# <span class="tag">Label</span> <span class="tag">inodes</span> <span class="tag">via</span> <span class="tag">getxattr</span>.
+<span class="tag">fs_use_xattr</span> <span class="tag">yaffs2</span> <span class="tag">u</span><span class="pseudo">:object_r</span><span class="pseudo">:labeledfs</span><span class="pseudo">:s0</span>;
+<span class="tag">fs_use_xattr</span> <span class="tag">jffs2</span> <span class="tag">u</span><span class="pseudo">:object_r</span><span class="pseudo">:labeledfs</span><span class="pseudo">:s0</span>;
+<span class="tag">fs_use_xattr</span> <span class="tag">ext2</span> <span class="tag">u</span><span class="pseudo">:object_r</span><span class="pseudo">:labeledfs</span><span class="pseudo">:s0</span>;
+<span class="tag">fs_use_xattr</span> <span class="tag">ext3</span> <span class="tag">u</span><span class="pseudo">:object_r</span><span class="pseudo">:labeledfs</span><span class="pseudo">:s0</span>;
+<span class="tag">fs_use_xattr</span> <span class="tag">ext4</span> <span class="tag">u</span><span class="pseudo">:object_r</span><span class="pseudo">:labeledfs</span><span class="pseudo">:s0</span>;
+<span class="tag">fs_use_xattr</span> <span class="tag">xfs</span> <span class="tag">u</span><span class="pseudo">:object_r</span><span class="pseudo">:labeledfs</span><span class="pseudo">:s0</span>;
+<span class="tag">fs_use_xattr</span> <span class="tag">btrfs</span> <span class="tag">u</span><span class="pseudo">:object_r</span><span class="pseudo">:labeledfs</span><span class="pseudo">:s0</span>;
+<span class="tag">fs_use_xattr</span> <span class="tag">f2fs</span> <span class="tag">u</span><span class="pseudo">:object_r</span><span class="pseudo">:labeledfs</span><span class="pseudo">:s0</span>;
+<span class="tag">fs_use_xattr</span> <span class="tag">squashfs</span> <span class="tag">u</span><span class="pseudo">:object_r</span><span class="pseudo">:labeledfs</span><span class="pseudo">:s0</span>;
+
+#对于虚拟文件系统，即<span class="tag">Linux</span>系统运行过程中创建的<span class="tag">VFS</span>，则使用<span class="tag">fs_use_task</span>关键字描述。
+#目前仅有<span class="tag">pipefs</span> <span class="tag">sockfs</span>两种<span class="tag">VFS</span>格式
+# <span class="tag">Label</span> <span class="tag">inodes</span> <span class="tag">from</span> <span class="tag">task</span> <span class="tag">label</span>.
+<span class="tag">fs_use_task</span> <span class="tag">pipefs</span> <span class="tag">u</span><span class="pseudo">:object_r</span><span class="pseudo">:pipefs</span><span class="pseudo">:s0</span>;
+<span class="tag">fs_use_task</span> <span class="tag">sockfs</span> <span class="tag">u</span><span class="pseudo">:object_r</span><span class="pseudo">:sockfs</span><span class="pseudo">:s0</span>;
+
+<span class="id">#fs_use_trans</span>也是针对 <span class="tag">Virtual</span> <span class="tag">File</span> <span class="tag">System</span>的，这些<span class="tag">VFS</span>是针对<span class="tag">pseudo</span> <span class="tag">terminal</span>和临时对象的。具体<span class="tag">labeling</span>时，会根据 <span class="tag">fs_use_trans</span> 以及 <span class="tag">TT</span>规则来 决定 最终的<span class="tag">SContext</span>。
+# <span class="tag">Label</span> <span class="tag">inodes</span> <span class="tag">from</span> <span class="tag">combination</span> <span class="tag">of</span> <span class="tag">task</span> <span class="tag">label</span> <span class="tag">and</span> <span class="tag">fs</span> <span class="tag">label</span>.
+# <span class="tag">Define</span> <span class="tag">type_transition</span> <span class="tag">rules</span> <span class="tag">if</span> <span class="tag">you</span> <span class="tag">want</span> <span class="tag">per-domain</span> <span class="tag">types</span>.
+<span class="tag">fs_use_trans</span> <span class="tag">devpts</span> <span class="tag">u</span><span class="pseudo">:object_r</span><span class="pseudo">:devpts</span><span class="pseudo">:s0</span>;
+<span class="tag">fs_use_trans</span> <span class="tag">tmpfs</span> <span class="tag">u</span><span class="pseudo">:object_r</span><span class="pseudo">:tmpfs</span><span class="pseudo">:s0</span>;
+<span class="tag">fs_use_trans</span> <span class="tag">devtmpfs</span> <span class="tag">u</span><span class="pseudo">:object_r</span><span class="pseudo">:device</span><span class="pseudo">:s0</span>;
+<span class="tag">fs_use_trans</span> <span class="tag">shm</span> <span class="tag">u</span><span class="pseudo">:object_r</span><span class="pseudo">:shm</span><span class="pseudo">:s0</span>;
+<span class="tag">fs_use_trans</span> <span class="tag">mqueue</span> <span class="tag">u</span><span class="pseudo">:object_r</span><span class="pseudo">:mqueue</span><span class="pseudo">:s0</span>;
+</code></pre><p>以下边例子为例：</p>
+<pre><code><span class="tag">fs_use_trans</span> <span class="tag">devpts</span> <span class="tag">u</span><span class="pseudo">:object_r</span><span class="pseudo">:devpts</span><span class="pseudo">:s0</span>;
+# 假设还有一条<span class="tag">TT</span>语句：
+<span class="tag">type_transition</span> <span class="tag">sysadm_t</span> <span class="tag">devpts</span> : <span class="tag">chr_file</span> <span class="tag">sysadm_devpts_t</span><span class="pseudo">:s0</span>;
+#该语句表示： 当 <span class="tag">sysadm_t</span>的进程 在<span class="tag">type</span>为<span class="tag">devpts</span>下 创建一个<span class="tag">chr_file</span>时，其<span class="tag">SContext</span>是 <span class="tag">sysadm_devpts_t</span><span class="pseudo">:s0</span>。
+#如果没有<span class="tag">TT</span>语句，<span class="tag">SContext</span>是 <span class="tag">u</span><span class="pseudo">:object_r</span><span class="pseudo">:devpts</span><span class="pseudo">:s0</span>
+#这里的对象不是目录，是<span class="tag">FileSystem</span>
+</code></pre><p>2.external/sepolicy/genfs_contexts中，gen是generalized的意思，用于fs_use_xattr,fs_use_task,fs_use_trans之外的情况，用genfscon来打labeling，一般是 /目录，proc目录，sysfs等。</p>
+<pre><code><span class="comment"># Label inodes with the fs label.</span>
+genfscon rootfs / u:object_r:rootfs:s0
+<span class="comment"># proc labeling can be further refined (longest matching prefix).</span>
+genfscon <span class="keyword">proc</span> / u:object_r:<span class="keyword">proc</span>:s0
+genfscon <span class="keyword">proc</span> /net u:object_r:proc_net:s0
+genfscon <span class="keyword">proc</span> /net/xt_qtaguid/ctrl u:object_r:qtaguid_proc:s0
+</code></pre><h2 id="2-2-4_给_网络数据包/端口_打标签">2.2.4 给 网络数据包/端口 打标签</h2><p>涉及iptables相关工作，SEAndroid中，暂时 没放开 网络数据包 打标签的功能。<br>给端口打标签，由portcon关键词完成。</p>
+<h2 id="2-3_Security_Level_和_MLS">2.3 Security Level 和 MLS</h2><h2 id="2-3-1_Security_Level">2.3.1 Security Level</h2><p>TE，RBAC是 “平等社会”下的权限管理，新增了 多等级安全管理：Multi-LevelSecurity 多等级安全。<br>多等级安全信息 也被 添加到 SContext中，可以控制SELinux 启用MLS 或 不启用MLS。</p>
+<p>完整的SContext：</p>
+<ul>
+<li>MLS未启用：user_u:role_r:type_t</li>
+<li>MLS启用后，user:role:type:sensitivity[:category,…]-sensitivity[:category,…]</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/3e3f3170b4570b4c2c9fbab5e29acf691eceb9bf/20160119/security-level.PNG" alt="Security-Level"><br>组成：</p>
+<ul>
+<li>low security level:当前SContext所对应的（死的或活的）东西 的当前（也就是最小）安全级别</li>
+<li>连字符 - ：表示 range</li>
+<li>high security level：当前SContext所对应的 （死的或活的）东西 的最高安全级别</li>
+</ul>
+<p>【例9】sensitivity关键字<br><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/8d52d2c68a0dca9a943ae12e05e3d38919b26c04/20160119/sensitivity.PNG" alt="sensivity"></p>
+<p>【例10】category关键字<br><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/309f3de883ff367329825abdb32a1180dd2ade04/20160119/category.PNG" alt="category"></p>
+<p>SEAndroid中：</p>
+<ul>
+<li>sensitivity 只定义了s0</li>
+<li>category 定义了从c0 到 c1023，共 1024个category</li>
+</ul>
+<p>sensitivity 和 category 一起组成了一个 Security Level（SLevel），SLevel由关键字level声明，如下例所示：</p>
+<p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/3be725998fa6a4ce11936463ecb456b425af19f9/20160119/level.PNG" alt="level"></p>
+<p>SL1 和 SL2 之间的关系有：</p>
+<ul>
+<li><p>dom：如果 SL1 dom SL2的话，则 SL1 的sensitivity &gt;= SL2的sensitivity，SL1的category 包含 SL2的category。例    </p>
+<p>  SL1=”s2:c0.c5” dom SL2=”s0:c2,c3”</p>
+</li>
+<li><p>domby: 和dom相反</p>
+</li>
+<li>eq：sensitivity相等，category相同。</li>
+<li>incomp：不可比。sensitivity不可比，category不可比。</li>
+</ul>
+<hr>
+<pre><code><span class="tag">user</span><span class="pseudo">:role</span><span class="pseudo">:type</span><span class="pseudo">:sensitivity</span><span class="attr_selector">[:category,...]</span><span class="tag">-</span> <span class="tag">sensitivity</span><span class="attr_selector">[:category,...]</span>
+<span class="id">#Android</span>中，<span class="tag">SContext</span>有：<span class="tag">u</span><span class="pseudo">:r</span><span class="pseudo">:init</span><span class="pseudo">:s0</span> ，在这种<span class="tag">case</span>中，<span class="tag">Low</span> <span class="tag">Level</span>等于<span class="tag">High</span> <span class="tag">Level</span>，而且<span class="tag">SLevel</span>没有包含<span class="tag">Category</span>
+</code></pre><p>SLevel如何在MAC中起作用。和constrain类似，MLS添加了mlsconstrain关键字</p>
+<h2 id="2-3-2_mlsconstrain_和_no_read_down/write_up">2.3.2 mlsconstrain 和 no read down/write up</h2><p>mlsconstrain 语法和constrain一样：</p>
+<pre><code>mlsconstrain <span class="class"><span class="keyword">class</span> <span class="title">perm_set</span> <span class="title">expression</span>;</span>
+</code></pre><p>与constrain不同的是，expression除了u1 , u2, r1, r2, t1, t2外，还新增了：</p>
+<ul>
+<li>l1, l2: l1表示 源的low sensitivity level，l2表示target的low sensitivity</li>
+<li>h1, h2: h1表示 源的high sensitivity level，h2表示target的 high sensitivity</li>
+<li>l 和 h 的关系：包括： dom，domby，eq 和 incomp</li>
+</ul>
+<p>mlsconstrain是一个policy语法，如何利用它来 体现 多层安全管理呢？</p>
+<p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/c9d21c32a1f21d6e9a23d0d567bee00b8574252d/20160119/MLS%E4%BD%9C%E7%94%A8.PNG" alt="MLS的作用"></p>
+<p>MLS在安全策略上 形象的描述叫 no write down 和 no read up:</p>
+<ul>
+<li>高级别的东西 不能 往低级别的东西里 写数据：这样可能导致 高级别的数据 泄露到 低级别中</li>
+<li>高级别的东西 只能 从低级别的东西里 读数据。</li>
+</ul>
+<p>反过来说：</p>
+<ul>
+<li>低级别的东西 只能 往高级别的东西里 写数据</li>
+<li>低级别的东西 不能 从高级别的东西里 读数据</li>
+</ul>
+<h2 id="2-3-3_MLS_in_Android">2.3.3 MLS in Android</h2><ul>
+<li>首先，系统中只有一个sensitivity level，即s0；</li>
+<li>系统中有1024个category，从c0到c1023.</li>
+</ul>
+<p>external/sepolicy/mls:</p>
+<pre><code><span class="preprocessor">#########################################</span>
+<span class="preprocessor"># MLS declarations</span>
+<span class="preprocessor">#</span>
+<span class="preprocessor">#定义了2个和mls相关的宏，位于 mls_macro文件中</span>
+<span class="preprocessor"># Generate the desired number of sensitivities and categories.</span>
+gen_sens(mls_num_sens) # mls_num_sens=<span class="number">1</span>
+gen_cats(mls_num_cats) # mls_num_cats=<span class="number">1024</span>
+
+<span class="preprocessor">#下边的宏生成SLevel</span>
+<span class="preprocessor"># Generate level definitions for each sensitivity and category.</span>
+gen_levels(mls_num_sens,mls_num_cats)
+</code></pre><p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/2475497bdc7bb52ab8bf7678283152f445a614be/20160119/policy.conf.PNG" alt="policy.conf"></p>
+<p>mlsconstrain例子：</p>
+<p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/ade02c3e753911045fd89dea3c8b69bb05470a18/20160119/mlsconstrain%E4%BE%8B%E5%AD%90.PNG" alt="mlsconstrain例子"></p>
+<h2 id="2-4_编译安全策略文件">2.4 编译安全策略文件</h2><p>Android中策略文件在external/sepolicy下</p>
+<p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/a67c7ec67e002da0cd5d723ca6da1bfeb8767760/20160119/SElinux%E5%AE%89%E5%85%A8%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E7%94%9F%E6%88%90.PNG" alt="SELinux安全配置文件生成"></p>
+<ul>
+<li>左边一列 是 安全配置的源文件。即external/sepolicy下的te，initial_sid, initial_sid_contexts,access_vectors,fs_use , genfs_contexts等。我们要改的一半是te文件，其他文件 由于和 Kernel内部的 LSM等模块相关，很难有机会改。</li>
+<li>这些文件都是文本文件，会被组合到一起。</li>
+<li>搞到一起后 的文件中 使用宏的地方，要用m4命令对这些宏进行扩展。<br>如：m4 -D mls_num_sens=1 -D mls_num_cats=1024<br>m4处理后 得到 policy.conf。是所有 安全策略 源文件 的集合，宏也被替换。</li>
+<li>policy.conf文件 最终被 checkpolicy 命令处理。该命令检查 neverallow 是否被违背，语法是否正确等。最后， checkpolicy 将 policy.conf 打包生成一个二进制文件。在SEAndroid中，该文件叫sepolicy，在Linux发行版本上，一般叫 policy.26等，26表示SELinux的版本号</li>
+<li>最后，再把sepolicy文件 传递到 Kernel LSM中，整个安全策略配置就算完成。</li>
+</ul>
+<h2 id="2-5_拓展讨论">2.5 拓展讨论</h2><p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/7f7bf3ddb95208b2d4952acd72916430afa92ee1/20160119/SElinux%20Component.PNG" alt="SELinux Component组成"></p>
+<ul>
+<li>Subject：代表发起操作的对象，一般试process。SELinux需要检查subject是否满足 权限要求</li>
+<li>Object Manager：管理着 Object 及 相应的SContext。OM向Access Vector Cache查询所要求的操作是否有权限。</li>
+<li>AVC：起加速作用，将缓存一些权限检查的结果。当相同的 权限检查请求 过来时，直接从AVC中 返回所缓存的结果。</li>
+<li>如果AVC没有这条权限检查结果，它将向Security Server去查询。SS内部 保存有SePolicy，它可以根据SePolicy计算出权限检查的结果。</li>
+</ul>
+<h1 id="二、SEAndroid源码分析">二、SEAndroid源码分析</h1><p>1.初始化SEAndroid，在init的main函数中<br>system/core/init/init.cpp:</p>
+<pre><code><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>** argv)</span> </span>{
+……
+    <span class="comment">// Set up SELinux, including loading the SELinux policy if we're in the kernel domain.</span>
+    selinux_initialize(is_first_stage);<span class="comment">//①初始化SEAndroid</span>
+
+    <span class="comment">// If we're in the kernel domain, re-exec init to transition to the init domain now</span>
+    <span class="comment">// that the SELinux policy has been loaded.</span>
+    <span class="keyword">if</span> (is_first_stage) {
+        <span class="keyword">if</span> (restorecon(<span class="string">"/init"</span>) == -<span class="number">1</span>) {
+            ERROR(<span class="string">"restorecon failed: %s\n"</span>, strerror(errno));
+            security_failure();
+        }
+        <span class="keyword">char</span>* path = argv[<span class="number">0</span>];
+        <span class="keyword">char</span>* args[] = { path, <span class="keyword">const_cast</span>&lt;<span class="keyword">char</span>*&gt;(<span class="string">"--second-stage"</span>), <span class="literal">nullptr</span> };
+        <span class="keyword">if</span> (execv(path, args) == -<span class="number">1</span>) {
+            ERROR(<span class="string">"execv(\"%s\") failed: %s\n"</span>, path, strerror(errno));
+            security_failure();
+        }
+    }
+
+    <span class="comment">//②给下边几个目录打标签，restorecon 全称是 restore context;就是 根据file_contexts中的内容给一堆目录打标签</span>
+    <span class="comment">// These directories were necessarily created before initial policy load</span>
+    <span class="comment">// and therefore need their security context restored to the proper value.</span>
+    <span class="comment">// This must happen before /dev is populated by ueventd.</span>
+    INFO(<span class="string">"Running restorecon...\n"</span>);
+    restorecon(<span class="string">"/dev"</span>);
+    restorecon(<span class="string">"/dev/socket"</span>);
+    restorecon(<span class="string">"/dev/__properties__"</span>);
+    restorecon_recursive(<span class="string">"/sys"</span>);
+
+    ……
+}
+</code></pre><p>1.1. selinux_initialize<br>system/core/init/init.cpp:</p>
+<pre><code>static <span class="keyword">void</span> selinux<span class="number">_</span>initialize(bool <span class="keyword">in</span><span class="number">_k</span>ernel<span class="number">_</span>domain) {
+    Timer t;
+
+    selinux<span class="number">_</span>callback cb;
+    cb.func<span class="number">_</span>log = selinux<span class="number">_k</span>log<span class="number">_</span>callback;
+    selinux<span class="number">_</span>set<span class="number">_</span>callback(SELINUX<span class="number">_</span>CB<span class="number">_</span>LOG, cb);<span class="comment">//selinux_set_callback有libselinux提供</span>
+    cb.func<span class="number">_</span>audit = audit<span class="number">_</span>callback;
+    selinux<span class="number">_</span>set<span class="number">_</span>callback(SELINUX<span class="number">_</span>CB<span class="number">_</span>AUDIT, cb);
+
+    <span class="comment">//①判断SELinux是否启用.方法是：</span>
+    <span class="comment">//方式一： /sys/fs/selinux是否存在</span>
+    <span class="comment">//方式二：ro.boot.selinux属性不为disable</span>
+    <span class="keyword">if</span> (selinux<span class="number">_</span><span class="keyword">is</span><span class="number">_</span>disabled()) {
+        <span class="keyword">return</span>;
+    }
+
+    <span class="keyword">if</span> (<span class="keyword">in</span><span class="number">_k</span>ernel<span class="number">_</span>domain) {
+        <span class="comment">//②加载sepolicy文件</span>
+        INFO(<span class="string">"Loading SELinux policy...\n"</span>);
+        <span class="keyword">if</span> (selinux<span class="number">_</span>android<span class="number">_</span>load<span class="number">_p</span>olicy() &lt; <span class="number">0</span>) {
+            ERROR(<span class="string">"failed to load policy: %s\n"</span>, strerror(errno));
+            security<span class="number">_f</span>ailure();
+        }
+
+        <span class="comment">//SELinux有2种工作模式：</span>
+        <span class="comment">//"permissive"：所有操作都被允许（即没有MAC），但是如果有 违反权限的话，会记录日志</span>
+        <span class="comment">//"enforcing"：所有操作都会进行 权限检查</span>
+        bool <span class="keyword">is</span><span class="number">_</span>enforcing = selinux<span class="number">_</span><span class="keyword">is</span><span class="number">_</span>enforcing();
+        security<span class="number">_</span>setenforce(<span class="keyword">is</span><span class="number">_</span>enforcing);<span class="comment">//③设置SELinux的模式</span>
+
+        <span class="keyword">if</span> (write<span class="number">_f</span>ile(<span class="string">"/sys/fs/selinux/checkreqprot"</span>, <span class="string">"0"</span>) == -<span class="number">1</span>) {
+            security<span class="number">_f</span>ailure();
+        }
+
+        NOTICE(<span class="string">"(Initializing SELinux %s took %.2fs.)\n"</span>,
+               <span class="keyword">is</span><span class="number">_</span>enforcing ? <span class="string">"enforcing"</span> : <span class="string">"non-enforcing"</span>, t.duration());
+    } <span class="keyword">else</span> {
+        selinux<span class="number">_</span>init<span class="number">_</span>all<span class="number">_</span>handles();<span class="comment">//④初始化 file_context, seapp_context 及 property_context相关内容</span>
+    }
+}
+</code></pre><p>1.1.1 selinux_is_disabled<br>system/core/init/init.cpp:</p>
+<pre><code><span class="function"><span class="keyword">static</span> <span class="keyword">bool</span> <span class="title">selinux_is_disabled</span><span class="params">(<span class="keyword">void</span>)</span>
+</span>{
+    <span class="keyword">if</span> (ALLOW_DISABLE_SELINUX) {
+        <span class="keyword">if</span> (access(<span class="string">"/sys/fs/selinux"</span>, F_OK) != <span class="number">0</span>) {
+            <span class="comment">// SELinux is not compiled into the kernel, or has been disabled</span>
+            <span class="comment">// via the kernel command line "selinux=0".</span>
+            <span class="keyword">return</span> <span class="literal">true</span>;
+        }
+        <span class="keyword">return</span> selinux_status_from_cmdline() == SELINUX_DISABLED;
+    }
+
+    <span class="keyword">return</span> <span class="literal">false</span>;
+}
+</code></pre><p>1.1.2 selinux_android_load_policy<br>external/libselinux/src/android.c:</p>
+<pre><code><span class="xml">int selinux_android_load_policy(void)
+</span><span class="expression">{
+        <span class="variable">const</span> <span class="variable">char</span> *<span class="variable">mnt</span> = <span class="variable">SELINUXMNT</span>;/<span class="end-block">/ </span>值为<span class="end-block">/sys</span><span class="end-block">/fs</span><span class="end-block">/selinux</span>
+        <span class="variable">int</span> <span class="variable">rc</span>;
+        /<span class="end-block">/ </span>挂载 <span class="end-block">/sys</span><span class="end-block">/fs</span><span class="end-block">/selinux</span>，<span class="variable">SELINUXFS</span>值为<span class="string">"selinuxfs"</span>
+        <span class="variable">rc</span> = <span class="variable">mount</span>(<span class="variable">SELINUXFS</span>, <span class="variable">mnt</span>, <span class="variable">SELINUXFS</span>, 0, <span class="variable">NULL</span>);
+        ……
+        /<span class="end-block">/ </span><span class="end-block">/sys</span><span class="end-block">/fs</span><span class="end-block">/selinux</span>是<span class="variable">userpace</span> 和 <span class="variable">kernel</span> 中的<span class="variable">SELinux</span>模块交互的通道
+        <span class="variable">set</span>_<span class="variable">selinuxmnt</span>(<span class="variable">mnt</span>);该方法在<span class="variable">external</span><span class="end-block">/libselinux</span><span class="end-block">/include</span><span class="end-block">/selinux</span><span class="end-block">/selinux.h</span>中，属于<span class="variable">libselinux</span> <span class="variable">API</span>
+
+    <span class="variable">return</span> <span class="variable">selinux</span>_<span class="variable">android</span>_<span class="variable">load</span>_<span class="variable">policy</span>_<span class="variable">helper</span>(<span class="variable">false</span>);//加载<span class="variable">SEAndroid</span>中的<span class="variable">policy</span>文件
+}</span><span class="xml"></span>
+</code></pre><p><img src="" alt="Nexus7上 /sys/fs/selinux 的内容"></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/SELinux/">SELinux</a>
+  </div>
+
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://yoursite.com/2016/01/19/SELinux/" data-title="SELinux | Hexo" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2016/09/09/spannableString/" title="">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  (no title)</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2015/12/10/数据结构5-树-下-5-1-堆/"  title="数据结构5-树-下-5-1-堆">
+ <strong>NEXT:</strong><br/> 
+ <span>数据结构5-树-下-5-1-堆
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一、SELinux背景知识"><span class="toc-number">1.</span> <span class="toc-text">一、SELinux背景知识</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-DAC与MAC"><span class="toc-number">1.1.</span> <span class="toc-text">1.DAC与MAC</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1_简介"><span class="toc-number">1.2.</span> <span class="toc-text">1.1 简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-SELinux_Policy语言介绍"><span class="toc-number">1.3.</span> <span class="toc-text">1.2.SELinux Policy语言介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#进程的SContext，可通过命令：ps_-Z_查看。"><span class="toc-number">1.3.1.</span> <span class="toc-text">进程的SContext，可通过命令：ps -Z 查看。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#文件的SContext，可通过命令：ls_-Z_查看。"><span class="toc-number">1.3.2.</span> <span class="toc-text">文件的SContext，可通过命令：ls -Z 查看。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#总结："><span class="toc-number">1.3.3.</span> <span class="toc-text">总结：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1_TE介绍"><span class="toc-number">1.4.</span> <span class="toc-text">2.1 TE介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#neverallow的作用："><span class="toc-number">1.4.1.</span> <span class="toc-text">neverallow的作用：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-1_Object_Class和Perm_Set"><span class="toc-number">1.5.</span> <span class="toc-text">2.1.1 Object Class和Perm Set</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Object_Class"><span class="toc-number">1.5.1.</span> <span class="toc-text">Object Class</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Perm_Set"><span class="toc-number">1.5.2.</span> <span class="toc-text">Perm Set</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-2_type,_attribute_和_rule_name等"><span class="toc-number">1.6.</span> <span class="toc-text">2.1.2 type, attribute 和 rule_name等</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#使用attribute有什么好处？"><span class="toc-number">1.6.1.</span> <span class="toc-text">使用attribute有什么好处？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#rule_name"><span class="toc-number">1.6.2.</span> <span class="toc-text">rule_name</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-3_RBAC和constrain"><span class="toc-number">1.7.</span> <span class="toc-text">2.1.3 RBAC和constrain</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Role定义"><span class="toc-number">1.7.1.</span> <span class="toc-text">Role定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#user定义"><span class="toc-number">1.7.2.</span> <span class="toc-text">user定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Roles_和_Users中有什么样的权限控制呢？"><span class="toc-number">1.7.3.</span> <span class="toc-text">Roles 和 Users中有什么样的权限控制呢？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#expression包含的关键词如下："><span class="toc-number">1.7.4.</span> <span class="toc-text">expression包含的关键词如下：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#constrain补充知识点："><span class="toc-number">1.7.5.</span> <span class="toc-text">constrain补充知识点：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RBAC和constrain到底想要干什么"><span class="toc-number">1.7.6.</span> <span class="toc-text">RBAC和constrain到底想要干什么</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2_Labeling介绍"><span class="toc-number">1.8.</span> <span class="toc-text">2.2 Labeling介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-1_sid和sid_context"><span class="toc-number">1.9.</span> <span class="toc-text">2.2.1 sid和sid_context</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#initial_sids_和_initial_sid_context:"><span class="toc-number">1.9.1.</span> <span class="toc-text">initial_sids 和 initial_sid_context:</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-2_Domain/Type_Transition_和宏"><span class="toc-number">1.10.</span> <span class="toc-text">2.2.2 Domain/Type Transition 和宏</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#为什么需要上述3个权限？"><span class="toc-number">1.10.1.</span> <span class="toc-text">为什么需要上述3个权限？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#针对死的东西打标签"><span class="toc-number">1.10.2.</span> <span class="toc-text">针对死的东西打标签</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-3_File/File_System_打_label"><span class="toc-number">1.11.</span> <span class="toc-text">2.2.3 File/File System 打 label</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-4_给_网络数据包/端口_打标签"><span class="toc-number">1.12.</span> <span class="toc-text">2.2.4 给 网络数据包/端口 打标签</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3_Security_Level_和_MLS"><span class="toc-number">1.13.</span> <span class="toc-text">2.3 Security Level 和 MLS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-1_Security_Level"><span class="toc-number">1.14.</span> <span class="toc-text">2.3.1 Security Level</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-2_mlsconstrain_和_no_read_down/write_up"><span class="toc-number">1.15.</span> <span class="toc-text">2.3.2 mlsconstrain 和 no read down/write up</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-3_MLS_in_Android"><span class="toc-number">1.16.</span> <span class="toc-text">2.3.3 MLS in Android</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-4_编译安全策略文件"><span class="toc-number">1.17.</span> <span class="toc-text">2.4 编译安全策略文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-5_拓展讨论"><span class="toc-number">1.18.</span> <span class="toc-text">2.5 拓展讨论</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二、SEAndroid源码分析"><span class="toc-number">2.</span> <span class="toc-text">二、SEAndroid源码分析</span></a></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/SELinux/" title="SELinux">SELinux<sup>1</sup></a></li>
+		
+			<li><a href="/tags/framework/" title="framework">framework<sup>1</sup></a></li>
+		
+			<li><a href="/tags/数据结构/" title="数据结构">数据结构<sup>13</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  <div class="rsspart">
+	<a href="null" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font clearfix">
+		
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2016 
+		
+		<a href="http://yoursite.com" target="_blank" title="Jie Qiong">Jie Qiong</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+  </body>
+</html>
