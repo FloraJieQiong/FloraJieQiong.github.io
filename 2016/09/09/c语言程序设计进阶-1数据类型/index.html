@@ -3,17 +3,57 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Tag: 数据结构 | Hexo</title>
+  <title>c语言程序设计进阶-1数据类型 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/tags/数据结构/page/2/index.html">
+  <meta name="description" content="1.0 数据类型sizeof是一个运算符，给出某个类型或变量在内存中 所占据的字节数
+
+是静态运算符，它的结果在编译时刻就决定了
+sizeof括号里的运算是不会做的
+
+sizeof(int)
+
+sizeof(i)
+#include &amp;lt;stdio.h&amp;gt;
+int main()
+{
+    int a;
+    a = 6;
+    printf(&quot;sizeof(a) =%ld\n&quot;, si">
+<meta property="og:type" content="article">
+<meta property="og:title" content="c语言程序设计进阶-1数据类型">
+<meta property="og:url" content="http://yoursite.com/2016/09/09/c语言程序设计进阶-1数据类型/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description">
+<meta property="og:description" content="1.0 数据类型sizeof是一个运算符，给出某个类型或变量在内存中 所占据的字节数
+
+是静态运算符，它的结果在编译时刻就决定了
+sizeof括号里的运算是不会做的
+
+sizeof(int)
+
+sizeof(i)
+#include &amp;lt;stdio.h&amp;gt;
+int main()
+{
+    int a;
+    a = 6;
+    printf(&quot;sizeof(a) =%ld\n&quot;, si">
+<meta property="og:updated_time" content="2016-09-09T12:04:00.444Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
-<meta name="twitter:description">
+<meta name="twitter:title" content="c语言程序设计进阶-1数据类型">
+<meta name="twitter:description" content="1.0 数据类型sizeof是一个运算符，给出某个类型或变量在内存中 所占据的字节数
+
+是静态运算符，它的结果在编译时刻就决定了
+sizeof括号里的运算是不会做的
+
+sizeof(int)
+
+sizeof(i)
+#include &amp;lt;stdio.h&amp;gt;
+int main()
+{
+    int a;
+    a = 6;
+    printf(&quot;sizeof(a) =%ld\n&quot;, si">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -59,77 +99,75 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2015" class="archive-year">2015</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2015/11/16/数据结构1 基本概念——1-3最大子列和问题/" class="archive-article-date">
-  <time datetime="2015-11-16T01:06:35.000Z" itemprop="datePublished">Nov 16</time>
+        <section id="main"><article id="post-c语言程序设计进阶-1数据类型" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/09/09/c语言程序设计进阶-1数据类型/" class="article-date">
+  <time datetime="2016-09-09T11:51:28.000Z" itemprop="datePublished">2016-09-09</time>
 </a>
-      
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/11/16/数据结构1 基本概念——1-3最大子列和问题/">数据结构1 基本概念——1-3最大子列和问题</a>
+    <h1 class="article-title" itemprop="name">
+      c语言程序设计进阶-1数据类型
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
+      </header>
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2015/11/10/数据结构1 基本概念——1-2什么是算法/" class="archive-article-date">
-  <time datetime="2015-11-10T01:21:45.000Z" itemprop="datePublished">Nov 10</time>
-</a>
+    <div class="article-entry" itemprop="articleBody">
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/11/10/数据结构1 基本概念——1-2什么是算法/">数据结构1 基本概念——1-2什么是算法</a>
-    </h1>
-  
+        <h1 id="1-0_数据类型">1.0 数据类型</h1><p>sizeof<br>是一个运算符，给出某个类型或变量在内存中 所占据的字节数</p>
+<ul>
+<li>是静态运算符，它的结果在编译时刻就决定了</li>
+<li><p>sizeof括号里的运算是不会做的</p>
+</li>
+<li><p>sizeof(int)</p>
+</li>
+<li><p>sizeof(i)</p>
+<pre><code><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span>
+<span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span>
+</span>{
+    <span class="keyword">int</span> a;
+    a = <span class="number">6</span>;
+    <span class="built_in">printf</span>(<span class="string">"sizeof(a) =%ld\n"</span>, <span class="keyword">sizeof</span>(a));<span class="comment">//4</span>
+    <span class="built_in">printf</span>(<span class="string">"sizeof(int)=%ld\n"</span>, <span class="keyword">sizeof</span>(<span class="keyword">int</span>));<span class="comment">//4</span>
+    <span class="built_in">printf</span>(<span class="string">"sizeof(a++)=%ld\n"</span>, <span class="keyword">sizeof</span>(a++));<span class="comment">//4 运行完 a=6</span>
+    <span class="built_in">printf</span>(<span class="string">"sizeof(a+1.0)=%ld\n"</span>, <span class="keyword">sizeof</span>(a+<span class="number">1.0</span>));<span class="comment">//8 因为1.0是double，double的字节数是8</span>
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2015/11/09/数据结构1 基本概念——1-1什么是数据结构/" class="archive-article-date">
-  <time datetime="2015-11-09T02:48:32.000Z" itemprop="datePublished">Nov 9</time>
-</a>
+}
+</code></pre></li>
+</ul>
+<h1 id="1-1_整数类型">1.1 整数类型</h1>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/11/09/数据结构1 基本概念——1-1什么是数据结构/">数据结构1 基本概念——1-1什么是数据结构？</a>
-    </h1>
-  
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/09/09/c语言程序设计进阶-1数据类型/" data-id="cisvpt2ry000x0ko0jvlld603" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/c语言程序设计进阶/">c语言程序设计进阶</a></li></ul>
 
-    </header>
+    </footer>
   </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/09/09/spannableString/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-  
-    </div></section>
-  
+
 </section>
         
           <aside id="sidebar">

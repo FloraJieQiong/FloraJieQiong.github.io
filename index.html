@@ -61,6 +61,65 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-c语言程序设计进阶-1数据类型" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/09/09/c语言程序设计进阶-1数据类型/" class="article-date">
+  <time datetime="2016-09-09T11:51:28.000Z" itemprop="datePublished">2016-09-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/09/09/c语言程序设计进阶-1数据类型/">c语言程序设计进阶-1数据类型</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="1-0_数据类型">1.0 数据类型</h1><p>sizeof<br>是一个运算符，给出某个类型或变量在内存中 所占据的字节数</p>
+<ul>
+<li>是静态运算符，它的结果在编译时刻就决定了</li>
+<li><p>sizeof括号里的运算是不会做的</p>
+</li>
+<li><p>sizeof(int)</p>
+</li>
+<li><p>sizeof(i)</p>
+<pre><code><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span>
+<span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span>
+</span>{
+    <span class="keyword">int</span> a;
+    a = <span class="number">6</span>;
+    <span class="built_in">printf</span>(<span class="string">"sizeof(a) =%ld\n"</span>, <span class="keyword">sizeof</span>(a));<span class="comment">//4</span>
+    <span class="built_in">printf</span>(<span class="string">"sizeof(int)=%ld\n"</span>, <span class="keyword">sizeof</span>(<span class="keyword">int</span>));<span class="comment">//4</span>
+    <span class="built_in">printf</span>(<span class="string">"sizeof(a++)=%ld\n"</span>, <span class="keyword">sizeof</span>(a++));<span class="comment">//4 运行完 a=6</span>
+    <span class="built_in">printf</span>(<span class="string">"sizeof(a+1.0)=%ld\n"</span>, <span class="keyword">sizeof</span>(a+<span class="number">1.0</span>));<span class="comment">//8 因为1.0是double，double的字节数是8</span>
+
+}
+</code></pre></li>
+</ul>
+<h1 id="1-1_整数类型">1.1 整数类型</h1>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/09/09/c语言程序设计进阶-1数据类型/" data-id="cisvpt2ry000x0ko0jvlld603" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/c语言程序设计进阶/">c语言程序设计进阶</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-spannableString" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/09/09/spannableString/" class="article-date">
@@ -88,7 +147,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/09/09/spannableString/" data-id="cisvbrdcu000srso0gwt8vbms" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/09/09/spannableString/" data-id="cisvpt2rt000s0ko0la3dxtse" class="article-share-link">Share</a>
       
       
     </footer>
@@ -610,7 +669,7 @@ gen_levels(mls_num_sens,mls_num_cats)
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/01/19/SELinux/" data-id="cisvbrdd0000xrso0gacyk8w7" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/01/19/SELinux/" data-id="cisvpt2s000100ko0trvsz72x" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SELinux/">SELinux</a></li></ul>
@@ -734,7 +793,7 @@ gen_levels(mls_num_sens,mls_num_cats)
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/12/10/数据结构5-树-下-5-1-堆/" data-id="cisvbrdby0001rso0lymre4ev" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/12/10/数据结构5-树-下-5-1-堆/" data-id="cisvpt2qx00010ko0kx9qifad" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构/">数据结构</a></li></ul>
@@ -784,7 +843,7 @@ gen_levels(mls_num_sens,mls_num_cats)
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/12/08/数据结构4-树-中-——4-2-平衡二叉树/" data-id="cisvbrdc60004rso094w4mo8a" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/12/08/数据结构4-树-中-——4-2-平衡二叉树/" data-id="cisvpt2r500040ko03lxqmgmv" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构/">数据结构</a></li></ul>
@@ -955,7 +1014,7 @@ Position FindMax(BinTree BST){
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/12/07/数据结构4-树-中-——4-1-二叉搜索树/" data-id="cisvbrdc80006rso06cjkfn2n" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/12/07/数据结构4-树-中-——4-1-二叉搜索树/" data-id="cisvpt2r700060ko0pnfvw689" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构/">数据结构</a></li></ul>
@@ -1153,7 +1212,7 @@ Position FindMax(BinTree BST){
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/12/04/数据结构3-树-上-——3-3-二叉树的遍历/" data-id="cisvbrdca0008rso07oeb6yqy" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/12/04/数据结构3-树-上-——3-3-二叉树的遍历/" data-id="cisvpt2r900080ko04yzy7alg" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构/">数据结构</a></li></ul>
@@ -1209,7 +1268,7 @@ Position FindMax(BinTree BST){
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/12/03/数据结构3-树-上-——3-2-二叉树与存储结构/" data-id="cisvbrdcb000arso0bqpbuqir" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/12/03/数据结构3-树-上-——3-2-二叉树与存储结构/" data-id="cisvpt2ra000a0ko03bcseu25" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构/">数据结构</a></li></ul>
@@ -2100,7 +2159,7 @@ android_media_MediaScanner_processFile<span class="list">(
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/12/02/framework-MediaScanner/" data-id="cisvbrdcy000urso0oj09gjog" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/12/02/framework-MediaScanner/" data-id="cisvpt2rx000u0ko03i8ic397" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/framework/">framework</a></li></ul>
@@ -2218,123 +2277,7 @@ android_media_MediaScanner_processFile<span class="list">(
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/12/02/数据结构3-树-上-——3-1-树与树的表示/" data-id="cisvbrdcc000crso0fds38gti" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构/">数据结构</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-数据结构2-线性结构——2-4-应用实例：多项式加法运算" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2015/12/01/数据结构2-线性结构——2-4-应用实例：多项式加法运算/" class="article-date">
-  <time datetime="2015-12-01T12:08:39.000Z" itemprop="datePublished">2015-12-01</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/12/01/数据结构2-线性结构——2-4-应用实例：多项式加法运算/">数据结构2-线性结构——2-4-应用实例：多项式加法运算</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="多项式加法运算">多项式加法运算</h1><p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/28c464ba24c80ff65872b7460d67adc0b3054143/201512/%E5%A4%9A%E9%A1%B9%E5%BC%8F%E5%8A%A0%E6%B3%95%E8%BF%90%E7%AE%971.PNG" alt="多项式加法运算1"></p>
-<p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/22c23cf33256038c38ac0d5b52042f04722c8774/201512/%E5%8D%95%E5%90%91%E9%93%BE%E8%A1%A8%E8%A1%A8%E7%A4%BA%E5%A4%9A%E9%A1%B9%E5%BC%8F.PNG" alt="单向链表表示多项式"></p>
-<pre><code><span class="keyword">typedef</span> <span class="keyword">struct</span> PolyNode{
-    <span class="keyword">int</span> coef;<span class="comment">//系数</span>
-    <span class="keyword">int</span> expon;<span class="comment">//指数</span>
-    <span class="keyword">struct</span> Node *link;<span class="comment">//指向下一个节点的指针</span>
-}*Polynomial;
-Polynomial P1,P2;
-</code></pre><p><strong> 算法思路: </strong>两个指针P1，P2分别 指向 多项式 的第一个结点，不断循环：</p>
-<ul>
-<li>P1-&gt;expon==P2-&gt;expon:系数相加，若 结果不为0，则作为 结果多项式 对应项 的系数。同时，P1和P2都分别指向下一项；</li>
-<li>P1-&gt;expon &gt; P2-&gt;expon:将P1的当前项 存入 结果多项式，并使P1指向下一项；</li>
-<li>P1-&gt;expon &lt; P2-&gt;expon:将P2的当前项 存入 结果多项式，并使P2指向下一项。</li>
-<li>当 某一个多项式 处理完时，将另一个多项式 的所有结点 依次复制到 结果多项式中去。</li>
-</ul>
-<hr>
-<pre><code>Ploynomial PolyAdd(Polynomial P1, Polynomial P2){
-    Polynomial front,rear,temp;<span class="comment">//front 记录 结果多项式 链表 头结点，rear 结果多项式 尾</span>
-    int <span class="keyword">sum</span>;
-
-    rear = (Polynomial)malloc(sizeof(PolyNode));<span class="comment">//为方便表头插入，先产生一个 临时空结点 作为 结果多项式 链表头</span>
-    front = rear;
-
-    <span class="keyword">while</span>(P1 <span class="subst">&amp;&amp;</span> P2){
-        <span class="comment">//当两个多项式 都有 非零项 待处理时</span>
-        switch(Compare(P1<span class="subst">-&gt;</span>expon, P2<span class="subst">-&gt;</span>expon)){
-            <span class="keyword">case</span> <span class="number">1</span>:
-                <span class="comment">//P1-&gt;expon &gt; P2-&gt;expon</span>
-                Attach(P1<span class="subst">-&gt;</span>ceof, P1<span class="subst">-&gt;</span>expon, <span class="subst">&amp;</span>rear);<span class="comment">//将 P1的系数和指数 拷贝到结果多项式中，接到 rear的后边</span>
-                P1 = P1<span class="subst">-&gt;</span><span class="keyword">link</span>;<span class="comment">//P1后移</span>
-                break;
-            <span class="keyword">case</span> -<span class="number">1</span>:
-                Attach(P2<span class="subst">-&gt;</span>ceof, P2<span class="subst">-&gt;</span>expon, <span class="subst">&amp;</span>rear);
-                P2=P2<span class="subst">-&gt;</span><span class="keyword">link</span>;
-                break;
-            <span class="keyword">case</span> <span class="number">0</span>:
-                <span class="keyword">sum</span> = P1<span class="subst">-&gt;</span>ceof + P2<span class="subst">-&gt;</span>ceof;
-                <span class="keyword">if</span>(<span class="keyword">sum</span>){
-                    <span class="comment">//sum != 0</span>
-                    Attach(<span class="keyword">sum</span>, P1<span class="subst">-&gt;</span>expon, <span class="subst">&amp;</span>rear);
-                }
-                P1=P1<span class="subst">-&gt;</span><span class="keyword">link</span>;
-                P2=P2<span class="subst">-&gt;</span><span class="keyword">link</span>;
-                break;
-        }
-    }
-    <span class="comment">//将 未处理完的 另一个多项式 的所有节点 依次复制到 结果多项式 中</span>
-    f<span class="subst">or</span>(; P1; P1=P1<span class="subst">-&gt;</span><span class="keyword">link</span>){
-        <span class="comment">//P1 不空</span>
-        Attach(P1<span class="subst">-&gt;</span>ceof, P1<span class="subst">-&gt;</span>ceof, <span class="subst">&amp;</span>rear);
-    }
-    f<span class="subst">or</span>(; P2; P2=P2<span class="subst">-&gt;</span><span class="keyword">link</span>){
-        <span class="comment">//P2 不空</span>
-        Attach(P2<span class="subst">-&gt;</span>ceof, P2<span class="subst">-&gt;</span>expon, <span class="subst">&amp;</span>rear);
-    }
-
-    rear<span class="subst">-&gt;</span><span class="keyword">link</span> = <span class="built_in">NULL</span>;<span class="comment">//rear 是结果多项式的尾，指向NULL</span>
-    temp = front;
-    front = front<span class="subst">-&gt;</span><span class="keyword">link</span>;<span class="comment">//令front指向 结果多项式 第一个 非零项</span>
-    free(temp);<span class="comment">//释放临时 空表头结点</span>
-    <span class="keyword">return</span> front;
-}
-
-
-<span class="literal">void</span> Attach(int ceof, int expon, Polynomial *PtrRear){
-    <span class="comment">//ceof 系数，expon 指数，*PtrRear 结果多项式 尾指针</span>
-    <span class="comment">//需要改变 结果多项式 尾指针的值，所以 第三个参数是 结点指针的地址，*PtrRear指向尾项</span>
-
-    Polynomial P;
-
-    P = (Polynomial)maoolc(sizeof(PolyNode))<span class="comment">//申请新结点</span>
-    P<span class="subst">-&gt;</span>ceof = ceof;<span class="comment">//对新结点 赋值</span>
-    P<span class="subst">-&gt;</span>expon = expon;
-    (*PtrRear)<span class="subst">-&gt;</span><span class="keyword">link</span> = P;<span class="comment">//将P指向的 新结点 插入到 结果表达式 尾项 的后边</span>
-    *PtrRear = P;<span class="comment">//修改PtrRear值</span>
-}
-</code></pre><p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/aeb5358cf6062c54f5df5e2dd4711d7e06beef4f/201512/Attach%E5%87%BD%E6%95%B0.PNG" alt="Attach()图解，对新结点赋值"></p>
-<p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/aeb5358cf6062c54f5df5e2dd4711d7e06beef4f/201512/Attach%E5%87%BD%E6%95%B02.PNG" alt="Attach()图解，修改PtrRear值"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/12/01/数据结构2-线性结构——2-4-应用实例：多项式加法运算/" data-id="cisvbrdcd000erso0ve57umqa" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/12/02/数据结构3-树-上-——3-1-树与树的表示/" data-id="cisvpt2rc000c0ko0bgkcnb3s" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构/">数据结构</a></li></ul>
@@ -2361,7 +2304,7 @@ Polynomial P1,P2;
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/SELinux/">SELinux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/framework/">framework</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构/">数据结构</a><span class="tag-list-count">13</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/SELinux/">SELinux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/c语言程序设计进阶/">c语言程序设计进阶</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/framework/">framework</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构/">数据结构</a><span class="tag-list-count">13</span></li></ul>
     </div>
   </div>
 
@@ -2370,7 +2313,7 @@ Polynomial P1,P2;
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/SELinux/" style="font-size: 10px;">SELinux</a> <a href="/tags/framework/" style="font-size: 10px;">framework</a> <a href="/tags/数据结构/" style="font-size: 20px;">数据结构</a>
+      <a href="/tags/SELinux/" style="font-size: 10px;">SELinux</a> <a href="/tags/c语言程序设计进阶/" style="font-size: 10px;">c语言程序设计进阶</a> <a href="/tags/framework/" style="font-size: 10px;">framework</a> <a href="/tags/数据结构/" style="font-size: 20px;">数据结构</a>
     </div>
   </div>
 
@@ -2379,7 +2322,7 @@ Polynomial P1,P2;
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">7</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">7</span></li></ul>
     </div>
   </div>
 
@@ -2389,6 +2332,10 @@ Polynomial P1,P2;
     <h3 class="widget-title">Recents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2016/09/09/c语言程序设计进阶-1数据类型/">c语言程序设计进阶-1数据类型</a>
+          </li>
         
           <li>
             <a href="/2016/09/09/spannableString/">(no title)</a>
@@ -2404,10 +2351,6 @@ Polynomial P1,P2;
         
           <li>
             <a href="/2015/12/08/数据结构4-树-中-——4-2-平衡二叉树/">数据结构4-树-中-——4-2-平衡二叉树</a>
-          </li>
-        
-          <li>
-            <a href="/2015/12/07/数据结构4-树-中-——4-1-二叉搜索树/">数据结构4-树-中-——4-1-二叉搜索树</a>
           </li>
         
       </ul>
