@@ -61,6 +61,55 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-spannableString" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/09/09/spannableString/" class="article-date">
+  <time datetime="2016-09-09T11:51:28.000Z" itemprop="datePublished">2016-09-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/09/09/spannableString/">SpannableString</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="TextView_SpannableString">TextView SpannableString</h1><p><a href="http://blog.csdn.net/fengyuzhengfan/article/details/38459299" target="_blank" rel="external">http://blog.csdn.net/fengyuzhengfan/article/details/38459299</a><br><a href="http://blog.csdn.net/fengyuzhengfan/article/details/38470675" target="_blank" rel="external">http://blog.csdn.net/fengyuzhengfan/article/details/38470675</a><br><a href="http://blog.csdn.net/nnmmbb/article/details/37656513" target="_blank" rel="external">http://blog.csdn.net/nnmmbb/article/details/37656513</a></p>
+<h4 id="Android中设置文本样式的几种方法">Android中设置文本样式的几种方法</h4><ul>
+<li>将android:autoLink属性值设为true。系统会自动识别E-mail、电话、网址等特殊文本。</li>
+<li>在Java代码中直接使用Span对象来设置文本样式。这种方法需要将文本转换成一个SpannableString或SpannableStringBuilder对象，然后在SpannableString或SpannableStringBuilder对象中使用setSpan方法将要设置样式的文本转换成相应的Span对象。</li>
+</ul>
+<h4 id="void_setSpan(Object_what,_int_start,_int_end,_int_flags)">void setSpan(Object what, int start, int end, int flags)</h4><p>what:设置一个Span对象<br>start：起始位置<br>end：结束位置（不包含结束位置）<br>flags值说明：</p>
+<ul>
+<li>Spanned.SPAN_EXCLUSIVE_INCLUSIVE:在 Span前面输入的字符不应用 Span的效果，在后面输入的字符应用Span效果。</li>
+<li>Spanned.SPAN_INCLUSIVE_EXCLUSIVE:在 Span前面输入的字符应用 Span 的效果，在后面输入的字符不应用Span效果。</li>
+<li>Spanned.SPAN_INCUJSIVE_INCLUSIVE:在 Span前后输入的字符都应用 Span 的效果。</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/09/09/spannableString/" data-id="ciu2fupnl000sxoo07x1fch6k" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SpannableString/">SpannableString</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-c语言程序设计进阶-1数据类型" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/09/09/c语言程序设计进阶-1数据类型/" class="article-date">
@@ -104,52 +153,234 @@
 }
 </code></pre></li>
 </ul>
-<h1 id="1-1_整数类型">1.1 整数类型</h1>
+<h1 id="1-1_整数类型">1.1 整数类型</h1><h2 id="1-1-1_整数类型">1.1.1 整数类型</h2><pre><code><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span>
+
+<span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span>
+</span>{
+    <span class="built_in">printf</span>(<span class="string">"sizeof(char) = %d\n"</span>, <span class="keyword">sizeof</span>(<span class="keyword">char</span>));
+    <span class="built_in">printf</span>(<span class="string">"sizeof(short) = %d\n"</span>, <span class="keyword">sizeof</span>(<span class="keyword">short</span>));
+    <span class="built_in">printf</span>(<span class="string">"sizeof(int) = %d\n"</span>, <span class="keyword">sizeof</span>(<span class="keyword">int</span>));
+    <span class="built_in">printf</span>(<span class="string">"sizeof(long) = %d\n"</span>, <span class="keyword">sizeof</span>(<span class="keyword">long</span>));
+    <span class="built_in">printf</span>(<span class="string">"sizeof(long long) = %d\n"</span>, <span class="keyword">sizeof</span>(<span class="keyword">long</span> <span class="keyword">long</span>));
+}
+</code></pre><p>结果：</p>
+<pre><code><span class="keyword">sizeof</span>(<span class="keyword">char</span>) = <span class="number">1</span>
+<span class="keyword">sizeof</span>(<span class="keyword">short</span>) = <span class="number">2</span>
+<span class="keyword">sizeof</span>(<span class="keyword">int</span>) = <span class="number">4</span>
+<span class="keyword">sizeof</span>(<span class="keyword">long</span>) = <span class="number">4</span>
+<span class="keyword">sizeof</span>(<span class="keyword">long</span> <span class="keyword">long</span>) = <span class="number">8</span>
+</code></pre><h3 id="整数">整数</h3><ul>
+<li>char ：1字节（8bit）</li>
+<li>short：2字节</li>
+<li>int：取决于编译器（CPU），通常的意义是“1个字”</li>
+<li>long：取决于编译器（CPU），通常的意义是“1个字”</li>
+<li>long long： 8字节</li>
+</ul>
+<h2 id="1-1-2_整数的内部表达">1.1.2 整数的内部表达</h2><h3 id="二进制负数">二进制负数</h3><ul>
+<li>1个字节可以表达的数：<ul>
+<li>00000000 - 11111111（0-255）</li>
+</ul>
+</li>
+<li><p>如何表达负数？</p>
+<ul>
+<li>仿照十进制，有一个特殊标志表示负数</li>
+<li>取中间的数为0，如10000000表示0，比它小的是负数，比它大的是正数</li>
+<li>补码<h3 id="补码">补码</h3>-1如何表示，我们希望 -1 + 1 –&gt; 0<br>0 –&gt; 00000000<br>1 –&gt; 00000001<br>11111111 + 00000001 –&gt; 100000000<br>因为0-1 –&gt; -1,所以 -1 =<br>(1)00000000 - 00000001 –&gt; 11111111</li>
+</ul>
+</li>
+<li><p>11111111被当做纯二进制看待时，是255；被当做补码看待时是-1</p>
+</li>
+<li>同理，对于-a，补码是 0-a,实际是 2^n -a，n是这种类型的位数</li>
+<li>补码的意义就是 拿补码和原码 可以加出一个溢出的“零”</li>
+</ul>
+<h2 id="1-1-3_整数的范围">1.1.3 整数的范围</h2><h3 id="数的范围">数的范围</h3><ul>
+<li>对于一个字节（8位），可以表达的是：</li>
+<li>0000000 - 11111111</li>
+<li>其中：<ul>
+<li>00000000 –&gt; 0</li>
+<li>11111111 ~ 10000000 –&gt; -1 ~ -128</li>
+<li>00000001 ~ 01111111 –&gt; 1 ~ 127</li>
+</ul>
+</li>
+</ul>
+<p>demo:</p>
+<pre><code><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span>
+<span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span>
+</span>{
+    <span class="keyword">char</span> c = <span class="number">255</span>;
+    <span class="keyword">int</span> i = <span class="number">255</span>;
+    <span class="built_in">printf</span>(<span class="string">"c=%d, i=%d"</span>, c, i);<span class="comment">//c=-1, i=255</span>
+    <span class="comment">//c 11111111</span>
+    <span class="comment">//i 00000000 00000000 00000000 11111111</span>
+
+    <span class="keyword">return</span> <span class="number">0</span>;
+}
+</code></pre><h3 id="整数的范围">整数的范围</h3><ul>
+<li>char： 1字节： -128 ~ 127</li>
+<li>short : 2字节 : -32768 ~ 32767</li>
+<li>int ： 取决于编译器（CPU），通常的意义是“1个字”</li>
+<li>long：4字节</li>
+<li>long long： 8字节</li>
+</ul>
+<h3 id="unsigned">unsigned</h3><ul>
+<li>如果一个数字要表达自己是unsigned，可以在后边加 u 或 U，如255U</li>
+<li>用l或L表示long（long）</li>
+</ul>
+<p>demo:</p>
+<pre><code><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span>
+
+<span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span>
+</span>{
+    <span class="keyword">unsigned</span> <span class="keyword">char</span> c = <span class="number">255</span>;
+    <span class="built_in">printf</span>(<span class="string">"c=%d"</span>, c);<span class="comment">//c=255</span>
+    <span class="comment">//c 11111111</span>
+
+    <span class="keyword">return</span> <span class="number">0</span>;
+}
+</code></pre><p>char : 00000000 - 11111111 表示0-255， -128 ~ 127</p>
+<h3 id="整数越界">整数越界</h3><ul>
+<li>整数是以纯二进制方式进行计算的，所以：<ul>
+<li>-1 + 1 –&gt; 11111111 + 1 –&gt; 100000000 –&gt; 0</li>
+<li>127 + 1 –&gt; 01111111 + 1 –&gt; 10000000 –&gt; -128</li>
+<li>-128 -1 –&gt; 10000000 - 1 –&gt; 01111111 –&gt; 127</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/FloraJieQiong/pages-pics/3b73cc88166d7cd6c1151150d1580d56a928698c/20160912/128.png" alt="整数越界"></p>
+<p>负数 0 正数 构成一个圆<br>0 减 1 得-1<br>-1 加 1 得0<br>127 加 1 得 -128<br>-128 减1 得 127</p>
+<p>demo:获取int最大值</p>
+<pre><code><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span>
+
+<span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span>
+</span>{
+    <span class="keyword">int</span> a = <span class="number">0</span>, b = <span class="number">0</span>;
+    <span class="keyword">while</span>(++a &gt; <span class="number">0</span>);
+    <span class="built_in">printf</span>(<span class="string">"int 最大值是:%d\n"</span>, a-<span class="number">1</span>);
+
+    b++;
+    <span class="keyword">while</span>((a=a/<span class="number">10</span>) != <span class="number">0</span>)
+    {
+        b++;
+    }
+    <span class="built_in">printf</span>(<span class="string">"int最大值位数是%d"</span>,b);
+    <span class="comment">//int 最大值是:2147483647</span>
+    <span class="comment">//int最大值位数是10</span>
+    <span class="keyword">return</span> <span class="number">0</span>;
+}
+</code></pre><h2 id="1-1-4_整数的格式化">1.1.4 整数的格式化</h2><h3 id="整数的输入输出">整数的输入输出</h3><ul>
+<li>只有两种形式：int 或long long</li>
+<li>%d : int</li>
+<li>%u : unsigned</li>
+<li>%ld : long long</li>
+<li>%lu : unsigned long long</li>
+</ul>
+<h3 id="进制">进制</h3><ul>
+<li>八进制：0开头 ，输出用%o</li>
+<li>十六进制: 0x开头，输出用%x,%X。（%x输出10为a，%X输出10为A）<br>八进制与十六进制 只是如何把数字 表达为 字符串，与内部如何存储无关</li>
+</ul>
+<h2 id="1-1-5_选择整数类型">1.1.5 选择整数类型</h2><ul>
+<li>没有特殊需要，选择int</li>
+<li>unsigned 只是输出不同，内部计算是一样的</li>
+</ul>
+<h1 id="1-2_浮点类型">1.2 浮点类型</h1><h2 id="1-2-1_浮点类型">1.2.1 浮点类型</h2><h3 id="1-类型：">1.类型：</h3><ul>
+<li><p>float：</p>
+<ul>
+<li>字长 32 </li>
+<li>范围 ±(1.20<em>10^-38 ~ 3.40</em>10^38),0,±inf,nan  </li>
+<li>有效数字位数 7</li>
+</ul>
+</li>
+<li><p>double：</p>
+<ul>
+<li>字长 64</li>
+<li>范围 ±(2.2<em>10^-308 ~ 1.79</em>10^308),0,±inf,nan  </li>
+<li>有效数字位数 15</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-浮点数的输入输出">2.浮点数的输入输出</h3><ul>
+<li>float：<ul>
+<li>scanf : %f</li>
+<li>printf : %f, %e</li>
+</ul>
+</li>
+<li>double:<ul>
+<li>scanf : %lf</li>
+<li>printf : %f,%e</li>
+</ul>
+</li>
+</ul>
+<hr>
+<pre><code><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span>
+
+<span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span>
+</span>{
+    <span class="keyword">double</span> d = <span class="number">1234.56789</span>;
+    <span class="built_in">printf</span>(<span class="string">"%e,%f\n"</span>, d, d);<span class="comment">//1.234568e+003,1234.567890</span>
+    <span class="built_in">printf</span>(<span class="string">"%E\n"</span>, d);<span class="comment">//1.234568E+003</span>
+    <span class="keyword">double</span> d1 = <span class="number">1E-10</span>;
+    <span class="built_in">printf</span>(<span class="string">"%E,%.16f\n"</span>, d1, d1);<span class="comment">//1.000000E-010,0.0000000001000000</span>
+
+    <span class="keyword">return</span> <span class="number">0</span>;
+}
+</code></pre><h4 id="输出精度">输出精度</h4><h2 id="-_%和f之间加上_-n_指定输出_小数点后n位，这种输出是_四舍五入的">- %和f之间加上 .n 指定输出 小数点后n位，这种输出是 四舍五入的</h2><pre><code><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span>
+
+<span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span>
+</span>{
+    <span class="built_in">printf</span>(<span class="string">"%.3f\n"</span>, -<span class="number">0.0049</span>);<span class="comment">//-0.005</span>
+    <span class="built_in">printf</span>(<span class="string">"%.30f\n"</span>, -<span class="number">0.0049</span>);<span class="comment">//-0.004899999999999999800000000000</span>
+    <span class="built_in">printf</span>(<span class="string">"%.3f\n"</span>, -<span class="number">0.00049</span>);<span class="comment">//-0.000</span>
+    <span class="keyword">return</span> <span class="number">0</span>;
+}
+</code></pre><h2 id="1-2-2_浮点类型的范围与精度">1.2.2 浮点类型的范围与精度</h2><h3 id="1-超过范围的浮点数">1.超过范围的浮点数</h3><ul>
+<li>printf输出 ±inf，表示超过范围的浮点数：±∞</li>
+<li>printf输出 nan，表示不存在的浮点数</li>
+</ul>
+<p>–</p>
+<pre><code><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span>
+
+<span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span>
+</span>{
+    <span class="built_in">printf</span>(<span class="string">"%f\n"</span>, <span class="number">12.0</span>/<span class="number">0.0</span>);<span class="comment">// 1.#INF00 视频中输出的是inf</span>
+    <span class="built_in">printf</span>(<span class="string">"%f\n"</span>, -<span class="number">12.0</span>/<span class="number">0.0</span>);<span class="comment">// -1.#INF00  视频中输出的是-inf</span>
+    <span class="built_in">printf</span>(<span class="string">"%f\n"</span>, <span class="number">0.0</span>/<span class="number">0.0</span>);<span class="comment">// -1.#IND00  视频中输出的是nan</span>
+    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, <span class="number">12</span>/<span class="number">0</span>);<span class="comment">// warning: division by zero</span>
+
+    <span class="keyword">return</span> <span class="number">0</span>;
+}
+</code></pre><h3 id="2-double存储的数值">2.double存储的数值</h3><pre><code><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span>
+
+<span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span>
+</span>{
+    <span class="keyword">float</span> a, b, c;
+
+    a = <span class="number">1.345f</span>;
+    b = <span class="number">1.123f</span>;
+    c = a + b;
+
+    <span class="keyword">if</span>(c == <span class="number">2.468</span>){
+        <span class="built_in">printf</span>(<span class="string">"相等\n"</span>);
+    } <span class="keyword">else</span> {
+        <span class="built_in">printf</span>(<span class="string">"不相等, c= %.10f,或%f\n"</span>, c, c);<span class="comment">//不相等, c= 2.4679999352,或2.468000</span>
+    }
+
+    <span class="keyword">return</span> <span class="number">0</span>;
+}
+</code></pre><p>默认有小数点的变量类型是 double，不是float<br>float要在数字后加 f 或 F 表明身份</p>
+<p>整数是以 二进制的形式 存在于 计算机内部的，浮点数不是。<br>浮点数是编码的数字，计算时，不能在 计算机内部 直接以 二进制的方式进行，通常需要由专门的硬件支持。<br>浮点数的计算机内部表达形式 造成了 不同的现象。</p>
+<p>浮点数计算时由专用的硬件部件实现，double与float用的部件不同。<br>2.468  double 和 float，内部存储不一样</p>
+<h3 id="3-选择浮点类型">3.选择浮点类型</h3><ul>
+<li>没有特殊需要，用double</li>
+</ul>
+<h1 id="1-3_逻辑类型">1.3 逻辑类型</h1>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/09/09/c语言程序设计进阶-1数据类型/" data-id="cisvpt2ry000x0ko0jvlld603" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/09/09/c语言程序设计进阶-1数据类型/" data-id="ciu2fupns000zxoo04to92zxr" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/c语言程序设计进阶/">c语言程序设计进阶</a></li></ul>
 
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-spannableString" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/09/09/spannableString/" class="article-date">
-  <time datetime="2016-09-09T01:54:05.479Z" itemprop="datePublished">2016-09-09</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="TextView_SpannableString">TextView SpannableString</h1><p><a href="http://blog.csdn.net/fengyuzhengfan/article/details/38459299" target="_blank" rel="external">http://blog.csdn.net/fengyuzhengfan/article/details/38459299</a><br><a href="http://blog.csdn.net/fengyuzhengfan/article/details/38470675" target="_blank" rel="external">http://blog.csdn.net/fengyuzhengfan/article/details/38470675</a><br><a href="http://blog.csdn.net/nnmmbb/article/details/37656513" target="_blank" rel="external">http://blog.csdn.net/nnmmbb/article/details/37656513</a></p>
-<h4 id="Android中设置文本样式的几种方法">Android中设置文本样式的几种方法</h4><ul>
-<li>将android:autoLink属性值设为true。系统会自动识别E-mail、电话、网址等特殊文本。</li>
-<li>在Java代码中直接使用Span对象来设置文本样式。这种方法需要将文本转换成一个SpannableString或SpannableStringBuilder对象，然后在SpannableString或SpannableStringBuilder对象中使用setSpan方法将要设置样式的文本转换成相应的Span对象。</li>
-</ul>
-<h4 id="void_setSpan(Object_what,_int_start,_int_end,_int_flags)">void setSpan(Object what, int start, int end, int flags)</h4><p>what:设置一个Span对象<br>start：起始位置<br>end：结束位置（不包含结束位置）<br>flags值说明：</p>
-<ul>
-<li>Spanned.SPAN_EXCLUSIVE_INCLUSIVE:在 Span前面输入的字符不应用 Span的效果，在后面输入的字符应用Span效果。</li>
-<li>Spanned.SPAN_INCLUSIVE_EXCLUSIVE:在 Span前面输入的字符应用 Span 的效果，在后面输入的字符不应用Span效果。</li>
-<li>Spanned.SPAN_INCUJSIVE_INCLUSIVE:在 Span前后输入的字符都应用 Span 的效果。</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/09/09/spannableString/" data-id="cisvpt2rt000s0ko0la3dxtse" class="article-share-link">Share</a>
-      
-      
     </footer>
   </div>
   
@@ -669,7 +900,7 @@ gen_levels(mls_num_sens,mls_num_cats)
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/01/19/SELinux/" data-id="cisvpt2s000100ko0trvsz72x" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/01/19/SELinux/" data-id="ciu2fupnu0012xoo0a8473dwy" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SELinux/">SELinux</a></li></ul>
@@ -793,7 +1024,7 @@ gen_levels(mls_num_sens,mls_num_cats)
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/12/10/数据结构5-树-下-5-1-堆/" data-id="cisvpt2qx00010ko0kx9qifad" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/12/10/数据结构5-树-下-5-1-堆/" data-id="ciu2fupmp0001xoo0ui2gajau" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构/">数据结构</a></li></ul>
@@ -843,7 +1074,7 @@ gen_levels(mls_num_sens,mls_num_cats)
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/12/08/数据结构4-树-中-——4-2-平衡二叉树/" data-id="cisvpt2r500040ko03lxqmgmv" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/12/08/数据结构4-树-中-——4-2-平衡二叉树/" data-id="ciu2fupmy0004xoo0nqq3ymkn" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构/">数据结构</a></li></ul>
@@ -1014,7 +1245,7 @@ Position FindMax(BinTree BST){
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/12/07/数据结构4-树-中-——4-1-二叉搜索树/" data-id="cisvpt2r700060ko0pnfvw689" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/12/07/数据结构4-树-中-——4-1-二叉搜索树/" data-id="ciu2fupn00006xoo0i35csn9x" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构/">数据结构</a></li></ul>
@@ -1212,7 +1443,7 @@ Position FindMax(BinTree BST){
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/12/04/数据结构3-树-上-——3-3-二叉树的遍历/" data-id="cisvpt2r900080ko04yzy7alg" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/12/04/数据结构3-树-上-——3-3-二叉树的遍历/" data-id="ciu2fupn10008xoo0npwpqlf8" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构/">数据结构</a></li></ul>
@@ -1268,7 +1499,7 @@ Position FindMax(BinTree BST){
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/12/03/数据结构3-树-上-——3-2-二叉树与存储结构/" data-id="cisvpt2ra000a0ko03bcseu25" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/12/03/数据结构3-树-上-——3-2-二叉树与存储结构/" data-id="ciu2fupn3000axoo0uahfx6zp" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构/">数据结构</a></li></ul>
@@ -2159,7 +2390,7 @@ android_media_MediaScanner_processFile<span class="list">(
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/12/02/framework-MediaScanner/" data-id="cisvpt2rx000u0ko03i8ic397" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/12/02/framework-MediaScanner/" data-id="ciu2fupnq000wxoo0m70z2w2r" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/framework/">framework</a></li></ul>
@@ -2277,7 +2508,7 @@ android_media_MediaScanner_processFile<span class="list">(
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/12/02/数据结构3-树-上-——3-1-树与树的表示/" data-id="cisvpt2rc000c0ko0bgkcnb3s" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/12/02/数据结构3-树-上-——3-1-树与树的表示/" data-id="ciu2fupn5000cxoo0o3tpc5xe" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构/">数据结构</a></li></ul>
@@ -2304,7 +2535,7 @@ android_media_MediaScanner_processFile<span class="list">(
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/SELinux/">SELinux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/c语言程序设计进阶/">c语言程序设计进阶</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/framework/">framework</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构/">数据结构</a><span class="tag-list-count">13</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/SELinux/">SELinux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpannableString/">SpannableString</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/c语言程序设计进阶/">c语言程序设计进阶</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/framework/">framework</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构/">数据结构</a><span class="tag-list-count">13</span></li></ul>
     </div>
   </div>
 
@@ -2313,7 +2544,7 @@ android_media_MediaScanner_processFile<span class="list">(
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/SELinux/" style="font-size: 10px;">SELinux</a> <a href="/tags/c语言程序设计进阶/" style="font-size: 10px;">c语言程序设计进阶</a> <a href="/tags/framework/" style="font-size: 10px;">framework</a> <a href="/tags/数据结构/" style="font-size: 20px;">数据结构</a>
+      <a href="/tags/SELinux/" style="font-size: 10px;">SELinux</a> <a href="/tags/SpannableString/" style="font-size: 10px;">SpannableString</a> <a href="/tags/c语言程序设计进阶/" style="font-size: 10px;">c语言程序设计进阶</a> <a href="/tags/framework/" style="font-size: 10px;">framework</a> <a href="/tags/数据结构/" style="font-size: 20px;">数据结构</a>
     </div>
   </div>
 
@@ -2334,11 +2565,11 @@ android_media_MediaScanner_processFile<span class="list">(
       <ul>
         
           <li>
-            <a href="/2016/09/09/c语言程序设计进阶-1数据类型/">c语言程序设计进阶-1数据类型</a>
+            <a href="/2016/09/09/spannableString/">SpannableString</a>
           </li>
         
           <li>
-            <a href="/2016/09/09/spannableString/">(no title)</a>
+            <a href="/2016/09/09/c语言程序设计进阶-1数据类型/">c语言程序设计进阶-1数据类型</a>
           </li>
         
           <li>
